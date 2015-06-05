@@ -13,6 +13,7 @@ Resources
 -------------------------------
 
 * Documentation: http://svsite.readthedocs.org/
+* Bugs, features: https://github.com/mverleg/svsite/issues
 
 License
 -------------------------------
