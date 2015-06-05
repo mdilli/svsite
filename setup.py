@@ -6,6 +6,7 @@
 """
 
 from distutils.core import setup, Command
+from os.path import join
 
 
 class PyTest(Command):
@@ -26,7 +27,7 @@ class PyTest(Command):
 
 setup(
 	name='svsite',
-	version='0.1.0',
+	version=open(join('dev', 'VERSION')).read().strip(),
 	packages=['', 'svsite'],
 	package_dir={'': 'source'},
 	package_data={

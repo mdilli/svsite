@@ -33,6 +33,5 @@ coverage.xml
 *.mo
 *.pot
 *.log
-docs/_build/
 target/
 .idea/
