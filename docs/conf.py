@@ -12,16 +12,16 @@
 #
 # All configuration values have a default; values that are commented out
 # serve to show the default.
-from os.path import join
 
-import sys
-import os
-import shlex
+from sys import path
+from os.path import join, abspath
+
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
+path.insert(0, abspath(join('..')))
 
 # -- General configuration ------------------------------------------------
 
@@ -32,12 +32,16 @@ import shlex
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'sphinx.ext.coverage',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.viewcode',
+	'sphinx.ext.autodoc',
+	'sphinx.ext.autosummary',
+	'sphinx.ext.doctest',
+	'sphinx.ext.coverage',
+	'sphinx.ext.mathjax',
+	'sphinx.ext.viewcode',
 ]
+
+# Autosummary based on http://stackoverflow.com/questions/2701998/sphinx-autodoc-is-not-automatic-enough
+autosummary_generate = True
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -260,8 +264,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'svsite', 'svSite Documentation',
-     [author], 1)
+	(master_doc, 'svsite', 'svSite Documentation',
+	 [author], 1)
 ]
 
 # If true, show URL addresses after external links.
