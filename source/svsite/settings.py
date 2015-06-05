@@ -1,6 +1,5 @@
 
-from os.path import dirname, abspath
-
+from os.path import dirname, abspath, join
 
 BASE_DIR = dirname(dirname(abspath(__file__)))
 
@@ -65,7 +64,7 @@ WSGI_APPLICATION = 'svsite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': join(BASE_DIR, 'data', 'default.sqlite3'),
     }
 }
 
