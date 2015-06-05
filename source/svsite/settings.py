@@ -95,7 +95,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 try:
-	from settings_local import *
+	from .settings_local import *
 except ImportError:
 	pth = join(BASE_DIR, 'source', 'svsite', 'settings_local.py')
 	print('creating local settings file "{0:s}"'.format(pth))

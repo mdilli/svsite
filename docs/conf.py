@@ -13,8 +13,7 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-from sys import path
-from os.path import join, abspath
+from os.path import join
 
 
 # If extensions (or modules to document with autodoc) are in another directory,
