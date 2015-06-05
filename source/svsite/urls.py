@@ -18,11 +18,13 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 import grappelli.urls
+import allauth.urls
 
 
 urlpatterns = [
 	url(r'^grappelli/', include(grappelli.urls)),
 	url(r'^admin/', include(admin.site.urls)),
+	url(r'^accounts/', include(allauth.urls)),
 ]
 
 
