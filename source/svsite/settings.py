@@ -20,6 +20,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'member.svUser'
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
 
 # Application definition
 
@@ -35,38 +42,13 @@ INSTALLED_APPS = (
 	'allauth',
 	'allauth.account',
 	'allauth.socialaccount',
-	#'allauth.socialaccount.providers.amazon',
-	#'allauth.socialaccount.providers.angellist',
-	#'allauth.socialaccount.providers.bitbucket',
-	#'allauth.socialaccount.providers.bitly',
-	#'allauth.socialaccount.providers.coinbase',
-	#'allauth.socialaccount.providers.dropbox',
-	#'allauth.socialaccount.providers.dropbox_oauth2',
-	#'allauth.socialaccount.providers.evernote',
-	'allauth.socialaccount.providers.facebook',
-	#'allauth.socialaccount.providers.flickr',
-	#'allauth.socialaccount.providers.feedly',
-	#'allauth.socialaccount.providers.fxa',
-	'allauth.socialaccount.providers.github',
-	'allauth.socialaccount.providers.google',
-	#'allauth.socialaccount.providers.hubic',
-	#'allauth.socialaccount.providers.instagram',
-	#'allauth.socialaccount.providers.linkedin',
-	'allauth.socialaccount.providers.linkedin_oauth2',
-	#'allauth.socialaccount.providers.odnoklassniki',
-	'allauth.socialaccount.providers.openid',
-	#'allauth.socialaccount.providers.persona',
-	#'allauth.socialaccount.providers.soundcloud',
-	#'allauth.socialaccount.providers.spotify',
-	'allauth.socialaccount.providers.stackexchange',
-	#'allauth.socialaccount.providers.tumblr',
-	#'allauth.socialaccount.providers.twitch',
-	#'allauth.socialaccount.providers.twitter',
-	#'allauth.socialaccount.providers.vimeo',
-	#'allauth.socialaccount.providers.vk',
-	#'allauth.socialaccount.providers.weibo',
-	#'allauth.socialaccount.providers.xing',
-
+	#'allauth.socialaccount.providers.facebook',
+	#'allauth.socialaccount.providers.github',
+	#'allauth.socialaccount.providers.google',
+	#'allauth.socialaccount.providers.linkedin_oauth2',
+	#'allauth.socialaccount.providers.openid',
+	#'allauth.socialaccount.providers.stackexchange',
+	'member',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -143,6 +125,9 @@ STATIC_ROOT = '../static/'
 STATIC_URL = '/static/'
 
 GRAPPELLI_ADMIN_TITLE = 'Admin panel &#8212; <a href="/">go to homepage</a>'
+
+LOGIN_URL = '/account/login/'
+LOGIN_REDIRECT_URL = '/member/me/'
 
 
 try:

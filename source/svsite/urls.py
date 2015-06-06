@@ -17,14 +17,18 @@ Including another URLconf
 
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.http import HttpResponse
 import grappelli.urls
 import allauth.urls
+import member.urls
 
 
 urlpatterns = [
+	url(r'^$', lambda request: HttpResponse('under construction')),
 	url(r'^grappelli/', include(grappelli.urls)),
 	url(r'^admin/', include(admin.site.urls)),
-	url(r'^accounts/', include(allauth.urls)),
+	url(r'^account/', include(allauth.urls)),
+	url(r'^member/', include(member.urls)),
 ]
 
 
