@@ -31,6 +31,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 # Application definition
 
 INSTALLED_APPS = (
+	'svsite',
 	'grappelli',  # before admin
 	'django.contrib.admin',
 	'django.contrib.auth',
@@ -77,6 +78,7 @@ TEMPLATES = [
 				'django.contrib.messages.context_processors.messages',
 				'allauth.account.context_processors.account',
 				'allauth.socialaccount.context_processors.socialaccount',
+				'svsite.context.context_settings',
 			],
 		},
 	},
@@ -116,6 +118,9 @@ USE_TZ = True
 
 
 SITE_ID = 1
+
+BASE_TEMPLATE = 'base.html'  # magic name, see template comment
+BASE_EMAIL_TEMPLATE = 'base.html'
 
 
 # Static files (CSS, JavaScript, Images)

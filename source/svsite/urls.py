@@ -21,10 +21,15 @@ from django.http import HttpResponse
 import grappelli.urls
 import allauth.urls
 import member.urls
+try:
+	from svsite.playground import playground
+except ImportError:
+	playground = lambda request: HttpResponse('nothing here')
 
 
 urlpatterns = [
 	url(r'^$', lambda request: HttpResponse('under construction')),
+	url(r'^test/$', playground),
 	url(r'^grappelli/', include(grappelli.urls)),
 	url(r'^admin/', include(admin.site.urls)),
 	url(r'^account/', include(allauth.urls)),
