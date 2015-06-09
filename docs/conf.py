@@ -37,6 +37,7 @@ extensions = [
 	'sphinx.ext.coverage',
 	'sphinx.ext.mathjax',
 	'sphinx.ext.viewcode',
+	'sphinx.ext.graphviz',
 ]
 
 # Autosummary based on http://stackoverflow.com/questions/2701998/sphinx-autodoc-is-not-automatic-enough
