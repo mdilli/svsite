@@ -42,6 +42,9 @@ setup(
 	description='reusable association website',
 	install_requires=[
 		'django',
+		'django-allauth',
+		'django-extensions',
+		'django-grappelli',
 	],
 	classifiers=[
 		'Development Status :: 2 - Pre-Alpha',
