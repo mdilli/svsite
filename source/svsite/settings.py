@@ -40,6 +40,7 @@ INSTALLED_APPS = (
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'django.contrib.sites',  # for allauth (and possibly others)
+	'django_extensions',
 	'allauth',
 	'allauth.account',
 	'allauth.socialaccount',
@@ -134,7 +135,7 @@ GRAPPELLI_ADMIN_TITLE = 'Admin panel &#8212; <a href="/">go to homepage</a>'
 LOGIN_URL = '/account/login/'
 LOGIN_REDIRECT_URL = '/member/me/'
 
-
+INTERNAL_IPS = ('127.0.0.1',)
 
 
 
