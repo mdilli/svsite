@@ -39,7 +39,7 @@ setup(
 	license='MIT License',
 	author='mark, ...',
 	author_email='contact me on github',
-	description='reusable basic for an association website',
+	description='reusable association website',
 	install_requires=[
 		'django',
 	],

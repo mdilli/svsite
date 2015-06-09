@@ -135,12 +135,19 @@ LOGIN_URL = '/account/login/'
 LOGIN_REDIRECT_URL = '/member/me/'
 
 
+
+
+
 try:
 	from .settings_local import *
 except ImportError:
 	pth = join(BASE_DIR, 'source', 'svsite', 'settings_local.py')
-	print('creating local settings file "{0:s}"'.format(pth))
-	with open(pth, 'w+') as fh:
-		fh.write('\n"""\n\tLocal settings for this specific instance of svSite (e.g. passwords, absolute paths, ...).\n"""\n')
+	try:
+		with open(pth, 'w+') as fh:
+			fh.write('\n"""\n\tLocal settings for this specific instance of svSite (e.g. passwords, absolute paths, ...).\n"""\n')
+		print('creating local settings file "{0:s}"'.format(pth))
+	except OSError:
+		print('could not create local settings file "{0:s}"'.format(path))
+
 
 
