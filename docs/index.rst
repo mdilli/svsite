@@ -7,6 +7,7 @@ Interesting
 .. toctree::
    :maxdepth: 2
 
+   install.rst
    models.rst
 
 Components
