@@ -14,7 +14,6 @@ assert not getattr(settings, 'PREPEND_WWW', False), \
 
 class RemoveWwwMiddleware():
 	def process_request( self, request ):
-		print('removeWWW', request.META['HTTP_HOST'])
 		try:
 			if request.META['HTTP_HOST'].lower().find('www.') == 0:
 				from django.http import HttpResponsePermanentRedirect

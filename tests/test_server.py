@@ -7,11 +7,13 @@ from bs4 import BeautifulSoup
 from pytest import mark
 from django.core.urlresolvers import reverse
 from requests import get
+from svsite import settings
 from tests.utilities import create_user, get_form_errors
 
 
 def test_homepage(live_server):
-	url = '{0:s}/'.format(live_server.url)
+	assert not getattr(settings, 'PREPEND_WWW', False), 'cannot test homepage request if www is prepended, since that doesn\'t work for localhost (the server still might or might not work)'
+	url = live_server.url + '/'
 	resp = get(url)
 	assert resp.status_code == 200, 'url "{0:s}" returned status {1:d}'.format(url, resp.status_code)
 
@@ -29,8 +31,9 @@ def test_login(client):
 	user = create_user()
 	login_form = client.get(reverse('account_login'))
 	soup = BeautifulSoup(login_form.content)
-	csrf_field = soup.find_all(attrs = {'name': 'csrfmiddlewaretoken'})[0]
-	csrf_token = csrf_field['value']
+	csrf_fields = soup.find_all(attrs = {'name': 'csrfmiddlewaretoken'})
+	assert csrf_fields, 'no csrf token found (no valid form)\npage = {0:s}'.format(str(soup))
+	csrf_token = csrf_fields[0]['value']
 	login_response = client.post(reverse('account_login'), data = {
 		'login': user.email,
 		'password': 'test',
