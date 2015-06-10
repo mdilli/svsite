@@ -2,7 +2,9 @@
 Installation
 ===============================
 
-svSite should provide a fully functional site with minimal work. Although later on you may want to personalize the look, which will take time. That's inevitable.
+svSite should provide a fully functional site with minimal work.
+
+Although later on you may want to personalize the look (:doc:`info <layout>`), which will take time. That's inevitable.
 
 To get svSite running, follow the steps in the appropriate section.
 
