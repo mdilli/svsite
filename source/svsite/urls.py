@@ -22,6 +22,8 @@ import grappelli.urls
 import allauth.urls
 import member.urls
 import activity.urls
+from svsite.backups import download_database, upload_database
+
 try:
 	from svsite.playground import playground
 except ImportError:
@@ -32,6 +34,8 @@ urlpatterns = [
 	url(r'^$', lambda request: HttpResponse('under construction')),
 	url(r'^test/$', playground),
 	url(r'^grappelli/', include(grappelli.urls)),
+	url(r'^admin/backup/', download_database, name = 'backup'),
+	url(r'^admin/restore/', upload_database, name = 'restore'),
 	url(r'^admin/', include(admin.site.urls)),
 	url(r'^account/', include(allauth.urls)),
 	url(r'^member/', include(member.urls)),
