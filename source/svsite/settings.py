@@ -62,6 +62,7 @@ MIDDLEWARE_CLASSES = (
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 	'django.middleware.security.SecurityMiddleware',
+	'svsite.middleware.RemoveWwwMiddleware',
 )
 
 ROOT_URLCONF = 'svsite.urls'
@@ -124,7 +125,8 @@ BASE_TEMPLATE = 'base.html'  # magic name, see template comment
 BASE_EMAIL_TEMPLATE = 'base.html'
 
 
-PREPEND_WWW = True
+# have strip-www middlware so don't turn this on
+# PREPEND_WWW = True
 APPEND_SLASH = True
 
 
