@@ -10,9 +10,6 @@ py.test tests || exit 10
 # create a file to run tests without needing py.test (or plugins)
 py.test --genscript=tests/runtests.py || exit 30
 
-# create graph of the models
-python source/manage.py graph_models --all > docs/images/models.dot || exit 50
-
 # create sphix documentation
 cd docs && make dirhtml && cd .. || exit 40
 
