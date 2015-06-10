@@ -41,6 +41,7 @@ INSTALLED_APPS = (
 	'django.contrib.staticfiles',
 	'django.contrib.sites',  # for allauth (and possibly others)
 	'django_extensions',
+	'debug_toolbar',
 	'allauth',
 	'allauth.account',
 	'allauth.socialaccount',
@@ -54,6 +55,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+	# debug toolbar added automatically
 	'django.contrib.sessions.middleware.SessionMiddleware',
 	'django.middleware.common.CommonMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
