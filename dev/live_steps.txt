@@ -1,0 +1,10 @@
+
+Before making the server accessible to the world:
+
+* Run the tests, and everything else in publish.sh
+* Make sure DEBUG is False
+* Add host to ALLOWED_HOSTS
+* For optimal performance, replace RemoveWwwMiddleware and HttpsRedirectMiddleware by webserver configuration
+*
+*
+*

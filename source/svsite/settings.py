@@ -63,6 +63,7 @@ MIDDLEWARE_CLASSES = (
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 	'django.middleware.security.SecurityMiddleware',
 	'svsite.middleware.RemoveWwwMiddleware',
+	'svsite.middleware.HttpsRedirectMiddleware',
 )
 
 ROOT_URLCONF = 'svsite.urls'
@@ -143,6 +144,8 @@ LOGIN_REDIRECT_URL = '/member/me/'
 
 INTERNAL_IPS = ('127.0.0.1',)
 
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 
 try:
