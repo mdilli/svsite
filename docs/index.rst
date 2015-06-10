@@ -5,7 +5,7 @@ Using
 -------------------------------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    install.rst
    layout.rst
@@ -14,8 +14,9 @@ Extending
 -------------------------------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
+   contribute.rst
    models.rst
 
 Components

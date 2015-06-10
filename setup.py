@@ -41,6 +41,7 @@ setup(
 	author_email='contact me on github',
 	description='reusable association website',
 	install_requires=[
+		# see documentation for non-pip requirements
 		'django',
 		'django-allauth',
 		'django-extensions',
