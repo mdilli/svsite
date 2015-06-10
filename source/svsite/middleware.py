@@ -1,4 +1,5 @@
-
+from os import environ
+from django.core.exceptions import MiddlewareNotUsed
 from svsite import settings
 from django.http import HttpResponsePermanentRedirect
 
@@ -30,6 +31,10 @@ class HttpsRedirectMiddleware():
 
 		Adapted from https://djangosnippets.org/snippets/85/
 	"""
+	def __init__(self):
+		if 'TEST_MODE' in environ and environ['TEST_MODE'] == 'on':
+			raise MiddlewareNotUsed('HttpsRedirectMiddleware disabled due to TEST_MODE')
+
 	def process_view(self, request, view_func, view_args, view_kwargs):
 		if not self._is_secure(request):
 			return self._redirect(request)

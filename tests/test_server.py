@@ -1,20 +1,22 @@
 
 """
 	A test to see if the server can start succesfully and let a user login.
+
+	Note that being in test mode turns SSL off, so that is not tested.
 """
 
 from bs4 import BeautifulSoup
+from django.conf import settings
 from pytest import mark
 from django.core.urlresolvers import reverse
 from requests import get
-from svsite import settings
 from tests.utilities import create_user, get_form_errors
 
 
 def test_homepage(live_server):
 	assert not getattr(settings, 'PREPEND_WWW', False), 'cannot test homepage request if www is prepended, since that doesn\'t work for localhost (the server still might or might not work)'
 	url = live_server.url + '/'
-	resp = get(url)
+	resp = get(url, verify = False)
 	assert resp.status_code == 200, 'url "{0:s}" returned status {1:d}'.format(url, resp.status_code)
 
 
