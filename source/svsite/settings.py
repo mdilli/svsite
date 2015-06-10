@@ -32,6 +32,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 INSTALLED_APPS = (
 	'svsite',
+	'grappelli.dashboard',
 	'grappelli',  # before admin
 	'django.contrib.admin',
 	'django.contrib.auth',
@@ -134,6 +135,8 @@ BASE_TEMPLATE = 'base.html'  # magic name, see template comment
 BASE_EMAIL_TEMPLATE = 'base.html'
 
 
+SEPARATOR = '&laquo;'
+
 # have strip-www middlware so don't turn this on
 # PREPEND_WWW = True
 APPEND_SLASH = True
@@ -145,7 +148,8 @@ APPEND_SLASH = True
 STATIC_ROOT = '../static/'
 STATIC_URL = '/static/'
 
-GRAPPELLI_ADMIN_TITLE = 'Admin panel &#8212; <a href="/">go to homepage</a>'
+GRAPPELLI_ADMIN_TITLE = 'Admin panel {0:s} svSite'.format(SEPARATOR)
+GRAPPELLI_INDEX_DASHBOARD = 'svsite.dashboard.CustomIndexDashboard'
 
 LOGIN_URL = '/account/login/'
 LOGIN_REDIRECT_URL = '/member/me/'

@@ -1,6 +1,6 @@
 
+from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
-from svsite import settings
 
 
 """
@@ -14,6 +14,7 @@ def context_settings(request):
 		'BASE_EMAIL_TEMPLATE': settings.BASE_EMAIL_TEMPLATE,
 		'SITE_NAME': site.name,
 		'SITE_DOMAIN': site.domain,
+		'SEPARATOR': settings.SEPARATOR
 	}
 
 
