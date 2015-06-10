@@ -21,6 +21,7 @@ from django.http import HttpResponse
 import grappelli.urls
 import allauth.urls
 import member.urls
+import activity.urls
 try:
 	from svsite.playground import playground
 except ImportError:
@@ -34,6 +35,7 @@ urlpatterns = [
 	url(r'^admin/', include(admin.site.urls)),
 	url(r'^account/', include(allauth.urls)),
 	url(r'^member/', include(member.urls)),
+	url(r'^activity/', include(activity.urls)),
 ]
 
 

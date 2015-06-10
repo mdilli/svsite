@@ -6,7 +6,7 @@
 """
 
 from os.path import dirname, abspath, join
-
+from django.utils.translation import gettext_noop
 
 BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
 
@@ -52,6 +52,7 @@ INSTALLED_APPS = (
 	#'allauth.socialaccount.providers.openid',
 	#'allauth.socialaccount.providers.stackexchange',
 	'member',
+	'activity',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -111,9 +112,14 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGES = (
+	('nl', gettext_noop('Dutch')),
+	('en_GB', gettext_noop('English')),
+)
 
-TIME_ZONE = 'UTC'
+LANGUAGE_CODE = 'nl'
+
+TIME_ZONE = 'Europe/Amsterdam'
 
 USE_I18N = True
 

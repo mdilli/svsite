@@ -1,0 +1,15 @@
+
+{% extends BASE_TEMPLATE %}
+
+
+{% load i18n %}
+
+{% block head_title %}{{ request.user.get_full_name }} &laquo; {% trans "profile" %}{% endblock %}
+
+{% block content %}
+
+	{{ object.name }}
+
+{% endblock content %}
+
+
