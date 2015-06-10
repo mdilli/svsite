@@ -124,6 +124,10 @@ BASE_TEMPLATE = 'base.html'  # magic name, see template comment
 BASE_EMAIL_TEMPLATE = 'base.html'
 
 
+PREPEND_WWW = True
+APPEND_SLASH = True
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
