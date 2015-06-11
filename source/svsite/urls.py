@@ -37,9 +37,10 @@ urlpatterns = [
 	url(r'^admin/backup/', download_database, name = 'backup'),
 	url(r'^admin/restore/', upload_database, name = 'restore'),
 	url(r'^admin/', include(admin.site.urls)),
-	url(r'^account/', include(allauth.urls)),
-	url(r'^member/', include(member.urls)),
-	url(r'^activity/', include(activity.urls)),
+	url(r'^u/', include(allauth.urls)),
+	url(r'^m/', include(member.urls)),
+	url(r'^a/', include(activity.urls)),
+	url(r'^c/', include(activity.urls)),
 ]
 
 
