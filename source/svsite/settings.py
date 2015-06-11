@@ -65,12 +65,22 @@ MIDDLEWARE_CLASSES = (
 	'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
-	'django.middleware.security.SecurityMiddleware',
+	#'django.middleware.security.SecurityMiddleware',  #  todo turn back on in django 1.8
 	'svsite.middleware.RemoveWwwMiddleware',
 	'svsite.middleware.HttpsRedirectMiddleware',
 )
 
 ROOT_URLCONF = 'svsite.urls'
+
+TEMPLATE_CONTEXT_PROCESSORS = [
+	'django.template.context_processors.debug',
+	'django.template.context_processors.request',
+	'django.contrib.auth.context_processors.auth',
+	'django.contrib.messages.context_processors.messages',
+	'allauth.account.context_processors.account',
+	'allauth.socialaccount.context_processors.socialaccount',
+	'svsite.context.context_settings',
+]
 
 TEMPLATES = [
 	{
@@ -78,15 +88,7 @@ TEMPLATES = [
 		'DIRS': [],
 		'APP_DIRS': True,
 		'OPTIONS': {
-			'context_processors': [
-				'django.template.context_processors.debug',
-				'django.template.context_processors.request',
-				'django.contrib.auth.context_processors.auth',
-				'django.contrib.messages.context_processors.messages',
-				'allauth.account.context_processors.account',
-				'allauth.socialaccount.context_processors.socialaccount',
-				'svsite.context.context_settings',
-			],
+			'context_processors': TEMPLATE_CONTEXT_PROCESSORS,
 		},
 	},
 ]

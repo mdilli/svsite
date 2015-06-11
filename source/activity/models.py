@@ -22,6 +22,7 @@ class Activity(TimeFramedModel):
 		('required', 'Registration required'),
 	), max_length = 12, help_text = 'Do visitors register?')
 	registration_deadline = models.DateTimeField(blank = True, null = True, help_text = 'After which time does registration close?')
+	#todo: time duration - DurationField
 	#todo: location field
 	#todo: image field
 	#todo: db constraint end time after start

@@ -1,6 +1,5 @@
 __pycache__/
 *.py[cod]
-*.pyc
 *.so
 .Python
 env/
@@ -35,3 +34,5 @@ coverage.xml
 *.log
 target/
 .idea/
+playground/
+
