@@ -1,3 +1,3 @@
 """
-The main location for general files, like settings, urls, etc.
+General files, like settings, urls, etc.
 """
