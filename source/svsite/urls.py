@@ -15,9 +15,13 @@ Including another URLconf
 	2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 
-from django.conf.urls import include, url
+from django.conf import settings
+from django.conf.urls import include, url, patterns
+from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.http import HttpResponse
+from django.views import static
 import grappelli.urls
 import allauth.urls
 import member.urls
@@ -30,7 +34,7 @@ except ImportError:
 	playground = lambda request: HttpResponse('nothing here')
 
 
-urlpatterns = [
+urlpatterns = i18n_patterns('',
 	url(r'^$', lambda request: HttpResponse('under construction')),
 	url(r'^test/$', playground),
 	url(r'^grappelli/', include(grappelli.urls)),
@@ -41,6 +45,13 @@ urlpatterns = [
 	url(r'^m/', include(member.urls)),
 	url(r'^a/', include(activity.urls)),
 	url(r'^c/', include(activity.urls)),
-]
+)
+
+
+if settings.DEBUG:
+	urlpatterns = patterns('',
+		url(r'^{0:s}/(?P<path>.*)$'.format(settings.MEDIA_URL.strip('/')), static.serve,
+			{'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
+		) + staticfiles_urlpatterns() + urlpatterns
 
 

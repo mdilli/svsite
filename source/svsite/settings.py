@@ -29,12 +29,15 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 CMS_PERMISSION = True
 
+CMS_MAX_PAGE_PUBLISH_REVERSIONS = 200
+
 # Application definition
 
 INSTALLED_APPS = (
 	'svsite',
 	'grappelli.dashboard',
-	'grappelli',  # before admin
+	#'grappelli',  # before admin
+	'djangocms_admin_style',  # already have grappelli
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -54,7 +57,8 @@ INSTALLED_APPS = (
 	# 'allauth.socialaccount.providers.linkedin_oauth2',
 	# 'allauth.socialaccount.providers.openid',
 	# 'allauth.socialaccount.providers.stackexchange',
-	# 'djangocms_admin_style',  # already have grappelli
+	'filer',
+	'easy_thumbnails',
 	'djangocms_text_ckeditor',
 	'cms',
 	'menus',
@@ -62,15 +66,17 @@ INSTALLED_APPS = (
 	'treebeard',
 	'djangocms_style',
 	'djangocms_column',
-	'djangocms_file',
-	#'djangocms_flash',
-	'djangocms_googlemap',
 	'djangocms_inherit',
-	'djangocms_link',
-	'djangocms_picture',
-	'djangocms_teaser',
-	'djangocms_video',
+	'cmsplugin_filer_image',
+	'cmsplugin_filer_link',
+	'cmsplugin_filer_file',
+	'cmsplugin_filer_folder',
+	'cmsplugin_filer_teaser',
+	'djangocms_googlemap',
+	'cmsplugin_filer_video',
+	#'djangocms_flash',
 	'reversion',
+
 	'member',
 	'activity',
 	'content',
@@ -151,16 +157,24 @@ DATABASES = {
 }
 
 MIGRATION_MODULES = {
+	'cms': 'cms.migrations_django',
+	'menus': 'menus.migrations_django',
 	'djangocms_column': 'djangocms_column.migrations_django',
-	'djangocms_flash': 'djangocms_flash.migrations_django',
+	#'djangocms_flash': 'djangocms_flash.migrations_django',
 	'djangocms_googlemap': 'djangocms_googlemap.migrations_django',
 	'djangocms_inherit': 'djangocms_inherit.migrations_django',
-	'djangocms_link': 'djangocms_link.migrations_django',
+	#'djangocms_link': 'djangocms_link.migrations_django',
 	'djangocms_style': 'djangocms_style.migrations_django',
-	'djangocms_file': 'djangocms_file.migrations_django',
-	'djangocms_picture': 'djangocms_picture.migrations_django',
-	'djangocms_teaser': 'djangocms_teaser.migrations_django',
-	'djangocms_video': 'djangocms_video.migrations_django'
+	#'djangocms_file': 'djangocms_file.migrations_django',
+	#'djangocms_picture': 'djangocms_picture.migrations_django',
+	#'djangocms_teaser': 'djangocms_teaser.migrations_django',
+	#'djangocms_video': 'djangocms_video.migrations_django'
+	'cmsplugin_filer_file': 'cmsplugin_filer_file.migrations_django',
+	'cmsplugin_filer_folder': 'cmsplugin_filer_folder.migrations_django',
+	'cmsplugin_filer_link': 'cmsplugin_filer_link.migrations_django',
+	'cmsplugin_filer_image': 'cmsplugin_filer_image.migrations_django',
+	'cmsplugin_filer_teaser': 'cmsplugin_filer_teaser.migrations_django',
+	'cmsplugin_filer_video': 'cmsplugin_filer_video.migrations_django',
 }
 
 
@@ -233,10 +247,27 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_ROOT = join('..', 'static')
-STATIC_URL = '/static/'
+STATIC_URL = '/s/'
 
 MEDIA_ROOT = join('..', 'media')
-MEDIA_URL = '/media/'
+#CMS_PAGE_MEDIA_PATH = join(MEDIA_ROOT, 'cms')
+MEDIA_URL = '/d/'
+
+FILER_ENABLE_LOGGING = True
+
+FILER_IMAGE_USE_ICON = True
+
+TEXT_SAVE_IMAGE_FUNCTION = 'cmsplugin_filer_image.integrations.ckeditor.create_image_plugin'
+
+THUMBNAIL_HIGH_RESOLUTION = True
+
+THUMBNAIL_PROCESSORS = (
+	'easy_thumbnails.processors.colorspace',
+	'easy_thumbnails.processors.autocrop',
+	#'easy_thumbnails.processors.scale_and_crop',
+	'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+	'easy_thumbnails.processors.filters',
+)
 
 GRAPPELLI_ADMIN_TITLE = 'Admin panel {0:s} svSite'.format(SEPARATOR)
 GRAPPELLI_INDEX_DASHBOARD = 'svsite.dashboard.CustomIndexDashboard'
