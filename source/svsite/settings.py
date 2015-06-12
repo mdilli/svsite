@@ -9,6 +9,7 @@ from django.utils.translation import gettext_noop, gettext
 
 
 BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
+DATA_DIR = BASE_DIR
 
 # Quick-start development settings - unsuitable for production
 
@@ -20,7 +21,7 @@ TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
-##AUTH_USER_MODEL = 'member.svUser'
+AUTH_USER_MODEL = 'member.svUser'
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
@@ -36,18 +37,17 @@ CMS_MAX_PAGE_PUBLISH_REVERSIONS = 200
 INSTALLED_APPS = (
 	'svsite',
 	'member',
-
-	'grappelli.dashboard',
+	#'grappelli.dashboard', #todo
 	#'grappelli',  # before admin
 	'djangocms_admin_style',  # already have grappelli
-	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
-	'django.contrib.messages',
-	'django.contrib.staticfiles',
+	'django.contrib.admin',
 	'django.contrib.sites',  # for allauth (and possibly others)
 	'django.contrib.sitemaps',  # fpr django-cms
+	'django.contrib.staticfiles',
+	'django.contrib.messages',
 	'django_extensions',
 	'debug_toolbar',
 	'allauth',
@@ -59,28 +59,30 @@ INSTALLED_APPS = (
 	# 'allauth.socialaccount.providers.linkedin_oauth2',
 	# 'allauth.socialaccount.providers.openid',
 	# 'allauth.socialaccount.providers.stackexchange',
-
-	'filer',
-	'easy_thumbnails',
-	'djangocms_text_ckeditor',
 	'cms',
 	'menus',
 	'sekizai',
 	'treebeard',
 	'djangocms_style',
 	'djangocms_column',
+	'djangocms_text_ckeditor',
+	#'djangocms_file',
+	'djangocms_googlemap',
 	'djangocms_inherit',
-	'cmsplugin_filer_image',
-	'cmsplugin_filer_link',
+	#'djangocms_link',
+	#'djangocms_picture',
+	#'djangocms_teaser',
+	#'djangocms_video',
+	'filer',
+	'mptt',
+	'easy_thumbnails',
 	'cmsplugin_filer_file',
 	'cmsplugin_filer_folder',
+	'cmsplugin_filer_link',
+	'cmsplugin_filer_image',
 	'cmsplugin_filer_teaser',
-	'djangocms_googlemap',
 	'cmsplugin_filer_video',
-
-	#'djangocms_flash',
 	'reversion',
-
 	'activity',
 	'content',
 )
@@ -160,24 +162,21 @@ DATABASES = {
 }
 
 MIGRATION_MODULES = {
-	##'cms': 'cms.migrations_django',
-	##'menus': 'menus.migrations_django',
-	##'djangocms_column': 'djangocms_column.migrations_django',
-	#'djangocms_flash': 'djangocms_flash.migrations_django',
-	##'djangocms_googlemap': 'djangocms_googlemap.migrations_django',
-	##'djangocms_inherit': 'djangocms_inherit.migrations_django',
+	'djangocms_column': 'djangocms_column.migrations_django',
+	'djangocms_googlemap': 'djangocms_googlemap.migrations_django',
+	'djangocms_inherit': 'djangocms_inherit.migrations_django',
 	#'djangocms_link': 'djangocms_link.migrations_django',
-	##'djangocms_style': 'djangocms_style.migrations_django',
+	'djangocms_style': 'djangocms_style.migrations_django',
 	#'djangocms_file': 'djangocms_file.migrations_django',
 	#'djangocms_picture': 'djangocms_picture.migrations_django',
 	#'djangocms_teaser': 'djangocms_teaser.migrations_django',
-	#'djangocms_video': 'djangocms_video.migrations_django'
-	# 'cmsplugin_filer_file': 'cmsplugin_filer_file.migrations_django',
-	# 'cmsplugin_filer_folder': 'cmsplugin_filer_folder.migrations_django',
-	# 'cmsplugin_filer_link': 'cmsplugin_filer_link.migrations_django',
-	# 'cmsplugin_filer_image': 'cmsplugin_filer_image.migrations_django',
-	# 'cmsplugin_filer_teaser': 'cmsplugin_filer_teaser.migrations_django',
-	# 'cmsplugin_filer_video': 'cmsplugin_filer_video.migrations_django',
+	#'djangocms_video': 'djangocms_video.migrations_django',
+	'cmsplugin_filer_file': 'cmsplugin_filer_file.migrations_django',
+	'cmsplugin_filer_folder': 'cmsplugin_filer_folder.migrations_django',
+	'cmsplugin_filer_link': 'cmsplugin_filer_link.migrations_django',
+	'cmsplugin_filer_image': 'cmsplugin_filer_image.migrations_django',
+	'cmsplugin_filer_teaser': 'cmsplugin_filer_teaser.migrations_django',
+	'cmsplugin_filer_video': 'cmsplugin_filer_video.migrations_django',
 }
 
 
@@ -188,14 +187,14 @@ LANGUAGE_CODE = 'nl'
 
 LANGUAGES = (
 	('nl', gettext_noop('Dutch')),
-	('en_GB', gettext_noop('English')),
+	('en', gettext_noop('English')),
 )
 
 CMS_LANGUAGES = {
 	1: [
 		{
 			'redirect_on_fallback': True,
-			'code': 'en_GB',
+			'code': 'en',
 			'hide_untranslated': False,
 			'public': True,
 			'name': gettext_noop('en_GB'),
@@ -229,8 +228,8 @@ BASE_TEMPLATE = 'base.html'  # magic name, see template comment
 BASE_EMAIL_TEMPLATE = 'base.html'
 
 CMS_TEMPLATES = (
-	('cms_page.html', 'Page'),
-	('cms_feature.html', 'Page with Feature')
+	('page.html', 'Page'),
+	('feature.html', 'Page with Feature')
 )
 
 SEPARATOR = '&laquo;'
@@ -290,7 +289,7 @@ except ImportError:
 	pth = join(BASE_DIR, 'source', 'svsite', 'settings_local.py')
 	try:
 		with open(pth, 'w+') as fh:
-			fh.write('\n"""\n\tLocal settings for this specific instance of svSite (e.g. passwords, absolute paths, ...).\n"""\n\nSECRET_KEY = "{0:s}"\n\n\n'.format(''.join([choice('abcdefghijklmnopqrstuvwxyz0123456789@#$%^&*(-_=+)') for i in range(50)])))
+			fh.write('"""\n\tLocal settings for this specific instance of svSite (e.g. passwords, absolute paths, ...).\n"""\n\nSECRET_KEY = "{0:s}"\n\n\n'.format(''.join([choice('abcdefghijklmnopqrstuvwxyz0123456789@#$%^&*(-_=+)') for i in range(50)])))
 		print('creating local settings file "{0:s}"'.format(pth))
 	except OSError:
 		print('could not create local settings file "{0:s}"'.format(pth))
