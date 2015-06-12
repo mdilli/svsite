@@ -7,20 +7,20 @@
 from os.path import dirname, abspath, join
 from django.utils.translation import gettext_noop, gettext
 
+
 BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=i6wddk2^%s^4&ic(4g0!_+1s_w5@vpm-u0b@6#7$_2%g^ngay'
+SECRET_KEY = 'this-is-not-secret,-make-sure-to-put-your-key-in-settings_local.py'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'member.svUser'
+##AUTH_USER_MODEL = 'member.svUser'
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
@@ -35,6 +35,8 @@ CMS_MAX_PAGE_PUBLISH_REVERSIONS = 200
 
 INSTALLED_APPS = (
 	'svsite',
+	'member',
+
 	'grappelli.dashboard',
 	#'grappelli',  # before admin
 	'djangocms_admin_style',  # already have grappelli
@@ -57,6 +59,7 @@ INSTALLED_APPS = (
 	# 'allauth.socialaccount.providers.linkedin_oauth2',
 	# 'allauth.socialaccount.providers.openid',
 	# 'allauth.socialaccount.providers.stackexchange',
+
 	'filer',
 	'easy_thumbnails',
 	'djangocms_text_ckeditor',
@@ -74,10 +77,10 @@ INSTALLED_APPS = (
 	'cmsplugin_filer_teaser',
 	'djangocms_googlemap',
 	'cmsplugin_filer_video',
+
 	#'djangocms_flash',
 	'reversion',
 
-	'member',
 	'activity',
 	'content',
 )
@@ -157,24 +160,24 @@ DATABASES = {
 }
 
 MIGRATION_MODULES = {
-	'cms': 'cms.migrations_django',
-	'menus': 'menus.migrations_django',
-	'djangocms_column': 'djangocms_column.migrations_django',
+	##'cms': 'cms.migrations_django',
+	##'menus': 'menus.migrations_django',
+	##'djangocms_column': 'djangocms_column.migrations_django',
 	#'djangocms_flash': 'djangocms_flash.migrations_django',
-	'djangocms_googlemap': 'djangocms_googlemap.migrations_django',
-	'djangocms_inherit': 'djangocms_inherit.migrations_django',
+	##'djangocms_googlemap': 'djangocms_googlemap.migrations_django',
+	##'djangocms_inherit': 'djangocms_inherit.migrations_django',
 	#'djangocms_link': 'djangocms_link.migrations_django',
-	'djangocms_style': 'djangocms_style.migrations_django',
+	##'djangocms_style': 'djangocms_style.migrations_django',
 	#'djangocms_file': 'djangocms_file.migrations_django',
 	#'djangocms_picture': 'djangocms_picture.migrations_django',
 	#'djangocms_teaser': 'djangocms_teaser.migrations_django',
 	#'djangocms_video': 'djangocms_video.migrations_django'
-	'cmsplugin_filer_file': 'cmsplugin_filer_file.migrations_django',
-	'cmsplugin_filer_folder': 'cmsplugin_filer_folder.migrations_django',
-	'cmsplugin_filer_link': 'cmsplugin_filer_link.migrations_django',
-	'cmsplugin_filer_image': 'cmsplugin_filer_image.migrations_django',
-	'cmsplugin_filer_teaser': 'cmsplugin_filer_teaser.migrations_django',
-	'cmsplugin_filer_video': 'cmsplugin_filer_video.migrations_django',
+	# 'cmsplugin_filer_file': 'cmsplugin_filer_file.migrations_django',
+	# 'cmsplugin_filer_folder': 'cmsplugin_filer_folder.migrations_django',
+	# 'cmsplugin_filer_link': 'cmsplugin_filer_link.migrations_django',
+	# 'cmsplugin_filer_image': 'cmsplugin_filer_image.migrations_django',
+	# 'cmsplugin_filer_teaser': 'cmsplugin_filer_teaser.migrations_django',
+	# 'cmsplugin_filer_video': 'cmsplugin_filer_video.migrations_django',
 }
 
 
@@ -226,8 +229,8 @@ BASE_TEMPLATE = 'base.html'  # magic name, see template comment
 BASE_EMAIL_TEMPLATE = 'base.html'
 
 CMS_TEMPLATES = (
-	('page.html', 'Page'),
-	('feature.html', 'Page with Feature')
+	('cms_page.html', 'Page'),
+	('cms_feature.html', 'Page with Feature')
 )
 
 SEPARATOR = '&laquo;'
@@ -283,11 +286,13 @@ CSRF_COOKIE_SECURE = True
 try:
 	from .settings_local import *
 except ImportError:
+	from random import choice
 	pth = join(BASE_DIR, 'source', 'svsite', 'settings_local.py')
 	try:
 		with open(pth, 'w+') as fh:
-			fh.write(
-				'\n"""\n\tLocal settings for this specific instance of svSite (e.g. passwords, absolute paths, ...).\n"""\n')
+			fh.write('\n"""\n\tLocal settings for this specific instance of svSite (e.g. passwords, absolute paths, ...).\n"""\n\nSECRET_KEY = "{0:s}"\n\n\n'.format(''.join([choice('abcdefghijklmnopqrstuvwxyz0123456789@#$%^&*(-_=+)') for i in range(50)])))
 		print('creating local settings file "{0:s}"'.format(pth))
 	except OSError:
-		print('could not create local settings file "{0:s}"'.format(path))
+		print('could not create local settings file "{0:s}"'.format(pth))
+
+
