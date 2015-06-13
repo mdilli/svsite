@@ -24,8 +24,10 @@ from django.http import HttpResponse
 from django.views import static
 import grappelli.urls
 import allauth.urls
+import census.urls
 import member.urls
 import activity.urls
+import cms.urls
 from svsite.backups import download_database, upload_database
 
 try:
@@ -41,10 +43,12 @@ urlpatterns = i18n_patterns('',
 	url(r'^admin/backup/', download_database, name = 'backup'),
 	url(r'^admin/restore/', upload_database, name = 'restore'),
 	url(r'^admin/', include(admin.site.urls)),
-	url(r'^u/', include(allauth.urls)),
-	url(r'^m/', include(member.urls)),
-	url(r'^a/', include(activity.urls)),
-	url(r'^c/', include(activity.urls)),
+	url(r'^user/', include(allauth.urls)),
+	url(r'^census/', include(census.urls)),
+	url(r'^user/', include(member.urls)),
+	url(r'^event/', include(activity.urls)),
+	url(r'^c/', include(cms.urls)),
+	#todo: if cms keeps it's prefix, make a redirect for leftover urls to that prefix
 )
 
 
