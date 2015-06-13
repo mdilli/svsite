@@ -9,8 +9,8 @@ from django.views import static
 import grappelli.urls
 import allauth.urls
 import cms.urls
-import member.census_urls
-import member.user_urls
+import member.urls_census
+import member.urls_user
 import activity.urls
 from svsite.backups import download_database, upload_database
 
@@ -28,8 +28,8 @@ urlpatterns = i18n_patterns('',
 	url(r'^admin/restore/', upload_database, name = 'restore'),
 	url(r'^admin/', include(admin.site.urls)),
 	url(r'^user/', include(allauth.urls)),
-	url(r'^census/', include(member.census_urls)),
-	url(r'^user/', include(member.user_urls)),
+	url(r'^census/', include(member.urls_census)),
+	url(r'^user/', include(member.urls_user)),
 	url(r'^event/', include(activity.urls)),
 	url(r'^c/', include(cms.urls)),
 	#todo: if cms keeps it's prefix, make a redirect for leftover urls to that prefix
