@@ -120,7 +120,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
 	'django.core.context_processors.static',
 	'django.contrib.auth.context_processors.auth',
 	'sekizai.context_processors.sekizai',
-	'cms.context_processors.cms_settings'
+	'cms.context_processors.cms_settings',
 	'django.contrib.messages.context_processors.messages',
 	'allauth.account.context_processors.account',
 	'allauth.socialaccount.context_processors.socialaccount',
