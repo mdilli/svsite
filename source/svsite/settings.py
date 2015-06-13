@@ -286,10 +286,14 @@ try:
 	from .settings_local import *
 except ImportError:
 	from random import choice
+	from os import chmod
 	pth = join(BASE_DIR, 'source', 'svsite', 'settings_local.py')
 	try:
 		with open(pth, 'w+') as fh:
-			fh.write('"""\n\tLocal settings for this specific instance of svSite (e.g. passwords, absolute paths, ...).\n"""\n\nSECRET_KEY = "{0:s}"\n\n\n'.format(''.join([choice('abcdefghijklmnopqrstuvwxyz0123456789@#$%^&*(-_=+)') for i in range(50)])))
+			fh.write('"""\n\tLocal settings for this specific instance of svSite (e.g. passwords, absolute paths, ...).\n"""' + \
+				'\n\nSECRET_KEY = "{0:s}"\n\n'.format(''.join([choice('abcdefghijklmnopqrstuvwxyz0123456789@#$%^&*(-_=+)') for i in range(50)])) +
+				'DATABASES = {\n\t"default": {\n\t\t"ENGINE": "django.db.backends.sqlite3",\n\t\t"NAME": "' + join(BASE_DIR, 'data', 'default.sqlite3') + '",\n\t}\n}\n\n\n')
+		chmod(pth, 0o640)
 		print('creating local settings file "{0:s}"'.format(pth))
 	except OSError:
 		print('could not create local settings file "{0:s}"'.format(pth))
