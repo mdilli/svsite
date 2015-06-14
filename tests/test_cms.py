@@ -1,9 +1,11 @@
 
 from os import devnull
+from pytest import mark
 from django.core.management import call_command
 import sys
 
 
+@mark.django_db
 def test_cms_check():
 	"""
 		Test django-cms with it's build it command `cms check`.

@@ -35,7 +35,7 @@ CMS_MAX_PAGE_PUBLISH_REVERSIONS = 200
 # Application definition
 
 INSTALLED_APPS = (
-	'svsite',
+	'svsite',  # on top because of base.html template
 	'member',
 	#'grappelli.dashboard', #todo
 	#'grappelli',  # before admin
