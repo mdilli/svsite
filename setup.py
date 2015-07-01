@@ -42,10 +42,11 @@ setup(
 	description='reusable association website',
 	install_requires=[
 		# see documentation for non-pip requirements
-		'django',
+		'django>=1.8',
 		'django-allauth',
 		'django-extensions',
 		'django-grappelli',
+		'django-cms>=3.1.1',
 	],
 	classifiers=[
 		'Development Status :: 2 - Pre-Alpha',

@@ -69,19 +69,18 @@ INSTALLED_APPS = (
 	#'djangocms_file',
 	'djangocms_googlemap',
 	'djangocms_inherit',
-	#'djangocms_link',
+	'djangocms_link',
 	#'djangocms_picture',
 	#'djangocms_teaser',
 	#'djangocms_video',
 	'filer',
 	'mptt',
 	'easy_thumbnails',
-	'cmsplugin_filer_file',
-	'cmsplugin_filer_folder',
-	'cmsplugin_filer_link',
-	'cmsplugin_filer_image',
-	'cmsplugin_filer_teaser',
-	'cmsplugin_filer_video',
+	# 'cmsplugin_filer_file',   # todo: turn back on after fixed, currently breaks clean migrate
+	# 'cmsplugin_filer_folder', # todo: idem
+	# 'cmsplugin_filer_image',  # todo: idem
+	# 'cmsplugin_filer_teaser', # todo: idem
+	# 'cmsplugin_filer_video',  # todo: idem
 	'reversion',
 	'activity',
 	'content',
@@ -89,13 +88,14 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
 	# debug toolbar added automatically
+	'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',  # log 404s
 	'django.contrib.sessions.middleware.SessionMiddleware',
 	'django.middleware.common.CommonMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 	'django.middleware.locale.LocaleMiddleware',
-	'django.middleware.doc.XViewMiddleware',
-	# 'django.middleware.security.SecurityMiddleware',  #  todo turn back on in django 1.8
+	#'django.middleware.doc.XViewMiddleware', #todo: turn back on? it moved
+	'django.middleware.security.SecurityMiddleware',
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
@@ -110,14 +110,14 @@ ROOT_URLCONF = 'svsite.urls'
 
 CMS_PLACEHOLDER_CONF = {}
 
-TEMPLATE_CONTEXT_PROCESSORS = [
-	'django.core.context_processors.i18n',  # Todo: change 'core' to 'template' in 1.8
-	'django.core.context_processors.debug',
-	'django.core.context_processors.request',
-	'django.core.context_processors.media',
-	'django.core.context_processors.csrf',
-	'django.core.context_processors.tz',
-	'django.core.context_processors.static',
+TEMPLATE_CONTEXT_PROCESSORS = (
+	'django.template.context_processors.i18n',
+	'django.template.context_processors.debug',
+	'django.template.context_processors.request',
+	'django.template.context_processors.media',
+	'django.template.context_processors.csrf',
+	'django.template.context_processors.tz',
+	'django.template.context_processors.static',
 	'django.contrib.auth.context_processors.auth',
 	'sekizai.context_processors.sekizai',
 	'cms.context_processors.cms_settings',
@@ -125,23 +125,24 @@ TEMPLATE_CONTEXT_PROCESSORS = [
 	'allauth.account.context_processors.account',
 	'allauth.socialaccount.context_processors.socialaccount',
 	'svsite.context.context_settings',
-]
+) #todo: deprecated, move to TEMPLATES
+
+TEMPLATE_LOADERS = (
+	'django.template.loaders.app_directories.Loader',
+	#'django.template.loaders.eggs.Loader'
+) #todo: deprecated, move to TEMPLATES
 
 TEMPLATES = [
 	{
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
 		'DIRS': [],
-		'APP_DIRS': True,
+		#'APP_DIRS': True,
 		'OPTIONS': {
 			'context_processors': TEMPLATE_CONTEXT_PROCESSORS,
+			'loaders': TEMPLATE_LOADERS,
 		},
 	},
 ]
-
-TEMPLATE_LOADERS = (
-	'django.template.loaders.app_directories.Loader',
-	'django.template.loaders.eggs.Loader'
-)
 
 AUTHENTICATION_BACKENDS = (
 	'django.contrib.auth.backends.ModelBackend',
@@ -165,7 +166,7 @@ MIGRATION_MODULES = {
 	'djangocms_column': 'djangocms_column.migrations_django',
 	'djangocms_googlemap': 'djangocms_googlemap.migrations_django',
 	'djangocms_inherit': 'djangocms_inherit.migrations_django',
-	#'djangocms_link': 'djangocms_link.migrations_django',
+	'djangocms_link': 'djangocms_link.migrations_django',
 	'djangocms_style': 'djangocms_style.migrations_django',
 	#'djangocms_file': 'djangocms_file.migrations_django',
 	#'djangocms_picture': 'djangocms_picture.migrations_django',
@@ -173,7 +174,6 @@ MIGRATION_MODULES = {
 	#'djangocms_video': 'djangocms_video.migrations_django',
 	'cmsplugin_filer_file': 'cmsplugin_filer_file.migrations_django',
 	'cmsplugin_filer_folder': 'cmsplugin_filer_folder.migrations_django',
-	'cmsplugin_filer_link': 'cmsplugin_filer_link.migrations_django',
 	'cmsplugin_filer_image': 'cmsplugin_filer_image.migrations_django',
 	'cmsplugin_filer_teaser': 'cmsplugin_filer_teaser.migrations_django',
 	'cmsplugin_filer_video': 'cmsplugin_filer_video.migrations_django',
@@ -281,6 +281,14 @@ INTERNAL_IPS = ('127.0.0.1',)
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
+SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = True
+
+SESSION_COOKIE_NAME = 'session'
+CSRF_COOKIE_NAME = 'csrf'
+
+CSRF_FAILURE_VIEW = 'svsite.errors.csrf_failure'
 
 try:
 	from .settings_local import *
