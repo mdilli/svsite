@@ -4,7 +4,7 @@ from django.conf.urls import include, url, patterns
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views import static
 import grappelli.urls
 import allauth.urls
@@ -21,9 +21,11 @@ except ImportError:
 
 
 urlpatterns = i18n_patterns('',
-	url(r'^$', lambda request: HttpResponse('under construction')),
+	#url(r'^$', lambda request: HttpResponse('under construction'), name = 'home'),
+	url(r'^$', lambda request: HttpResponseRedirect('c/'), name = 'home'),
+	url(r'^contact/$', lambda request: HttpResponse('under construction'), name = 'contact'),
 	url(r'^test/$', playground),
-	url(r'^grappelli/', include(grappelli.urls)),
+	url(r'^grappelli/', include(grappelli.urls)), #todo
 	url(r'^admin/backup/', download_database, name = 'backup'),
 	url(r'^admin/restore/', upload_database, name = 'restore'),
 	url(r'^admin/', include(admin.site.urls)),

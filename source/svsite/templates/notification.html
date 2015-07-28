@@ -1,0 +1,27 @@
+
+{% extends BASE_TEMPLATE %}
+
+
+{% block content %}
+
+	{% if title %}
+		<h1>{{ title }}</h1>
+	{% endif %}
+
+	<p>{{ message|linebreaks }}</p>
+
+	<div>
+		{% if next %}
+			<div>
+				<a href="{% url 'home' %}" class="btn btn-default">Homepage</a>
+				<a href="{{ next }}" class="btn btn-primary">Continue</a>
+			</div>
+		{% else %}
+			<div>
+				<a href="{% url 'home' %}" class="btn btn-primary">Continue to homepage</a>
+			</div>
+		{% endif %}
+	</div>
+{% endblock content %}
+
+

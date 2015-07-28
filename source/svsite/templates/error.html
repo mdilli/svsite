@@ -1,0 +1,33 @@
+
+{% extends BASE_TEMPLATE %}
+
+
+{% block content %}
+
+	{% if title %}
+		<h1>{{ title }}</h1>
+	{% else %}
+		<h1>There was a problem...</h1>
+	{% endif %}
+
+	<p>{{ message|linebreaks }}</p>
+
+	<p>If the problem doesn't go away or if you need help, please <a href="{% url 'contact' %}">contact us</a>.</p>
+
+	<div>
+		{% if next %}
+			<div>
+				<p>Choose an action, or use your browser's back button.</p>
+				<a href="{% url 'home' %}" class="btn btn-default">Main page</a>
+				<a href="{{ next }}" class="btn btn-primary">Continue</a>
+			</div>
+		{% else %}
+			<div>
+				<p>Use your browser's back button or go to the main page.</p>
+				<a href="{% url 'home' %}" class="btn btn-primary">Main page</a>
+			</div>
+		{% endif %}
+	</div>
+{% endblock content %}
+
+
