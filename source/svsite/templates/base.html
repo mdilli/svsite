@@ -1,15 +1,18 @@
+
 {% load cms_tags %}
 {% load staticfiles %}
 {% load sekizai_tags %}
 {% load menu_tags %}
 
+
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>{% block title %}This is my new project home page{% endblock title %}</title>
+		<title>{% block title %}Welcome{# #todo #}{% endblock title %}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap-theme.min.css">
+		<link rel="icon" href="{% static 'favicon.ico' %}">
 		{% render_block "css" %}
 	</head>
 	<body style="padding-top:60px">
