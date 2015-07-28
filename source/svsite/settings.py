@@ -4,8 +4,10 @@
 	Location specific settings can be set in settings_local.py .
 """
 
+import logging
 from os.path import dirname, abspath, join
 from django.utils.translation import gettext_noop, gettext
+from raven import fetch_git_sha
 
 
 BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
@@ -39,6 +41,7 @@ INSTALLED_APPS = (
 	'member',
 	#'grappelli.dashboard', #todo
 	#'grappelli',  # before admin
+	'raven.contrib.django.raven_compat',
 	'djangocms_admin_style',  # already have grappelli
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -290,6 +293,8 @@ CSRF_COOKIE_NAME = 'csrf'
 
 CSRF_FAILURE_VIEW = 'svsite.errors.csrf_failure'
 
+SENTRY_KEY = ''
+
 try:
 	from .settings_local import *
 except ImportError:
@@ -305,5 +310,48 @@ except ImportError:
 		print('creating local settings file "{0:s}"'.format(pth))
 	except OSError:
 		print('could not create local settings file "{0:s}"'.format(pth))
+
+# #todo: very big; necessary?
+# LOGGING = {
+# 	'version': 1,
+# 	'disable_existing_loggers': True,
+# 	'root': {
+# 		'level': 'WARNING',
+# 		'handlers': ['sentry'],
+# 	},
+# 	'formatters': {
+# 		'verbose': {
+# 			'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+# 		},
+# 	},
+# 	'handlers': {
+# 		'sentry': {
+# 			'level': 'ERROR',
+# 			'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+# 		},
+# 		'console': {
+# 			'level': 'DEBUG',
+# 			'class': 'logging.StreamHandler',
+# 			'formatter': 'verbose'
+# 		}
+# 	},
+# 	'loggers': {
+# 		'django.db.backends': {
+# 			'level': 'ERROR',
+# 			'handlers': ['console'],
+# 			'propagate': False,
+# 		},
+# 		'raven': {
+# 			'level': 'DEBUG',
+# 			'handlers': ['console'],
+# 			'propagate': False,
+# 		},
+# 		'sentry.errors': {
+# 			'level': 'DEBUG',
+# 			'handlers': ['console'],
+# 			'propagate': False,
+# 		},
+# 	},
+# }
 
 
