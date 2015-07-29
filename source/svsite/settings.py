@@ -251,12 +251,15 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_ROOT = join('..', 'static')
+STATIC_ROOT = join(BASE_DIR, 'static')
 STATIC_URL = '/s/'
+STATICFILES_DIRS = (join(BASE_DIR, 'env', 'bower'),)
 
-MEDIA_ROOT = join('..', 'media')
+MEDIA_ROOT = join(BASE_DIR, 'media')
 #CMS_PAGE_MEDIA_PATH = join(MEDIA_ROOT, 'cms')
 MEDIA_URL = '/d/'
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 FILER_ENABLE_LOGGING = True
 
@@ -274,11 +277,11 @@ THUMBNAIL_PROCESSORS = (
 	'easy_thumbnails.processors.filters',
 )
 
-GRAPPELLI_ADMIN_TITLE = 'Admin panel {0:s} svSite'.format(SEPARATOR)
+GRAPPELLI_ADMIN_TITLE = 'Admin panel {0:s} svSite'.format(SEPARATOR)  #todo
 GRAPPELLI_INDEX_DASHBOARD = 'svsite.dashboard.CustomIndexDashboard'
 
-LOGIN_URL = '/account/login/'
-LOGIN_REDIRECT_URL = '/member/me/'
+LOGIN_URL = '/user/login/'
+LOGIN_REDIRECT_URL = '/user/me/'
 
 INTERNAL_IPS = ('127.0.0.1',)
 
@@ -290,6 +293,8 @@ CSRF_COOKIE_HTTPONLY = True
 
 SESSION_COOKIE_NAME = 'session'
 CSRF_COOKIE_NAME = 'csrf'
+
+LANGUAGE_COOKIE_NAME = 'lang'
 
 CSRF_FAILURE_VIEW = 'svsite.errors.csrf_failure'
 

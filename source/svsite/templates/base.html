@@ -10,8 +10,8 @@
 	<head>
 		<title>{% block title %}Welcome{# #todo #}{% endblock title %}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap-theme.min.css' %}">
 		<link rel="icon" href="{% static 'favicon.ico' %}">
 		{% render_block "css" %}
 	</head>
@@ -37,8 +37,8 @@
 			{% block content %}
 			{% endblock content %}
 		</div>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+		<script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
 		{% render_block "js" %}
 	</body>
 </html>
