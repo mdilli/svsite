@@ -37,6 +37,13 @@ We need a database. SQLite is used by default, which you could replace now or la
 	python3 source/manage.py migrate
 	python source/manage.py createsuperuser
 
+Then there's static files, which are handles by bower. It has some dependencies[#foot1]_::
+
+	sudo apt-get install nodejs
+	npm install bower
+	cd dev; bower install; cd ..
+	python source/manage.py collectstatic --noinput
+
 Then you can start the server by using::
 
 	python3 source/manage.py runserver YOUR_URL
@@ -47,5 +54,9 @@ To **(re)start the server** later, got to the correct directory and run::
 
 	source env/bin/activate  # only if you use virtualenv
 	python3 source/manage.py runserver YOUR_URL  # or runserver_plus
+
+.. rubric:: Footnotes
+
+.. [#foot1] If you don't want to install node and bower, you can easily download the packages listed in `dev/bower/json` by hand and put them in `env/bower`. Make sure they have a `dist` subdirectory where the code lives. Make sure to still run the last command if you do this.
 
 
