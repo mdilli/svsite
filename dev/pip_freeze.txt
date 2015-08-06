@@ -1,5 +1,5 @@
 Babel==1.3
-Django==1.8.2
+Django==1.8.3
 Django-Select2==4.3.1
 Jinja2==2.7.3
 MarkupSafe==0.23
@@ -27,7 +27,7 @@ django-extensions==1.5.5
 django-extra-views==0.7.0
 django-filer==0.9.11
 django-grappelli==2.6.5
-django-hreflang==1.0.0
+django-hreflang==v1.2
 django-model-utils==2.2
 django-mptt==0.7.4
 django-polymorphic==0.7.1
