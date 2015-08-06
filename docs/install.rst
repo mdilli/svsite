@@ -37,7 +37,7 @@ We need a database. SQLite is used by default, which you could replace now or la
 	python3 source/manage.py migrate
 	python source/manage.py createsuperuser
 
-Then there's static files, which are handles by bower. It has some dependencies[#foot1]_::
+Then there's static files, which are handles by bower. It has some dependencies [#foot1]_ ::
 
 	sudo apt-get install nodejs
 	npm install bower

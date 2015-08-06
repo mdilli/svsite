@@ -27,6 +27,7 @@ django-extensions==1.5.5
 django-extra-views==0.7.0
 django-filer==0.9.11
 django-grappelli==2.6.5
+django-hreflang==1.0.0
 django-model-utils==2.2
 django-mptt==0.7.4
 django-polymorphic==0.7.1

@@ -87,6 +87,7 @@ INSTALLED_APPS = (
 	'reversion',
 	'activity',
 	'content',
+	'hreflang',
 )
 
 MIDDLEWARE_CLASSES = (

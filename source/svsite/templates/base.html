@@ -3,17 +3,29 @@
 {% load staticfiles %}
 {% load sekizai_tags %}
 {% load menu_tags %}
+{% load hreflang %}
 
 
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>{% block title %}Welcome{# #todo #}{% endblock title %}</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
-		<link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap-theme.min.css' %}">
-		<link rel="icon" href="{% static 'favicon.ico' %}">
+
+		<link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap-theme.min.css' %}" />
+		<link rel="icon" href="{% static 'favicon.ico' %}" />
 		{% render_block "css" %}
+
+		<meta name="keywords" content="{% block keywords %}{% endblock keywords %}" /> {# #todo #}
+		<meta name="description" content="{% block description %}{% endblock description %}" /> {# #todo #}
+		<meta name="copyright" content="{% block copyright %}{% endblock copyright %}" /> {# #todo #}
+		{% block no_email_collection %}<meta name="no-email-collection" content="Please don't collect emails belonging to our users." />{% endblock no_email_collection %} {# #todo remove on contact page #}
+		<meta name="language" content="{{ request.LANGUAGE_CODE }}" />
+		<meta name="referrer" content="no-referrer" />
+		<meta name="robots" content="index, follow" />
+		<meta name="{% block age_rating %}rating{% endblock age_rating %}" content="general" /> {# #todo change if nature content: "mature" #}
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		{% hreflang_tags indent=2 %}
 	</head>
 	<body style="padding-top:60px">
 		{% cms_toolbar %}
