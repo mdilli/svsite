@@ -1,2 +1,3 @@
 svsite/settings_local.py
 svsite/playground.py
+svsite/templates/playground.html
