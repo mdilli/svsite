@@ -8,17 +8,27 @@
 from django.contrib.admin.sites import AdminSite
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import Permission
 from .models import svUser
 
 
 class CensusAdminSite(AdminSite):
-	pass
+
+	site_header = 'Census member administration'
+	site_title = site_header
+	site_url = '/'
+	index_title = site_header
+
+	def has_permission(self, request):
+		#todo: create a special permission for viewing census admin (but permissions in migrations are tricky)
+		return super().has_permission(request)# and has_perm('member.')
 
 
-census_admin = CensusAdminSite()
+census_admin = CensusAdminSite(name = 'census')
 
 
 census_admin.register(svUser, UserAdmin)
 admin.site.register(svUser, UserAdmin)
+admin.site.register(Permission)
 
 
