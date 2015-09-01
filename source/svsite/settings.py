@@ -19,7 +19,6 @@ DATA_DIR = BASE_DIR
 SECRET_KEY = 'this-is-not-secret,-make-sure-to-put-your-key-in-settings_local.py'
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
@@ -114,36 +113,32 @@ ROOT_URLCONF = 'svsite.urls'
 
 CMS_PLACEHOLDER_CONF = {}
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-	'django.template.context_processors.i18n',
-	'django.template.context_processors.debug',
-	'django.template.context_processors.request',
-	'django.template.context_processors.media',
-	'django.template.context_processors.csrf',
-	'django.template.context_processors.tz',
-	'django.template.context_processors.static',
-	'django.contrib.auth.context_processors.auth',
-	'sekizai.context_processors.sekizai',
-	'cms.context_processors.cms_settings',
-	'django.contrib.messages.context_processors.messages',
-	'allauth.account.context_processors.account',
-	'allauth.socialaccount.context_processors.socialaccount',
-	'svsite.context.context_settings',
-) #todo: deprecated, move to TEMPLATES
-
-TEMPLATE_LOADERS = (
-	'django.template.loaders.app_directories.Loader',
-	#'django.template.loaders.eggs.Loader'
-) #todo: deprecated, move to TEMPLATES
-
 TEMPLATES = [
 	{
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
 		'DIRS': [],
 		#'APP_DIRS': True,
 		'OPTIONS': {
-			'context_processors': TEMPLATE_CONTEXT_PROCESSORS,
-			'loaders': TEMPLATE_LOADERS,
+			'context_processors': [
+				'django.template.context_processors.i18n',
+				'django.template.context_processors.debug',
+				'django.template.context_processors.request',
+				'django.template.context_processors.media',
+				'django.template.context_processors.csrf',
+				'django.template.context_processors.tz',
+				'django.template.context_processors.static',
+				'django.contrib.auth.context_processors.auth',
+				'sekizai.context_processors.sekizai',
+				'cms.context_processors.cms_settings',
+				'django.contrib.messages.context_processors.messages',
+				'allauth.account.context_processors.account',
+				'allauth.socialaccount.context_processors.socialaccount',
+				'svsite.context.context_settings',
+			],
+			'loaders': [
+				'django.template.loaders.app_directories.Loader',
+			],
+			'debug': DEBUG,
 		},
 	},
 ]
