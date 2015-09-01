@@ -9,7 +9,7 @@ from django.contrib.admin.sites import AdminSite
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Permission
-from .models import svUser
+from .models import Member
 
 
 class CensusAdminSite(AdminSite):
@@ -27,8 +27,8 @@ class CensusAdminSite(AdminSite):
 census_admin = CensusAdminSite(name = 'census')
 
 
-census_admin.register(svUser, UserAdmin)
-admin.site.register(svUser, UserAdmin)
+census_admin.register(Member, UserAdmin)
+admin.site.register(Member, UserAdmin)
 admin.site.register(Permission)
 
 

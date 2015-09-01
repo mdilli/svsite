@@ -6,7 +6,8 @@ from member.functions import email_to_name
 from django.utils.translation import ugettext_lazy as _
 
 
-class svUser(AbstractUser):
+class Member(AbstractUser):
+	#groups = models.ManyToManyField('teams.Team', blank = True)
 
 	class Meta:
 		verbose_name = _('Member')
