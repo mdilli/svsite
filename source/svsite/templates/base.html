@@ -23,7 +23,7 @@
 		<meta name="copyright" content="{% block copyright %}{% endblock copyright %}" /> {# #todo #}
 		{% block no_email_collection %}<meta name="no-email-collection" content="Please don't collect emails belonging to our users." />{% endblock no_email_collection %} {# #todo remove on contact page #}
 		<meta name="language" content="{{ request.LANGUAGE_CODE }}" />
-		<meta name="referrer" content="no-referrer" />
+		{# <meta name="referrer" content="no-referrer" /> #todo: safe to turn on if https if turned on everywhere, but Django doesn't allow it #}
 		<meta name="robots" content="index, follow" />
 		<meta name="{% block age_rating %}rating{% endblock age_rating %}" content="general" /> {# #todo change if nature content: "mature" #}
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
