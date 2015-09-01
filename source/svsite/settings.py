@@ -42,7 +42,7 @@ INSTALLED_APPS = (
 	#'grappelli.dashboard', #todo
 	#'grappelli',  # before admin
 	'raven.contrib.django.raven_compat',
-	'djangocms_admin_style',  # already have grappelli
+	'djangocms_admin_style',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
@@ -66,12 +66,12 @@ INSTALLED_APPS = (
 	'menus',
 	'sekizai',
 	'treebeard',
-	'djangocms_style',
+	#'djangocms_style',
 	'djangocms_column',
 	'djangocms_text_ckeditor',
 	#'djangocms_file',
 	'djangocms_googlemap',
-	'djangocms_inherit',
+	#'djangocms_inherit',
 	'djangocms_link',
 	#'djangocms_picture',
 	#'djangocms_teaser',
@@ -198,17 +198,17 @@ CMS_LANGUAGES = {
 	1: [
 		{
 			'redirect_on_fallback': True,
-			'code': 'en',
-			'hide_untranslated': False,
-			'public': True,
-			'name': gettext_noop('en_GB'),
-		},
-		{
-			'redirect_on_fallback': True,
 			'code': 'nl',
 			'hide_untranslated': False,
 			'public': True,
 			'name': gettext_noop('nl'),
+		},
+		{
+			'redirect_on_fallback': True,
+			'code': 'en',
+			'hide_untranslated': False,
+			'public': True,
+			'name': gettext_noop('en'),
 		},
 	],
 	'default': {
@@ -277,9 +277,6 @@ THUMBNAIL_PROCESSORS = (
 	'filer.thumbnail_processors.scale_and_crop_with_subject_location',
 	'easy_thumbnails.processors.filters',
 )
-
-GRAPPELLI_ADMIN_TITLE = 'Admin panel {0:s} svSite'.format(SEPARATOR)  #todo
-GRAPPELLI_INDEX_DASHBOARD = 'svsite.dashboard.CustomIndexDashboard'
 
 LOGIN_URL = '/user/login/'
 LOGIN_REDIRECT_URL = '/user/me/'

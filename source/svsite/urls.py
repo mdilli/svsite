@@ -6,7 +6,6 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import static
-import grappelli.urls
 import allauth.urls
 import cms.urls
 import member.urls_census
@@ -25,7 +24,6 @@ urlpatterns = i18n_patterns('',
 	url(r'^$', lambda request: HttpResponseRedirect('c/'), name = 'home'),
 	url(r'^contact/$', lambda request: HttpResponse('under construction'), name = 'contact'),
 	url(r'^test/$', playground),
-	url(r'^grappelli/', include(grappelli.urls)), #todo
 	url(r'^admin/backup/', download_database, name = 'backup'),
 	url(r'^admin/restore/', upload_database, name = 'restore'),
 	url(r'^admin/', include(admin.site.urls)),

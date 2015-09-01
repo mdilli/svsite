@@ -45,7 +45,6 @@ setup(
 		'django>=1.8',
 		'django-allauth',
 		'django-extensions',
-		'django-grappelli',
 		'django-cms>=3.1.1',
 	],
 	classifiers=[
