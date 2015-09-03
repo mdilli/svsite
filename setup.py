@@ -25,6 +25,10 @@ class PyTest(Command):
 		raise SystemExit(errno)
 
 
+with open('dev/requirements.pip', 'r') as fh:
+	requirements = fh.read().splitlines()
+
+
 setup(
 	name='svsite',
 	version=open(join('dev', 'VERSION')).read().strip(),
@@ -40,13 +44,7 @@ setup(
 	author='mark, ...',
 	author_email='contact me on github',
 	description='reusable association website',
-	install_requires=[
-		# see documentation for non-pip requirements
-		'django>=1.8',
-		'django-allauth',
-		'django-extensions',
-		'django-cms>=3.1.1',
-	],
+	install_requires=requirements, # see documentation for non-pip requirements
 	classifiers=[
 		'Development Status :: 2 - Pre-Alpha',
 		'Intended Audience :: Developers',
