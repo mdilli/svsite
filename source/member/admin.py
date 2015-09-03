@@ -27,8 +27,26 @@ class CensusAdminSite(AdminSite):
 census_admin = CensusAdminSite(name = 'census')
 
 
-census_admin.register(Member, UserAdmin)
-admin.site.register(Member, UserAdmin)
+@admin.register(Member)
+class MemberAdmin(UserAdmin):
+	fieldsets = (
+		(None, {'fields': ('username', 'password')}),
+		#('Study', {'fields': ('biology', 'chemistry', 'physics_astronomy', 'computing_science', 'molecular_life_science', 'mathematics', 'science', 'progress', 'specialization',)}),
+		('Technical', {'fields': ('is_active', 'is_staff', 'last_login', 'date_joined',)}),
+	)
+	readonly_fields = ('last_login', 'date_joined',)
+	list_display = ('username', 'is_active', 'is_staff', 'last_login', 'date_joined',)
+	list_filter = ('is_active', 'is_staff', 'last_login', 'date_joined',)
+	search_fields = ('username',)
+	ordering = ('last_login', 'date_joined',)
+	filter_horizontal = ('groups',)
+	show_full_result_count = True
+	view_on_site = True
+
+
+census_admin.register(Member, MemberAdmin)
 admin.site.register(Permission)
+
+#admin.site.register(Member.groups.through)
 
 
