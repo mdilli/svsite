@@ -48,9 +48,9 @@ Then you can start the server by using::
 
 	python3 source/manage.py runserver YOUR_URL
 
-Make sure to replace ``YOUR_URL``, or leave it out to run on localhost. You can stop the server with ``ctrl+C``. To run with extra debug functionality, if you installed the extra packages, you can use ``runserver_plus`` instead of ``runserver``.
+Make sure to replace ``YOUR_URL``, or leave it out to run on localhost. You can stop the server with ``ctrl+C``. To run with extra debug functionality, if you installed the extra packages, you can use ``runserver_plus`` instead of ``runserver``. This version can also use (unsigned) https for debugging, just start the server using ``python3 source/manage.py runserver_plus --cert dev/cert``.
 
-To **(re)start the server** later, got to the correct directory and run::
+To **(re)start the server** later, go to the correct directory and run::
 
 	source env/bin/activate  # only if you use virtualenv
 	python3 source/manage.py runserver YOUR_URL  # or runserver_plus
