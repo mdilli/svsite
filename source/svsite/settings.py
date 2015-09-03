@@ -11,6 +11,7 @@ from raven import fetch_git_sha
 
 
 BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
+
 DATA_DIR = BASE_DIR
 
 # Quick-start development settings - unsuitable for production
@@ -37,9 +38,7 @@ CMS_MAX_PAGE_PUBLISH_REVERSIONS = 200
 
 INSTALLED_APPS = (
 	'svsite',  # on top because of base.html template
-	'member',
-	#'grappelli.dashboard', #todo
-	#'grappelli',  # before admin
+	'member',  # must be before cms
 	'raven.contrib.django.raven_compat',
 	'djangocms_admin_style',
 	'django.contrib.auth',
@@ -47,7 +46,7 @@ INSTALLED_APPS = (
 	'django.contrib.sessions',
 	'django.contrib.admin',
 	'django.contrib.sites',  # for allauth (and possibly others)
-	'django.contrib.sitemaps',  # fpr django-cms
+	'django.contrib.sitemaps',  # for django-cms
 	'django.contrib.staticfiles',
 	'django.contrib.messages',
 	'django_extensions',
@@ -152,17 +151,6 @@ AUTHENTICATION_BACKENDS = (
 
 WSGI_APPLICATION = 'svsite.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.sqlite3',
-		'NAME': join(BASE_DIR, 'data', 'default.sqlite3'),
-	}
-}
-
 MIGRATION_MODULES = {
 	'djangocms_column': 'djangocms_column.migrations_django',
 	'djangocms_googlemap': 'djangocms_googlemap.migrations_django',
@@ -251,7 +239,7 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 STATIC_ROOT = join(BASE_DIR, 'static')
 STATIC_URL = '/s/'
-STATICFILES_DIRS = (join(BASE_DIR, 'env', 'bower'),)
+STATICFILES_DIRS = (join(BASE_DIR, 'dev', 'bower'),)
 
 MEDIA_ROOT = join(BASE_DIR, 'media')
 #CMS_PAGE_MEDIA_PATH = join(MEDIA_ROOT, 'cms')
@@ -298,18 +286,25 @@ SENTRY_KEY = ''
 try:
 	from .settings_local import *
 except ImportError:
-	from random import choice
+	from random import choice, SystemRandom
+	import string
 	from os import chmod
 	pth = join(BASE_DIR, 'source', 'svsite', 'settings_local.py')
 	try:
 		with open(pth, 'w+') as fh:
-			fh.write('"""\n\tLocal settings for this specific instance of svSite (e.g. passwords, absolute paths, ...).\n"""' + \
-				'\n\nSECRET_KEY = "{0:s}"\n\n'.format(''.join([choice('abcdefghijklmnopqrstuvwxyz0123456789@#$%^&*(-_=+)') for i in range(50)])) +
-				'DATABASES = {\n\t"default": {\n\t\t"ENGINE": "django.db.backends.sqlite3",\n\t\t"NAME": "' + join(BASE_DIR, 'data', 'default.sqlite3') + '",\n\t}\n}\n\n\n')
+			fh.write('"""\n\tLocal settings for this specific instance of svSite (e.g. passwords, absolute paths, ...).\n"""\n\n')
+			fh.write('from os.path import join, realpath, dirname, abspath\n\n\n')
+			fh.write('BASE_DIR = dirname(dirname(dirname(abspath(__file__))))\n\n')
+			fh.write('ALLOWED_HOSTS = [\'localhost\', \'.localhost.markv.nl\',]\n\n')
+			fh.write('SECRET_KEY = "{0:s}"\n\n'.format(''.join(SystemRandom().choice(string.ascii_letters + string.digits + '#$%&()*+,-./:;?@[]^_`{|}~') for _ in range(50))))
+			fh.write('DATABASES = {\n\t"default": {\n\t\t"ENGINE": "django.db.backends.sqlite3",\n\t\t"NAME": join(BASE_DIR, \'data\', \'data.sqlite3\'),\n\t}\n}\n\n')
+			fh.write('DEBUG = True\n\n\n')
 		chmod(pth, 0o640)
 		print('creating local settings file "{0:s}"'.format(pth))
+		from .settings_local import *
 	except OSError:
 		print('could not create local settings file "{0:s}"'.format(pth))
+
 
 # #todo: very big; necessary?
 # LOGGING = {
