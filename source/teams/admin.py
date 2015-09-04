@@ -1,5 +1,6 @@
-from django.contrib import admin
 
+from django.contrib import admin
+from django.contrib.sites.models import Site
 from ctrl.admin import census_admin
 from ctrl.admin import superuser_admin
 from teams.models import Team, TeamMember
@@ -20,7 +21,6 @@ class TeamMemberAdmin(admin.ModelAdmin):
 	"""
 
 
-@admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
 	"""
 	fieldsets = (
@@ -53,5 +53,8 @@ class TeamAdmin(admin.ModelAdmin):
 census_admin.register(Team, TeamAdmin)
 superuser_admin.register(Team, TeamAdmin)
 superuser_admin.register(TeamMember, TeamMemberAdmin)
+
+""" Remove Site here because this app is one of the last to be loaded, as opposed to ctrl. """
+admin.site.unregister(Site)
 
 

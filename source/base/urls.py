@@ -2,6 +2,7 @@
 from django.conf import settings
 from django.conf.urls import include, url, patterns
 from django.conf.urls.i18n import i18n_patterns
+from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import static
@@ -25,6 +26,7 @@ urlpatterns = i18n_patterns('',
 	url(r'^contact/$', lambda request: HttpResponse('under construction'), name = 'contact'),
 	url(r'^test/$', playground),
 	url(r'^admin/', lambda request: HttpResponseRedirect('/su/')),
+	url(r'^cms/', include(admin.site.urls)),
 	url(r'^user/', include(allauth.urls)),
     url(r'^su/backup/', download_database, name = 'backup'),
     url(r'^su/restore/', upload_database, name = 'restore'),

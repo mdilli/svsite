@@ -5,7 +5,10 @@
 	Second admin: https://stackoverflow.com/questions/3206856/how-to-have-2-different-admin-sites-in-a-django-project
 """
 
+from django.contrib import admin
 from django.contrib.admin import AdminSite
+from django.contrib.auth.models import Group
+from django.contrib.sites.models import Site
 
 
 class SuperuserAdminSite(AdminSite):
@@ -37,4 +40,7 @@ class CensusAdminSite(AdminSite):
 superuser_admin = SuperuserAdminSite(name = 'superuser')
 census_admin = CensusAdminSite(name = 'census')
 
+
+admin.site.unregister(Group)
+""" Site is unregistered in Team, which is hackish, but this app is loaded before Site. """
 

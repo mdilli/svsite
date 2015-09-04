@@ -1,7 +1,7 @@
 
-from django.contrib import admin
 from django.contrib.admin import ModelAdmin
 from activity.models import Activity
+from ctrl.admin import superuser_admin
 
 
 class ActivityAdmin(ModelAdmin):
@@ -11,6 +11,6 @@ class ActivityAdmin(ModelAdmin):
 	#todo: set end time automatically after start time is set
 
 
-admin.site.register(Activity, ActivityAdmin)
+superuser_admin.register(Activity, ActivityAdmin)
 
 
