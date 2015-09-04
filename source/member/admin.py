@@ -1,8 +1,8 @@
-
 from django.contrib.auth.admin import UserAdmin
+
 from .models import Member
-from svsite.admin import census_admin
-from svsite.admin import superuser_admin
+from ctrl.admin import census_admin
+from ctrl.admin import superuser_admin
 
 
 class FullMemberAdmin(UserAdmin):

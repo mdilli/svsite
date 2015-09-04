@@ -1,7 +1,7 @@
-
 from django.contrib import admin
-from svsite.admin import census_admin
-from svsite.admin import superuser_admin
+
+from ctrl.admin import census_admin
+from ctrl.admin import superuser_admin
 from teams.models import Team, TeamMember
 
 

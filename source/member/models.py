@@ -1,8 +1,8 @@
-
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
-from svsite.models import UserPermissionMixin, UserPermissionManager
+
+from ctrl.models import UserPermissionMixin, UserPermissionManager
 from teams.models import Team, TeamMember
 
 

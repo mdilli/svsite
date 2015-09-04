@@ -50,6 +50,7 @@ INSTALLED_APPS = (
 	'django.contrib.sitemaps',  # for django-cms
 	'django.contrib.staticfiles',
 	'django.contrib.messages',
+	'ctrl',
 	'django_extensions',
 	'debug_toolbar',
 	'allauth',

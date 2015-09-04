@@ -5,12 +5,13 @@ from django.conf.urls.i18n import i18n_patterns
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import static
+from ctrl.admin import superuser_admin
+from ctrl.admin import census_admin
+from ctrl.backups import download_database, upload_database
 import allauth.urls
 import cms.urls
 import member.urls
 import activity.urls
-from svsite.admin import census_admin, superuser_admin
-from svsite.backups import download_database, upload_database
 
 try:
 	from svsite.playground import playground

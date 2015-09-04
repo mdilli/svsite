@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
-from django.db import models, migrations
-import svsite.models
+from django.db import migrations
+import ctrl.models
 
 
 class Migration(migrations.Migration):
@@ -15,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AlterModelManagers(
             name='member',
             managers=[
-                ('objects', svsite.models.UserPermissionManager()),
+                ('objects', ctrl.models.UserPermissionManager()),
             ],
         ),
     ]

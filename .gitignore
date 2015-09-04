@@ -35,4 +35,5 @@ coverage.xml
 target/
 .idea/
 playground/
+dev/bower/
 
