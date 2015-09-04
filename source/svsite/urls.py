@@ -32,7 +32,7 @@ urlpatterns = i18n_patterns('',
 	url(r'^user/', include(member.urls_user)),
 	url(r'^event/', include(activity.urls)),
 	url(r'^c/', include(cms.urls)),
-	#todo: if cms keeps it's prefix, make a redirect for leftover urls to that prefix
+	# todo: if cms keeps it's prefix, make a redirect for leftover urls to that prefix
 )
 
 

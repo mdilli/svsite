@@ -2,7 +2,7 @@
 from django.shortcuts import render
 
 
-def error_view(request, message, title = None, next = None, status = 400)
+def error_view(request, message, title = None, next = None, status = 400):
 	"""
 		:param status:
 
@@ -19,7 +19,7 @@ def error_view(request, message, title = None, next = None, status = 400)
 
 def csrf_failure(request, reason):
 	return error_view(request,
-		message = 'There was a problem with the ',
+		message = 'There was a problem with the security (csrf protection). If the problem persists after reloading, please contact us.',
 	)
 
 
