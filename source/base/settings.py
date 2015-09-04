@@ -37,7 +37,7 @@ CMS_MAX_PAGE_PUBLISH_REVERSIONS = 200
 # Application definition
 
 INSTALLED_APPS = (
-	'svsite',  # on top because of base.html template
+	'base',  # on top because of base.html template
 	'member',  # must be before cms
 	'djangosecure',
 	'raven.contrib.django.raven_compat',
@@ -108,10 +108,10 @@ MIDDLEWARE_CLASSES = (
 	'cms.middleware.page.CurrentPageMiddleware',
 	'cms.middleware.toolbar.ToolbarMiddleware',
 	'cms.middleware.language.LanguageCookieMiddleware',
-	'svsite.middleware.RemoveWwwMiddleware',
+	'base.middleware.RemoveWwwMiddleware',
 )
 
-ROOT_URLCONF = 'svsite.urls'
+ROOT_URLCONF = 'base.urls'
 
 CMS_PLACEHOLDER_CONF = {}
 
@@ -135,7 +135,7 @@ TEMPLATES = [
 				'django.contrib.messages.context_processors.messages',
 				'allauth.account.context_processors.account',
 				'allauth.socialaccount.context_processors.socialaccount',
-				'svsite.context.context_settings',
+				'base.context.context_settings',
 			),
 			'loaders': (
 				'django.template.loaders.app_directories.Loader',
@@ -151,7 +151,7 @@ AUTHENTICATION_BACKENDS = (
 	'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-WSGI_APPLICATION = 'svsite.wsgi.application'
+WSGI_APPLICATION = 'base.wsgi.application'
 
 MIGRATION_MODULES = {
 	'djangocms_column': 'djangocms_column.migrations_django',
@@ -281,7 +281,7 @@ CSRF_COOKIE_NAME = 'csrf'
 
 LANGUAGE_COOKIE_NAME = 'lang'
 
-CSRF_FAILURE_VIEW = 'svsite.errors.csrf_failure'
+CSRF_FAILURE_VIEW = 'base.errors.csrf_failure'
 
 SENTRY_KEY = ''
 
@@ -291,7 +291,7 @@ except ImportError:
 	from random import choice, SystemRandom
 	import string
 	from os import chmod
-	pth = join(BASE_DIR, 'source', 'svsite', 'settings_local.py')
+	pth = join(BASE_DIR, 'source', 'base', 'settings_local.py')
 	try:
 		with open(pth, 'w+') as fh:
 			fh.write('"""\n\tLocal settings for this specific instance of svSite (e.g. passwords, absolute paths, ...).\n"""\n\n')

@@ -1,9 +1,9 @@
 
-from svsite import settings
+from django.conf import settings
 
 
 assert not getattr(settings, 'PREPEND_WWW', False), \
-	'the settings PREPEND_WWW cannot both be true when RemoveWWW middleware is enabled'
+	'the setting PREPEND_WWW cannot be true when RemoveWWW middleware is enabled'
 
 
 class RemoveWwwMiddleware():

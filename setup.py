@@ -30,16 +30,16 @@ with open('dev/requirements.pip', 'r') as fh:
 
 
 setup(
-	name='svsite',
+	name='base',
 	version=open(join('dev', 'VERSION')).read().strip(),
-	packages=['', 'svsite'],
+	packages=['', 'base'],
 	package_dir={'': 'source'},
 	package_data={
 		'docs': 'docs',
 		'static': 'static',
 	},
 	test_suite='tests',
-	url='https://github.com/mverleg/svsite',
+	url='https://github.com/mverleg/base',
 	license='MIT License',
 	author='mark, ...',
 	author_email='contact me on github',

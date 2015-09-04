@@ -4,7 +4,7 @@ from io import StringIO
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.management import call_command
 from django.http import FileResponse, HttpResponseForbidden
-from svsite.functions import lazy_create_permission
+from base.functions import lazy_create_permission
 
 
 def download_database(request):
@@ -12,7 +12,7 @@ def download_database(request):
 		Make a json dump of the entire database excluding sessions.
 	"""
 	lazy_create_permission('make_backup')
-	if not request.user.has_perm('svsite.make_backup'):
+	if not request.user.has_perm('base.make_backup'):
 		return HttpResponseForbidden('you do not have permission to create backups')
 	data = StringIO()
 	call_command('dumpdata', exclude = ['sessions.session'], natural_foreign = True, natural_primary = True, stdout = data)
@@ -27,7 +27,7 @@ def upload_database(request):
 		Upload a json dump as exported by download_database, and overwrite the database with it.
 	"""
 	lazy_create_permission('restore_backup')
-	if not request.user.has_perm('svsite.restore_backup'):
+	if not request.user.has_perm('base.restore_backup'):
 		return HttpResponseForbidden('you do not have permission to create backups')
 	raise NotImplementedError('upload database')  # todo issue #18
 

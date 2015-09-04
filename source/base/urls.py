@@ -14,7 +14,7 @@ import member.urls
 import activity.urls
 
 try:
-	from svsite.playground import playground
+	from base.playground import playground
 except ImportError:
 	playground = lambda request: HttpResponse('nothing here')
 
