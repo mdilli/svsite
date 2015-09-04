@@ -16,6 +16,7 @@ class GroupPermissionMixin(models.Model):
 
 class UserPermissionMixin():
 
+	@property
 	def has_permission_census(self):
 		"""
 			Check if the user has access to the census admin. There is only one permission, you can do everything or nothing.
@@ -25,6 +26,7 @@ class UserPermissionMixin():
 				return True
 		return False
 
+	@property
 	def has_permission_superuser(self):
 		"""
 			Similar to has_permission_census .
