@@ -44,3 +44,4 @@ census_admin = CensusAdminSite(name = 'census')
 admin.site.unregister(Group)
 """ Site is unregistered in Team, which is hackish, but this app is loaded before Site. """
 
+
