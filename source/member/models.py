@@ -12,14 +12,14 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Member(AbstractBaseUser):
-	username = models.SlugField(unique = True, error_messages = {'unique':'A user with that username already exists.'})
+	username = models.SlugField(unique = True, error_messages = {'unique': 'A user with that username already exists.'})
 	is_staff = models.BooleanField(_('staff status'), default = False, help_text = 'Designates whether the user can log into this admin site.')
 	is_active = models.BooleanField(_('active'), default = True, help_text = 'Designates whether this user should be treated as active. Unselect this instead of deleting accounts.')
 	date_joined = models.DateTimeField(_('date joined'), default = timezone.now)
 
 	is_superuser = models.BooleanField(_('superuser status'), default = False, help_text = _('Designates that this user has all permissions without explicitly assigning them.'))
 	groups = models.ManyToManyField('teams.Team', blank = True, through = 'teams.TeamMember')
-	user_permissions = models.ManyToManyField(Permission, blank = True, help_text = _('Disabled; don\'t use!'), related_name="user_set", related_query_name="user")
+	#user_permissions = models.ManyToManyField(Permission, blank = True, help_text = _('Disabled; don\'t use!'), related_name="user_set", related_query_name="user")
 
 	first_name = models.CharField(_('first name'), max_length = 32, blank = True)
 	last_name = models.CharField(_('last name'), max_length = 48, blank = True)
@@ -30,7 +30,7 @@ class Member(AbstractBaseUser):
 
 	objects = UserManager()
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.get_full_name()
 
 	def get_full_name(self):
@@ -49,7 +49,7 @@ class Member(AbstractBaseUser):
 	"""
 	@property
 	def user_permissions(self):
-		return []
+		return Permission.objects.none()
 
 	# def clean(self):
 	# 	if self.user_permissions.count():
@@ -71,6 +71,7 @@ class Member(AbstractBaseUser):
 		if self.is_active and self.is_superuser:
 			return True
 		# Otherwise we need to check the backends.
+		return True  # todo
 		return _user_has_perm(self, perm, obj)
 
 	def has_perms(self, perm_list, obj=None):
@@ -83,7 +84,7 @@ class Member(AbstractBaseUser):
 		# Active superusers have all permissions.
 		if self.is_active and self.is_superuser:
 			return True
-
+		return True  # todo
 		return _user_has_module_perms(self, app_label)
 
 

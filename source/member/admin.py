@@ -21,7 +21,7 @@ class CensusAdminSite(AdminSite):
 
 	def has_permission(self, request):
 		#todo: create a special permission for viewing census admin (but permissions in migrations are tricky)
-		return super().has_permission(request)# and has_perm('member.')
+		return super().has_permission(request)  # and has_perm('member.')
 
 
 census_admin = CensusAdminSite(name = 'census')
@@ -31,7 +31,7 @@ census_admin = CensusAdminSite(name = 'census')
 class MemberAdmin(UserAdmin):
 	fieldsets = (
 		(None, {'fields': ('username', 'password')}),
-		#('Study', {'fields': ('biology', 'chemistry', 'physics_astronomy', 'computing_science', 'molecular_life_science', 'mathematics', 'science', 'progress', 'specialization',)}),
+		# ('Study', {'fields': ('biology', 'chemistry', 'physics_astronomy', 'computing_science', 'molecular_life_science', 'mathematics', 'science', 'progress', 'specialization',)}),
 		('Technical', {'fields': ('is_active', 'is_staff', 'last_login', 'date_joined',)}),
 	)
 	readonly_fields = ('last_login', 'date_joined',)
@@ -46,7 +46,6 @@ class MemberAdmin(UserAdmin):
 
 census_admin.register(Member, MemberAdmin)
 admin.site.register(Permission)
-
-#admin.site.register(Member.groups.through)
+admin.site.unregister(Permission)
 
 

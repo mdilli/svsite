@@ -8,7 +8,7 @@ from django.conf import settings
 
 
 class Team(models.Model):
-	name = models.SlugField(unique = True, error_messages = {'unique':'A user with that username already exists.'})
+	name = models.SlugField(unique = True, error_messages = {'unique': 'A user with that username already exists.'})
 	listed = models.BooleanField(default = False)
 	description = models.TextField(default = '', blank = True)
 	members = models.ManyToManyField(settings.AUTH_USER_MODEL, blank = True, through = 'teams.TeamMember')
@@ -21,11 +21,11 @@ class Team(models.Model):
 		verbose_name = _('Team')
 		verbose_name_plural = _('Teams')
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.name
 
 	def get_absolute_url(self):
-		return reverse('group_info', kwargs = {'pk': self.pk, 'label': slugify(self.name)})  #todo
+		return reverse('group_info', kwargs = {'pk': self.pk, 'label': slugify(self.name)})  # todo
 
 	def natural_key(self):
 		return (self.name,)
@@ -37,6 +37,11 @@ class TeamMember(models.Model):
 	admin = models.BooleanField(default = False, help_text = _('Admins can and and remove members and update descriptions'))
 	role = models.CharField(max_length = 64, blank = True, default = '')
 
+	class Meta:
+		unique_together = ('member', 'team',)
+
+	def __str__(self):
+		return '{0:} ∈ {1:}'.format(self.member, self.team)
 
 # def user_team_update(sender, **kwargs):
 # 	print('update!', sender, kwargs)

@@ -1,11 +1,24 @@
-from cms.admin.useradmin import PageUserAdmin
+
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from member.admin import census_admin
 from teams.models import Team, TeamMember
 
 
-PageUserAdmin
+class TeamMemberInline(admin.TabularInline):
+	model = TeamMember
+	verbose_name = 'team member'
+	extra = 1
+
+
+class TeamMemberAdmin(admin.ModelAdmin):
+	"""
+	list_display = ('given_by', 'used_by', 'created', 'is_expired',)
+	list_filter = ('created',)
+	search_fields = ('given_by__username', 'used_by__username',)
+	ordering = ('created',)
+	"""
+
 
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
@@ -24,6 +37,9 @@ class TeamAdmin(admin.ModelAdmin):
 	show_full_result_count = True
 	view_on_site = True
 	"""
+
+	inlines = (TeamMemberInline,)
+
 	def formfield_for_manytomany(self, db_field, request=None, **kwargs):
 		if db_field.name == 'permissions':
 			qs = kwargs.get('queryset', db_field.rel.to.objects)
@@ -34,18 +50,8 @@ class TeamAdmin(admin.ModelAdmin):
 			db_field, request=request, **kwargs)
 
 
-@admin.register(TeamMember)
-class TeamMemberAdmin(admin.ModelAdmin):
-	"""
-	list_display = ('given_by', 'used_by', 'created', 'is_expired',)
-	list_filter = ('created',)
-	search_fields = ('given_by__username', 'used_by__username',)
-	ordering = ('created',)
-	"""
-
-
 census_admin.register(Team, TeamAdmin)
-census_admin.register(TeamMember, TeamMemberAdmin)
+#census_admin.register(TeamMember, TeamMemberAdmin)
 admin.site.unregister(Group)
 
 
