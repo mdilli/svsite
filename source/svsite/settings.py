@@ -39,6 +39,7 @@ CMS_MAX_PAGE_PUBLISH_REVERSIONS = 200
 INSTALLED_APPS = (
 	'svsite',  # on top because of base.html template
 	'member',  # must be before cms
+	'djangosecure',
 	'raven.contrib.django.raven_compat',
 	'djangocms_admin_style',
 	'django.contrib.auth',
@@ -231,7 +232,7 @@ APPEND_SLASH = True
 SECURE_SSL_REDIRECT = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_HSTS_SECONDS = 30  # set to large amount (seconds) to let people use https only for that duration (maybe not)
+SECURE_HSTS_SECONDS = 30  # todo set to large amount (seconds) to let people use only https for that duration (maybe not)
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 # Static files (CSS, JavaScript, Images)
@@ -293,7 +294,7 @@ except ImportError:
 	try:
 		with open(pth, 'w+') as fh:
 			fh.write('"""\n\tLocal settings for this specific instance of svSite (e.g. passwords, absolute paths, ...).\n"""\n\n')
-			fh.write('from os.path import join, realpath, dirname, abspath\n\n\n')
+			fh.write('from os.path import join, dirname, abspath\n\n\n')
 			fh.write('BASE_DIR = dirname(dirname(dirname(abspath(__file__))))\n\n')
 			fh.write('ALLOWED_HOSTS = [\'localhost\', \'.localhost.markv.nl\',]\n\n')
 			fh.write('SECRET_KEY = "{0:s}"\n\n'.format(''.join(SystemRandom().choice(string.ascii_letters + string.digits + '#$%&()*+,-./:;?@[]^_`{|}~') for _ in range(50))))

@@ -14,3 +14,4 @@ django-model-utils>=2.3
 werkzeug>=0.10
 pyopenssl>=0.15
 django-allauth>=0.21,<0.22
+django-secure>=1.0.1
