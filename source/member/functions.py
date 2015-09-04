@@ -1,5 +1,6 @@
 
 def email_to_name(email):
+	#todo: unused
 	"""
 		Convert an email address to a name by replacing special characters by spaces and title-casing the result.
 	"""

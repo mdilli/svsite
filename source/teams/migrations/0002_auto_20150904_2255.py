@@ -8,13 +8,12 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('teams', '0001_initial'),
-        ('member', '0001_initial'),
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='member',
-            name='groups',
-            field=models.ManyToManyField(blank=True, through='teams.TeamMember', to='teams.Team'),
+        migrations.RenameField(
+            model_name='team',
+            old_name='permission_full_admin',
+            new_name='permission_superuser',
         ),
     ]

@@ -2,15 +2,14 @@
 from django.conf import settings
 from django.conf.urls import include, url, patterns
 from django.conf.urls.i18n import i18n_patterns
-from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import static
 import allauth.urls
 import cms.urls
-import member.urls_census
-import member.urls_user
+import member.urls
 import activity.urls
+from svsite.admin import census_admin, superuser_admin
 from svsite.backups import download_database, upload_database
 
 try:
@@ -24,12 +23,13 @@ urlpatterns = i18n_patterns('',
 	url(r'^$', lambda request: HttpResponseRedirect('c/'), name = 'home'),
 	url(r'^contact/$', lambda request: HttpResponse('under construction'), name = 'contact'),
 	url(r'^test/$', playground),
-	url(r'^admin/backup/', download_database, name = 'backup'),
-	url(r'^admin/restore/', upload_database, name = 'restore'),
-	url(r'^admin/', include(admin.site.urls)),
+	url(r'^admin/', lambda request: HttpResponseRedirect('/su/')),
 	url(r'^user/', include(allauth.urls)),
-	url(r'^census/', include(member.urls_census)),
-	url(r'^user/', include(member.urls_user)),
+    url(r'^su/backup/', download_database, name = 'backup'),
+    url(r'^su/restore/', upload_database, name = 'restore'),
+	url(r'^su/', superuser_admin.urls, name = 'superuser_admin'),
+    url(r'^census/', census_admin.urls, name = 'census_admin'),
+	url(r'^user/', include(member.urls)),
 	url(r'^event/', include(activity.urls)),
 	url(r'^c/', include(cms.urls)),
 	# todo: if cms keeps it's prefix, make a redirect for leftover urls to that prefix

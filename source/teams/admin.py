@@ -1,7 +1,7 @@
 
 from django.contrib import admin
-from django.contrib.auth.models import Group
-from member.admin import census_admin
+from svsite.admin import census_admin
+from svsite.admin import superuser_admin
 from teams.models import Team, TeamMember
 
 
@@ -51,7 +51,7 @@ class TeamAdmin(admin.ModelAdmin):
 
 
 census_admin.register(Team, TeamAdmin)
-#census_admin.register(TeamMember, TeamMemberAdmin)
-admin.site.unregister(Group)
+superuser_admin.register(Team, TeamAdmin)
+superuser_admin.register(TeamMember, TeamMemberAdmin)
 
 
