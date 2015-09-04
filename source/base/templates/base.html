@@ -10,7 +10,8 @@
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#">{# prefix for open graph (FB) #}
 	<head>
-		<title>{% macro title %}{% block title %}Welcome{# #todo #}{% endblock title %}{% endmacro title %}</title>
+		{% kwacro title %}{% block title %}Welcome{# #todo #}{% endblock title %}{% endkwacro title %}
+		<title>{% usekwacro title %}</title>
 		<link rel="icon" href="{% static 'favicon.ico' %}" />
 
 		<link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" />
@@ -29,7 +30,7 @@
 		<meta name="{% block age_rating %}rating{% endblock age_rating %}" content="general" /> {# #todo change if nature content: "mature" #}
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta property="og:image" content="{% static 'favicon.ico' %}" />
-		<meta property="og:title" content="{% usemacro title %}" />
+		<meta property="og:title" content="{% usekwacro title %}" />
 		{% hreflang_tags indent=2 %}
 	</head>
 	<body style="padding-top:60px">
