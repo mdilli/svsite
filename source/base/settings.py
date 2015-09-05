@@ -2,12 +2,13 @@
 	General settings for the svSite project.
 
 	Location specific settings can be set in settings_local.py .
+
+	For anyone updating this code in the future:
+	http://www.commitstrip.com/en/2014/11/21/why-we-never-forget-our-fellow-coders/
 """
 
-import logging
 from os.path import dirname, abspath, join
-from django.utils.translation import gettext_noop, gettext
-from raven import fetch_git_sha
+from django.utils.translation import gettext_noop
 
 
 BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
