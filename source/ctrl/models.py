@@ -1,6 +1,5 @@
 
 from django.contrib.auth.models import UserManager
-from django.contrib.auth.models import Group, Permission
 from django.db import models
 from django.apps import apps
 
@@ -9,6 +8,7 @@ class GroupPermissionMixin(models.Model):
 
 	permission_census = models.BooleanField(default = False)
 	permission_superuser = models.BooleanField(default = False)
+	system = models.BooleanField(default = False, help_text = 'System teams are essential and cannot be changed')
 
 	class Meta:
 		abstract = True
@@ -64,7 +64,7 @@ class UserPermissionManager(UserManager):
 		try:
 			team = Team.objects.get(name = 'Admins')
 		except Team.DoesNotExist:
-			team = Team(name = 'admins', permission_superuser = True, permission_census = True)
+			team = Team(name = 'admins', permission_superuser = True, permission_census = False, system = True)
 			print('created "admins" group')
 			team.save()
 		tm = TeamMember(member = user, team = team, admin = True)

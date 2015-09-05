@@ -1,4 +1,4 @@
-from django.contrib.auth.models import Group, Permission, GroupManager
+from django.contrib.auth.models import GroupManager
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.text import slugify
@@ -11,7 +11,7 @@ from ctrl.models import GroupPermissionMixin
 
 class Team(GroupPermissionMixin):
 	name = models.CharField(max_length = 48, unique = True, error_messages = {'unique': 'A team with that name already exists.'})
-	slug = AutoSlugField(populate_from = 'name', unique = True)
+	slug = AutoSlugField(populate_from = 'name', unique = True, help_text = 'This value is used as identifier in places like urls.')
 	listed = models.BooleanField(default = False)
 	description = models.TextField(default = '', blank = True)
 	members = models.ManyToManyField(settings.AUTH_USER_MODEL, blank = True, through = 'teams.TeamMember')
@@ -30,8 +30,10 @@ class Team(GroupPermissionMixin):
 		return reverse('group_info', kwargs = {'pk': self.pk, 'label': slugify(self.name)})
 
 	def natural_key(self):
-		return (self.name,)
+		return (self.slug,)
 
+	def member_count(self):
+		return self.members.count()
 
 class TeamMember(models.Model):
 	member = models.ForeignKey(settings.AUTH_USER_MODEL)

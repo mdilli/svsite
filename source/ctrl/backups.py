@@ -12,7 +12,7 @@ def download_database(request):
 	"""
 		Make a json dump of the entire database excluding sessions.
 	"""
-	if not request.user.has_permission_superuser():
+	if not request.user.has_permission_superuser:
 		return HttpResponseForbidden('you do not have permission to create backups')
 	data = StringIO()
 	call_command('dumpdata', exclude = ['sessions.session'], natural_foreign = True, natural_primary = True, stdout = data)
@@ -27,7 +27,7 @@ def upload_database(request):
 	"""
 		Upload a json dump as exported by download_database, and overwrite the database with it.
 	"""
-	if not request.user.has_permission_superuser():
+	if not request.user.has_permission_superuser:
 		return HttpResponseForbidden('you do not have permission to create backups')
 	raise NotImplementedError('upload database')
 	# todo issue #18

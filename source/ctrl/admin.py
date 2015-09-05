@@ -21,7 +21,7 @@ class SuperuserAdminSite(AdminSite):
 	def has_permission(self, request):
 		if not request.user.is_active:
 			return False
-		return request.user.has_permission_superuser()
+		return request.user.has_permission_superuser
 
 
 class CensusAdminSite(AdminSite):
