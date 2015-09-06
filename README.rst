@@ -2,12 +2,12 @@
 svSite
 ===============================
 
-svSite is a project to create reusable website code that is usable for small or medium sized associations. It will be usable for communication within the organisation, creating and promising events, displaying news and static information, etc. 
+svSite is a project to create reusable website code that is usable for small or medium sized associations. It will be usable for communication within the organisation, creating and promoting events, displaying news and static information, etc. 
 
 Status
 -------------------------------
 
-Under development. Not usable yet, sorry.
+Under development; not usable yet. Please stand by for release v1.0!
 
 Resources
 -------------------------------
