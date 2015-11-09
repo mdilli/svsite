@@ -31,29 +31,29 @@ with open('dev/requirements.pip', 'r') as fh:
 
 setup(
 	name='base',
+	description='reusable association website',
+	url='https://github.com/mverleg/svsite',
 	version=open(join('dev', 'VERSION')).read().strip(),
-	packages=['', 'base'],
-	package_dir={'': 'source'},
+	packages=['', 'base'], #find_packages()
+	#package_dir={'': 'source'},
 	package_data={
 		'docs': 'docs',
-		'static': 'static',
+		'tests': 'tests',
 	},
 	test_suite='tests',
-	url='https://github.com/mverleg/base',
-	license='MIT License',
-	author='mark, ...',
-	author_email='contact me on github',
-	description='reusable association website',
+	license='BSD License',
+	author='Mark, ...',
+	author_email='markv.nl.dev@gmail.com',
 	install_requires=requirements, # see documentation for non-pip requirements
 	classifiers=[
 		'Development Status :: 2 - Pre-Alpha',
 		'Intended Audience :: Developers',
-		'License :: OSI Approved :: MIT License',
+		'License :: OSI Approved :: BSD License',
 		'Programming Language :: Python :: 3.4',
-		'Framework :: Django :: 1.8',
+		'Framework :: Django :: 1.9',
 		'Environment :: Web Environment',
 	],
-	cmdclass = {'test': PyTest},
+	cmdclass = {'test': PyTest},  #todo add a comment what this does and why it's a good idea...
 )
 
 
