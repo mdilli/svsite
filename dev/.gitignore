@@ -1,2 +1,5 @@
 cert.*
 bower/
+media/
+static/
+data/
