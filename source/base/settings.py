@@ -76,7 +76,8 @@ INSTALLED_APPS = (
 	'content',
 	'teams',
 	'hreflang',
-	'django-cleanup',
+	'django_cleanup',
+	'birthdays',
 	#'haystack',
 	#'cms-search',  # todo: change-cms-search (with haystack)
 )
@@ -168,8 +169,8 @@ MIGRATION_MODULES = {
 LANGUAGE_CODE = 'nl'
 
 LANGUAGES = (
-	('nl', gettext_noop('Dutch')),
-	('en', gettext_noop('English')),
+	('nl', ('Dutch')),  # using gettext_noop here causes a circular import
+	('en', ('English')),
 )
 
 CMS_LANGUAGES = {
@@ -179,14 +180,14 @@ CMS_LANGUAGES = {
 			'code': 'nl',
 			'hide_untranslated': False,
 			'public': True,
-			'name': gettext_noop('Dutch'),
+			'name': ('Dutch'),  # using gettext_noop here causes a circular import
 		},
 		{
 			'redirect_on_fallback': True,
 			'code': 'en',
 			'hide_untranslated': False,
 			'public': True,
-			'name': gettext_noop('English'),
+			'name': ('English'),
 		},
 	],
 	'default': {
@@ -261,7 +262,7 @@ INTERNAL_IPS = ('127.0.0.1',)
 
 
 try:
-	from settings_local import *
+	from base.settings_local import *
 except ImportError:
 	generate_local(__file__, 'svsite', create=True, filename='settings_local.py')
 

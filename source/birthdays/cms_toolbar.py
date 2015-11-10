@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from cms.toolbar_pool import toolbar_pool
 from cms.toolbar_base import CMSToolbar
 from cms.utils.urlutils import admin_reverse
-from birthdays.models import BirthdaysPlugin
+from birthdays.models import BirthdaysPluginModel
 from member.models import Member
 
 
@@ -15,7 +15,7 @@ class BirthdayToolbar(CMSToolbar):
 	supported_apps = (
 		'birthdays',  # this is already set automatically to current app
 	)
-	watch_models = [BirthdaysPlugin, Member,]
+	watch_models = [BirthdaysPluginModel, Member, ]
 
 	def populate(self):
 		if not self.is_current_app:

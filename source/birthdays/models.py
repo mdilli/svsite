@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from member.models import Member
 
 
-class BirthdaysPlugin(CMSPlugin):
+class BirthdaysPluginModel(CMSPlugin):
 	# following http://docs.django-cms.org/en/latest/introduction/plugins.html
 	caption = models.CharField(max_length=32, default=_('Happy birthday to...'))
 	max_days = models.PositiveSmallIntegerField(default=7, blank=True, null=True, validators=[MaxValueValidator(365)])
