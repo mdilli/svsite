@@ -15,6 +15,7 @@ class GroupPermissionMixin(models.Model):
 
 
 class UserPermissionMixin():
+	#todo: unused
 
 	@property
 	def has_permission_census(self):

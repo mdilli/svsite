@@ -1,17 +1,20 @@
 
-from cms.models import CMSPlugin
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
-from ctrl.models import UserPermissionMixin, UserPermissionManager
+from ctrl.models import UserPermissionManager
 
 
-class Member(AbstractUser, UserPermissionMixin):
+class Member(AbstractUser):
 	slug = AutoSlugField(populate_from='username', unique=True)
 	teams = models.ManyToManyField('teams.Team', blank=True, through='teams.TeamMember')
 	birthday = models.DateField(blank=True, null=True, default=None)
 
 	objects = UserPermissionManager()
+
+	# class Meta:
+	# 	abstract = False
+	# 	app_label = 'member'
 
 	def __str__(self):
 		return self.get_full_name()
