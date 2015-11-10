@@ -9,9 +9,9 @@ Linux / bash
 
 You will need to make sure you 'can push'_ code to Github by setting up ssh keys. Then fork the svsite repository and follow these steps.
 
-You will need ``python3``, ``pip``, a database (``sqlite3`` is default and easy, but slow), ``virtualenv``, ``git`` and some SSL packages. Just type::
+You will need ``python3``, ``pip``, a database (``sqlite3`` is default and easy, but slow), ``virtualenv``, ``git``, ``elasticsearch`` and some SSL packages. Just type::
 
-	sudo apt-get install python3 sqlite3 python-virtualenv git build-essential libssl-dev libffi-dev python-dev
+	sudo apt-get install python3 sqlite3 python-virtualenv git build-essential libssl-dev libffi-dev python-dev elasticsearch
 
 Get your copy of the svsite code::
 
@@ -27,7 +27,7 @@ Go to the directory, start a virtualenv and install::
 To create the database and superuser::
 
 	python3 source/manage.py migrate
-	python source/manage.py createsuperuser
+	python3 source/manage.py createsuperuser
 
 You might want to run the tests::
 
@@ -47,8 +47,13 @@ Now you are ready to make your chances!
 
 After you are done and have tested your changes (and converted space-indents to tabs), you can suggest it for inclusion into svsite by means of a `pull request`_
 
+A general note
+-------------------------------
+
+
+Good luck! why-we-never-forget-our-fellow-coders_
 
 .. _can push: https://help.github.com/articles/generating-ssh-keys/
 .. _pull request: https://help.github.com/articles/creating-a-pull-request/
-
+.. _why-we-never-forget-our-fellow-coders http://www.commitstrip.com/en/2014/11/21/why-we-never-forget-our-fellow-coders/
 
