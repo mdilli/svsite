@@ -1,0 +1,17 @@
+
+{# todo: see playground for a better theme #}
+
+<section class="birthdays">
+	<h1>{{ instance.caption }}</h1>
+	{% if birthday_users %}
+		<ol>
+			{% for birthday_user in birthday_users %}
+				<li>{{ birthday_user.get_full_name }}</li>
+			{% endfor %}
+		</ol>
+	{% else %}
+		<p>No one is having a birthday :(</p>
+	{% endif %}
+</section>
+
+
