@@ -20,3 +20,4 @@ django-display-exceptions>=1.6   # actually used?
 django-haystack>=2.4
 pyelasticsearch
 django-cleanup  # delete media files along with their model
+django-crispy-forms  # enough forms to be worth it?
