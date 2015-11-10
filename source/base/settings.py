@@ -2,27 +2,17 @@
 	General settings for the svSite project.
 
 	Location specific settings can be set in settings_local.py .
-
-	For anyone updating this code in the future:
-	http://www.commitstrip.com/en/2014/11/21/why-we-never-forget-our-fellow-coders/
 """
 
 from os.path import dirname, abspath, join
 from django.utils.translation import gettext_noop
+from misc.functions.local_example import generate_local
+from misc.settings import *
 
 
 BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
 
 DATA_DIR = BASE_DIR
-
-# Quick-start development settings - unsuitable for production
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'this-is-not-secret,-make-sure-to-put-your-key-in-settings_local.py'
-
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'member.Member'
 
@@ -30,12 +20,6 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-
-CMS_PERMISSION = True
-
-CMS_MAX_PAGE_PUBLISH_REVERSIONS = 200
-
-# Application definition
 
 INSTALLED_APPS = (
 	'base',  # on top because of base.html template
@@ -51,10 +35,12 @@ INSTALLED_APPS = (
 	'django.contrib.sitemaps',  # for django-cms
 	'django.contrib.staticfiles',
 	'django.contrib.messages',
+	'misc',
 	'ctrl',
+	'display_exceptions',
 	'django_extensions',
 	'debug_toolbar',
-	'allauth',
+	'allauth',  # todo: this is version locked
 	'allauth.account',
 	'allauth.socialaccount',
 	# 'allauth.socialaccount.providers.facebook',
@@ -90,6 +76,9 @@ INSTALLED_APPS = (
 	'content',
 	'teams',
 	'hreflang',
+	'django-cleanup',
+	#'haystack',
+	#'cms-search',  # todo: change-cms-search (with haystack)
 )
 
 MIDDLEWARE_CLASSES = (
@@ -109,7 +98,8 @@ MIDDLEWARE_CLASSES = (
 	'cms.middleware.page.CurrentPageMiddleware',
 	'cms.middleware.toolbar.ToolbarMiddleware',
 	'cms.middleware.language.LanguageCookieMiddleware',
-	'base.middleware.RemoveWwwMiddleware',
+	'misc.middleware.unique_urls.WwwSlashMiddleware',
+	'display_exceptions.DisplayExceptionMiddleware',
 )
 
 ROOT_URLCONF = 'base.urls'
@@ -142,10 +132,14 @@ TEMPLATES = [
 				'django.template.loaders.app_directories.Loader',
 				#'django.template.loaders.eggs.Loader'
 			),
-			'debug': DEBUG,
+			'debug': True,
 		},
 	},
 ]
+
+CMS_PERMISSION = True
+
+CMS_MAX_PAGE_PUBLISH_REVERSIONS = 200
 
 AUTHENTICATION_BACKENDS = (
 	'django.contrib.auth.backends.ModelBackend',
@@ -171,10 +165,6 @@ MIGRATION_MODULES = {
 	'cmsplugin_filer_video': 'cmsplugin_filer_video.migrations_django',
 }
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.8/topics/i18n/
-
 LANGUAGE_CODE = 'nl'
 
 LANGUAGES = (
@@ -189,14 +179,14 @@ CMS_LANGUAGES = {
 			'code': 'nl',
 			'hide_untranslated': False,
 			'public': True,
-			'name': gettext_noop('nl'),
+			'name': gettext_noop('Dutch'),
 		},
 		{
 			'redirect_on_fallback': True,
 			'code': 'en',
 			'hide_untranslated': False,
 			'public': True,
-			'name': gettext_noop('en'),
+			'name': gettext_noop('English'),
 		},
 	],
 	'default': {
@@ -214,8 +204,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-SITE_ID = 1
-
 BASE_TEMPLATE = 'base.html'  # magic name, see template comment
 BASE_EMAIL_TEMPLATE = 'base.html'
 
@@ -226,27 +214,27 @@ CMS_TEMPLATES = (
 
 SEPARATOR = '&laquo;'
 
-# have strip-www middlware so don't turn this on
-# PREPEND_WWW = True
-APPEND_SLASH = True
-
-#
+# this should all be done by apache, but as a fallback
 SECURE_SSL_REDIRECT = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_HSTS_SECONDS = 30  # todo set to large amount (seconds) to let people use only https for that duration (maybe not)
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # todo: correct?
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
-STATIC_ROOT = join(BASE_DIR, 'static')
-STATIC_URL = '/s/'
+SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = True
+
+SESSION_COOKIE_NAME = 'session'
+CSRF_COOKIE_NAME = 'csrf'
+
+LANGUAGE_COOKIE_NAME = 'lang'
+
+CSRF_FAILURE_VIEW = 'base.errors.csrf_failure'
+
 STATICFILES_DIRS = (join(BASE_DIR, 'dev', 'bower'),)
-
-MEDIA_ROOT = join(BASE_DIR, 'media')
-#CMS_PAGE_MEDIA_PATH = join(MEDIA_ROOT, 'cms')
-MEDIA_URL = '/d/'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
@@ -271,85 +259,10 @@ LOGIN_REDIRECT_URL = '/user/me/'
 
 INTERNAL_IPS = ('127.0.0.1',)
 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-
-SESSION_COOKIE_HTTPONLY = True
-CSRF_COOKIE_HTTPONLY = True
-
-SESSION_COOKIE_NAME = 'session'
-CSRF_COOKIE_NAME = 'csrf'
-
-LANGUAGE_COOKIE_NAME = 'lang'
-
-CSRF_FAILURE_VIEW = 'base.errors.csrf_failure'
-
-SENTRY_KEY = ''
 
 try:
-	from .settings_local import *
+	from settings_local import *
 except ImportError:
-	from random import choice, SystemRandom
-	import string
-	from os import chmod
-	pth = join(BASE_DIR, 'source', 'base', 'settings_local.py')
-	try:
-		with open(pth, 'w+') as fh:
-			fh.write('"""\n\tLocal settings for this specific instance of svSite (e.g. passwords, absolute paths, ...).\n"""\n\n')
-			fh.write('from os.path import join, dirname, abspath\n\n\n')
-			fh.write('BASE_DIR = dirname(dirname(dirname(abspath(__file__))))\n\n')
-			fh.write('ALLOWED_HOSTS = [\'localhost\', \'.localhost.markv.nl\',]\n\n')
-			fh.write('SECRET_KEY = "{0:s}"\n\n'.format(''.join(SystemRandom().choice(string.ascii_letters + string.digits + '#$%&()*+,-./:;?@[]^_`{|}~') for _ in range(50))))
-			fh.write('DATABASES = {\n\t"default": {\n\t\t"ENGINE": "django.db.backends.sqlite3",\n\t\t"NAME": join(BASE_DIR, \'data\', \'data.sqlite3\'),\n\t}\n}\n\n')
-			fh.write('DEBUG = True\n\n\n')
-		chmod(pth, 0o640)
-		print('creating local settings file "{0:s}"'.format(pth))
-		from .settings_local import *
-	except OSError:
-		print('could not create local settings file "{0:s}"'.format(pth))
-
-
-# #todo: very big; necessary?
-# LOGGING = {
-# 	'version': 1,
-# 	'disable_existing_loggers': True,
-# 	'root': {
-# 		'level': 'WARNING',
-# 		'handlers': ['sentry'],
-# 	},
-# 	'formatters': {
-# 		'verbose': {
-# 			'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-# 		},
-# 	},
-# 	'handlers': {
-# 		'sentry': {
-# 			'level': 'ERROR',
-# 			'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-# 		},
-# 		'console': {
-# 			'level': 'DEBUG',
-# 			'class': 'logging.StreamHandler',
-# 			'formatter': 'verbose'
-# 		}
-# 	},
-# 	'loggers': {
-# 		'django.db.backends': {
-# 			'level': 'ERROR',
-# 			'handlers': ['console'],
-# 			'propagate': False,
-# 		},
-# 		'raven': {
-# 			'level': 'DEBUG',
-# 			'handlers': ['console'],
-# 			'propagate': False,
-# 		},
-# 		'sentry.errors': {
-# 			'level': 'DEBUG',
-# 			'handlers': ['console'],
-# 			'propagate': False,
-# 		},
-# 	},
-# }
+	generate_local(__file__, 'svsite', create=True, filename='settings_local.py')
 
 

@@ -8,8 +8,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
-        {'sitemaps': {'cmspages': CMSSitemap}}),
-    url(r'^select2/', include('django_select2.urls')),
+        {'sitemaps': {'cmspages': CMSSitemap}}),  #todo: unused?
+    url(r'^select2/', include('django_select2.urls')), #todo: what is this?
     url(r'^', include('cms.urls')),
 )
 

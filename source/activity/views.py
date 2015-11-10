@@ -12,6 +12,7 @@ def to_activity_overview(request):
 
 class ActivityOverview(ListView):
 
+	#todo: no class views, they suck
 	template_name = 'activity_overview.html'
 
 	def get_queryset(self):

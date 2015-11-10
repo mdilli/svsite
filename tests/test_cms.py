@@ -8,7 +8,7 @@ import sys
 @mark.django_db
 def test_cms_check():
 	"""
-		Test django-cms with it's build it command `cms check`.
+		Test django-cms with it's build-in command `cms check`.
 
 		The `call_command` will raise an error when it fails, no need for asserts.
 	"""
