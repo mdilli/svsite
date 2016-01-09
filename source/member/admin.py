@@ -1,5 +1,5 @@
-from django.contrib.auth.admin import UserAdmin
 
+from django.contrib.auth.admin import UserAdmin
 from .models import Member
 from ctrl.admin import census_admin
 from ctrl.admin import superuser_admin
@@ -18,7 +18,7 @@ class FullMemberAdmin(UserAdmin):
 	search_fields = ('username', 'first_name', 'last_name',)
 	list_display_links = ('username', 'first_name', 'last_name',)
 	ordering = ('username',)
-	filter_horizontal = ('teams',)
+	#filter_horizontal = ('teams',) #todo replace with groups
 	show_full_result_count = True
 	view_on_site = True
 	#todo: show groups as readonly attribute
@@ -36,7 +36,7 @@ class TechnicalMemberAdmin(UserAdmin):
 	search_fields = ('username', 'first_name', 'last_name',)
 	list_display_links = ('username', 'get_full_name',)
 	ordering = ('username',)
-	filter_horizontal = ('teams',)
+	#filter_horizontal = ('teams',) #todo replace with groups
 	show_full_result_count = True
 	view_on_site = True
 	#todo: fully show editable groups

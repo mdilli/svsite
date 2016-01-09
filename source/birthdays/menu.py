@@ -24,6 +24,11 @@ class BirthdaysMenu(CMSAttachMenu):
 				id=birthday_user.pk,  # well that's what the demo did...
 			)
 			nodes.append(node)
+		nodes.append(NavigationNode(
+			title='</birthdays>',
+			url='/',
+			id=9999,
+		))
 		return nodes
 
 

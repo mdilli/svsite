@@ -44,16 +44,18 @@ Then there's static files, which are handles by bower. It has some dependencies 
 	cd dev; bower install; cd ..
 	python source/manage.py collectstatic --noinput
 
-Then you can start the server by using::
+Then you can start the server. This is not done with the normal ``runserver`` command but with ::
 
-	python3 source/manage.py runserver YOUR_URL
+	python3 source/manage.py runserver_plus --cert dev/cert YOUR_URL
 
-Make sure to replace ``YOUR_URL``, or leave it out to run on localhost. You can stop the server with ``ctrl+C``. To run with extra debug functionality, if you installed the extra packages, you can use ``runserver_plus`` instead of ``runserver``. This version can also use (unsigned) https for debugging, just start the server using ``python3 source/manage.py runserver_plus --cert dev/cert``.
+We use this special command to use a secure connection, which is enforced by default. In this test mode, an unsigned certificate is used, so you might have to add a security warning.
+
+Make sure to replace ``YOUR_URL``, or leave it out to run on localhost. You can stop the server with ``ctrl+C``.
 
 To **(re)start the server** later, go to the correct directory and run::
 
 	source env/bin/activate  # only if you use virtualenv
-	python3 source/manage.py runserver YOUR_URL  # or runserver_plus
+	python3 source/manage.py runserver_plus --cert dev/cert YOUR_URL
 
 .. rubric:: Footnotes
 

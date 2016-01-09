@@ -59,8 +59,8 @@ class UserPermissionManager(UserManager):
 		"""
 			Create admins group with superuser powers.
 		"""
-		Team = apps.get_model(app_label = 'teams', model_name = 'Team')
-		TeamMember = apps.get_model(app_label = 'teams', model_name = 'TeamMember')
+		Team = apps.get_model(app_label = 'auth', model_name = 'Group')
+		#TeamMember = apps.get_model(app_label = 'teams', model_name = 'TeamMember')
 		user = super(UserPermissionManager, self).create_superuser(username, email, password, **extra_fields)
 		try:
 			team = Team.objects.get(name = 'Admins')
@@ -68,8 +68,9 @@ class UserPermissionManager(UserManager):
 			team = Team(name = 'admins', permission_superuser = True, permission_census = False, system = True)
 			print('created "admins" group')
 			team.save()
-		tm = TeamMember(member = user, team = team, admin = True)
-		tm.save()
+		user.groups.add(team)
+		#tm = TeamMember(member = user, team = team, admin = True)
+		#tm.save()
 		return user
 
 

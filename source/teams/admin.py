@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.contrib.sites.models import Site
 from ctrl.admin import census_admin
 from ctrl.admin import superuser_admin
-from teams.models import TeamMember, Team
+from teams.models import Team
 
 
 @lru_cache(maxsize = 256)
@@ -25,6 +25,7 @@ def _get_team_system(url):
 	return team.system
 
 
+"""
 class TeamMemberInline(admin.TabularInline):
 	model = TeamMember
 	verbose_name = 'team member'
@@ -57,7 +58,7 @@ class TeamMemberInline(admin.TabularInline):
 	# 	return False
 	# 	print('get_del', obj)
 	# 	return not self.instance.system
-
+"""
 
 class FullTeamAdmin(admin.ModelAdmin):
 	fieldsets = (
@@ -81,8 +82,8 @@ class FullTeamAdmin(admin.ModelAdmin):
 	# 	print(kwargs)
 
 
-
-	inlines = (TeamMemberInline,)
+	#todo: member administration
+	#inlines = (TeamMemberInline,)
 
 	#def get_readonly_fields(self, request, obj = None):
 	#	if obj.system:
@@ -93,11 +94,12 @@ class FullTeamAdmin(admin.ModelAdmin):
 class CensusTeamAdmin(FullTeamAdmin):
 	readonly_fields = ('system', 'slug', 'member_count', 'permission_superuser',)
 
-	inlines = (TeamMemberInline,)
+	#todo: member administration
+	#inlines = (TeamMemberInline,)
 
 
-census_admin.register(Team, CensusTeamAdmin)
-superuser_admin.register(Team, FullTeamAdmin)
+#todo census_admin.register(Team, CensusTeamAdmin)
+#todo superuser_admin.register(Team, FullTeamAdmin)
 
 """ Remove Site here because this app is one of the last to be loaded, as opposed to ctrl. """
 admin.site.unregister(Site)

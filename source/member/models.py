@@ -1,5 +1,5 @@
 
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
 from ctrl.models import UserPermissionManager
@@ -7,7 +7,7 @@ from ctrl.models import UserPermissionManager
 
 class Member(AbstractUser):
 	slug = AutoSlugField(populate_from='username', unique=True)
-	teams = models.ManyToManyField('teams.Team', blank=True, through='teams.TeamMember')
+	#teams = models.ManyToManyField('teams.Team', blank=True, through='teams.TeamMember')
 	birthday = models.DateField(blank=True, null=True, default=None)
 
 	objects = UserPermissionManager()

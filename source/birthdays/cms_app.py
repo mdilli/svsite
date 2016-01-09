@@ -8,7 +8,7 @@ from birthdays.menu import BirthdaysMenu
 class BirthdaysApp(CMSApp):
 	# following http://docs.django-cms.org/en/latest/introduction/apphooks.html
 	name = _('Full birthdays list')
-	urls = ['memeber.urls']
+	urls = ['member.urls']
 	app_name = 'birthdays'
 	menus = [BirthdaysMenu]
 

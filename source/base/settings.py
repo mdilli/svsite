@@ -39,7 +39,7 @@ INSTALLED_APPS = (
 	'ctrl',
 	'display_exceptions',
 	'django_extensions',
-	'debug_toolbar',
+	#'debug_toolbar',  #todo: turned off because it breaks migrations
 	'allauth',  # todo: this is version locked
 	'allauth.account',
 	'allauth.socialaccount',
@@ -54,17 +54,17 @@ INSTALLED_APPS = (
 	'sekizai',
 	'treebeard',
 	#'djangocms_style',
-	'djangocms_column',
-	'djangocms_text_ckeditor',
+	#todo'djangocms_column',
+	#todo'djangocms_text_ckeditor',
 	#'djangocms_file',
-	'djangocms_googlemap',
+	#todo'djangocms_googlemap',
 	#'djangocms_inherit',
-	'djangocms_link',
+	#todo'djangocms_link',
 	#'djangocms_picture',
 	#'djangocms_teaser',
 	#'djangocms_video',
 	'filer',
-	'mptt',
+	#'mptt',
 	'easy_thumbnails',
 	# 'cmsplugin_filer_file',   # todo: turn back on after fixed, currently breaks clean migrate
 	# 'cmsplugin_filer_folder', # todo: idem
@@ -99,9 +99,12 @@ MIDDLEWARE_CLASSES = (
 	'cms.middleware.page.CurrentPageMiddleware',
 	'cms.middleware.toolbar.ToolbarMiddleware',
 	'cms.middleware.language.LanguageCookieMiddleware',
-	'misc.middleware.unique_urls.WwwSlashMiddleware',
+	'misc.middleware.unique_urls.RemoveWwwMiddleware',
 	'display_exceptions.DisplayExceptionMiddleware',
 )
+
+PREPEND_WWW = False  # www is stripped by middleware
+APPEND_SLASH = True  # problem with admin urls without this, keep!
 
 ROOT_URLCONF = 'base.urls'
 
@@ -165,6 +168,7 @@ MIGRATION_MODULES = {
 	'cmsplugin_filer_teaser': 'cmsplugin_filer_teaser.migrations_django',
 	'cmsplugin_filer_video': 'cmsplugin_filer_video.migrations_django',
 }
+#MIGRATION_MODULES = {}
 
 LANGUAGE_CODE = 'nl'
 
@@ -196,6 +200,15 @@ CMS_LANGUAGES = {
 		'public': True,
 	},
 }
+
+CACHES = {
+	'default': {
+		'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+		'LOCATION': '127.0.0.1:11211',
+	}
+}
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 TIME_ZONE = 'Europe/Amsterdam'
 
