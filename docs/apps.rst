@@ -2,5 +2,10 @@
 .. autosummary::
    :toctree: _autosum
 
+   activity
+   base
+   birthdays
+   content
+   ctrl
    member
-   svsite
+   teams

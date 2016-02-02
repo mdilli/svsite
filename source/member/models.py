@@ -5,6 +5,8 @@ from django_extensions.db.fields import AutoSlugField
 from ctrl.models import UserPermissionManager
 
 
+# todo: #http://docs.django-cms.org/en/develop/reference/configuration.html#custom-user-requirements
+
 class Member(AbstractUser):
 	slug = AutoSlugField(populate_from='username', unique=True)
 	#teams = models.ManyToManyField('teams.Team', blank=True, through='teams.TeamMember')

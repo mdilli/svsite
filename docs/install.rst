@@ -11,9 +11,9 @@ To get svSite running, follow the steps in the appropriate section.
 Linux / bash
 -------------------------------
 
-For this to work, you will need ``python3`` including ``pip`` and a database (``sqlite3`` is default and easy, but slow). Things will be easier and better with ``virtualenv`` and ``git``, so probably get those too. You can install them with::
+For this to work, you will need ``python3-dev`` including ``pip`` and a database (``sqlite3`` is default and easy, but slow). Things will be easier and better with ``virtualenv`` (or ``pew``) and ``git``, so probably get those too. You'll also need ``libjpeg-dev`` and the dev version of Python because of ``pillow``. You can install them with::
 
-	sudo apt-get install python3 sqlite3 python-virtualenv git
+	sudo apt-get install python3-dev sqlite3 python-virtualenv git libjpeg-dev
 
 Get the code. The easiest way is with git, replacing ``SITENAME``::
 
@@ -24,7 +24,7 @@ Enter the directory (``cd SITENAME``). Starting a virtual environment is recomme
 	virtualenv -p python3 env
 	source env/bin/activate
 
-If you skip this step, everything will be installed system-wide, so you need to preprend ``sudo`` before any `pip` command::
+If you skip this step, everything will be installed system-wide, so you need to prepend ``sudo`` before any `pip` command::
 
 	pip install --editable .
 
@@ -33,6 +33,10 @@ If you want to run tests, build the documentation or do anything other than simp
 	pip install -r dev/pip_freeze.txt  # optional
 
 We need a database. SQLite is used by default, which you could replace now or later (in ``source/svsite/settings_local.py``) for a substantial performance gain. To create the structure and an administrator, type this and follow the steps::
+
+#todo: migrate in two steps
+#todo: ./manage.py bower install
+#todo: need npm
 
 	python3 source/manage.py migrate
 	python source/manage.py createsuperuser
@@ -44,7 +48,7 @@ Then there's static files, which are handles by bower. It has some dependencies 
 	cd dev; bower install; cd ..
 	python source/manage.py collectstatic --noinput
 
-Then you can start the server. This is not done with the normal ``runserver`` command but with ::
+Then you can start the testserver. This is not done with the normal ``runserver`` command but with ::
 
 	python3 source/manage.py runserver_plus --cert dev/cert YOUR_URL
 
@@ -56,6 +60,8 @@ To **(re)start the server** later, go to the correct directory and run::
 
 	source env/bin/activate  # only if you use virtualenv
 	python3 source/manage.py runserver_plus --cert dev/cert YOUR_URL
+
+Note that this is just for development! When the website is going live, you should probably use a webserver such as Apache.
 
 .. rubric:: Footnotes
 

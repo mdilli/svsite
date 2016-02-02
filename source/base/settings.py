@@ -25,13 +25,13 @@ INSTALLED_APPS = (
 	'base',  # on top because of base.html template
 	'member',  # must be before cms
 	'djangosecure',
-	'raven.contrib.django.raven_compat',
+	#'raven.contrib.django.raven_compat',  #todo: back on?
 	'djangocms_admin_style',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
 	'django.contrib.admin',
-	'django.contrib.sites',  # for allauth (and possibly others)
+	'django.contrib.sites',  # for allauth and cms
 	'django.contrib.sitemaps',  # for django-cms
 	'django.contrib.staticfiles',
 	'django.contrib.messages',
@@ -40,9 +40,9 @@ INSTALLED_APPS = (
 	'display_exceptions',
 	'django_extensions',
 	#'debug_toolbar',  #todo: turned off because it breaks migrations
-	'allauth',  # todo: this is version locked
-	'allauth.account',
-	'allauth.socialaccount',
+	#'allauth',  # todo: this is version locked
+	#'allauth.account',  #todo: on
+	#'allauth.socialaccount',  #todo: on
 	# 'allauth.socialaccount.providers.facebook',
 	# 'allauth.socialaccount.providers.github',
 	# 'allauth.socialaccount.providers.google',
@@ -71,7 +71,7 @@ INSTALLED_APPS = (
 	# 'cmsplugin_filer_image',  # todo: idem
 	# 'cmsplugin_filer_teaser', # todo: idem
 	# 'cmsplugin_filer_video',  # todo: idem
-	'reversion',
+	#'reversion',  #todo: activate (and pip)
 	'activity',
 	'content',
 	'teams',
