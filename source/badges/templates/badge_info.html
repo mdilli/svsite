@@ -1,0 +1,29 @@
+
+{#{% extends 'get_theme.html' %}#}
+
+{% load static from staticfiles %}
+{% load trans from i18n %}
+
+
+{% block content %}
+
+	<h1>
+		{{ badge.name }}
+		<small>{% if badge.score >= 0 %}+{% endif %}{{ badge.score }}</small>
+	</h1>
+	<p><em>{{ badge.description }}</em></p>
+	<img src="{% static badge.image_url %}" />
+
+	<p>Users who got this badge:</p>
+	<ul>
+		{% for award in badge.awards %}
+			<li>
+				{{ award.user.get_long_name }} ({{ award.user }})
+				<em>{{ award.when|timesince }} {% trans 'ago' %}</em>
+			</li>
+		{% endfor %}
+	</ul>
+
+{% endblock content %}
+
+

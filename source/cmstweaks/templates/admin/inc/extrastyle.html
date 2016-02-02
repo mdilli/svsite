@@ -1,0 +1,10 @@
+{# override this template with your app to have extra styles #}
+
+{% load static from staticfiles %}
+
+
+{% if request.user.is_staff %}
+	<link rel="stylesheet" href="{% static 'admin/shrink_cms.css' %}">
+{% endif %}
+
+

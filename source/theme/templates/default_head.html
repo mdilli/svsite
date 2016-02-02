@@ -1,0 +1,45 @@
+
+{% load static from staticfiles %}
+{% load language_chooser from menu_tags %}
+{% load placeholder cms_toolbar page_attribute from cms_tags %}
+{% load render_block from sekizai_tags %}
+
+
+<meta charset="utf-8" />
+
+<title>
+	{% block head_title %}
+		{% page_attribute "page_title" %} &laquo; svSite
+	{% endblock head_title %}
+</title>
+{% block favicon %}
+	<link rel="shortcut icon" type="image/png" href="{% static '{{ THEME_PREFIX }}/favicon.png' %}"/>
+{% endblock favicon %}
+
+<meta name="keywords" content="{% block keywords %}{% endblock keywords %}" />
+<meta name="description" content="{% block description %}{% endblock description %}" />
+<meta name="copyright" content="{% block copyright %}{% endblock copyright %}" />
+<meta name="{% block age_rating %}rating{% endblock age_rating %}" content="general" /> {# #todo change if nature content: "mature" #}
+
+{% block meta_lang %}
+	<meta name="language" content="{{ request.LANGUAGE_CODE }}" />
+	{% language_chooser THEME_PREFIX|add:'/hreflang.html' %}  {# todo: check #}
+{% endblock meta_lang %}
+
+{% block meta_privacy %}
+	{% block no_email_collection %}<meta name="no-email-collection" content="Please don't collect emails belonging to our users." />{% endblock no_email_collection %} {# #todo remove on contact page #}
+	<meta name="robots" content="index, follow" />
+	{# <meta name="referrer" content="no-referrer" /> #todo: safe to turn on if https if turned on everywhere, but Django doesn't allow it #}
+{% endblock meta_privacy %}
+
+{% block meta_compatibility %}
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% endblock meta_compatibility %}
+
+{% block meta_social %}
+	<meta property="og:image" content="{% static '{{ THEME_PREFIX }}/img/favicon.png' %}" />
+	<meta property="og:title" content="{% page_attribute "page_title" %}" />
+{% endblock meta_social %}
+
+

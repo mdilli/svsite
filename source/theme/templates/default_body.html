@@ -1,0 +1,47 @@
+
+{% load placeholder from cms_tags %}
+
+
+{% include THEME_PREFIX|add:'/static.html' %}
+
+{% include THEME_PREFIX|add:'/menu.html' %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-md-4">
+			{% placeholder "header" %}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-8">
+			{% placeholder "top-row" %}
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-md-8">
+			<content>
+				{% block content %}
+					{% placeholder "content" %}
+				{% endblock content %}
+			</content>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			{% block sidebar %}
+				{% placeholder "sidebar" %}
+			{% endblock sidebar %}
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			{% placeholder "bottom-row" %}
+		</div>
+	</div>
+</div>
+
+

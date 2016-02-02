@@ -1,0 +1,13 @@
+{% for ance in ancestors %}
+<li {% if forloop.last %}class="active"{% endif %}>
+	<a href="{{ ance.get_absolute_url }}">
+		{% if forloop.first %}
+			<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+		{% else %}
+			{{ ance.get_menu_title }}
+		{% endif %}
+	</a>
+</li>
+{% endfor %}
+
+

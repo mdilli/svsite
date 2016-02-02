@@ -1,0 +1,43 @@
+
+django==1.8.*
+django-cms==3.2.0  # 3.2.1 breaks migrations even more
+django-classy-tags==0.7.1
+django-sekizai
+django-treebeard==3.*
+djangocms-admin-style
+html5lib==0.999
+django-formtools>=1.0
+
+#
+# You should do
+#   apt-get install python3-lxml
+# and then link it using (update env name):
+#   ln -s /usr/lib/python3/dist-packages/lxml /home/mark/.local/share/virtualenvs/ENVNAME/lib/python3.4/site-packages/lxml
+# because installing lxml with pip freezes the whole os for me.
+#
+
+djangocms-text-ckeditor
+
+djangocms-googlemap
+djangocms-inherit
+djangocms-link
+djangocms-snippet
+djangocms-style
+djangocms-column
+djangocms-grid
+
+cmsplugin-filer  # this installs pillow and filer a.o.
+django-resized
+
+django-reversion==1.9.*  # this works for now but will break for newer django; keep finely balanced with django and cms versions
+
+django-bower
+
+django_countries
+
+django-display-exceptions
+
+### OPTIONAL ###
+# python-memcached
+
+

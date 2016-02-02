@@ -1,0 +1,39 @@
+
+/*
+	Pages have no need for 4 different titles or for meta descriptions.
+*/
+#page_form .page_title,
+#page_form .meta_description
+{
+	display: none;
+}
+
+/*
+	Only group-level permissions, no users.
+*/
+#pagepermission_set-group .field-user,
+#pagepermission_set-group .original,
+#pagepermission_set-group fieldset th:first-child
+{
+	display: none;
+}
+
+#pagepermission_set-2-group .field-user,
+#pagepermission_set-2-group .original,
+#pagepermission_set-2-group fieldset th:first-child
+{
+	display: none;
+}
+
+#globalpagepermission_form .field-user
+{
+	display: none;
+}
+
+#inherited_permissions th:nth-child(2),
+#inherited_permissions td.user
+{
+	display: none;
+}
+
+

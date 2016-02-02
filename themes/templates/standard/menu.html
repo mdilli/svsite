@@ -1,0 +1,113 @@
+
+{% load static from staticfiles %}
+{% load page_url placeholder from cms_tags %}
+{% load show_menu show_sub_menu show_breadcrumb language_chooser from menu_tags %}
+{% load language_flag_url from language_flags %}
+{% load get_current_language from i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+
+<div id="header-container" class="container"> <!-- if you remove this, the menu will be wider -->
+	<nav id="header-menu-top" class="navbar navbar-default hidden-xs hidden-sm">
+		<div class="container-fluid">
+			<!-- Breadcrumbs to curent page. -->
+			<div class="nav navbar-nav">
+				<ul class="breadcrumb">
+					{% block breadcrumb %}
+						{% show_breadcrumb 0 THEME_PREFIX|add:'/breadcrumbs.html' %}
+					{% endblock %}
+				</ul>
+			</div>
+
+			<div class="nav navbar-nav">
+				<ul class="breadcrumb child-crumbs">
+					{% show_sub_menu 1 None 0 THEME_PREFIX|add:'/menu_children.html' %}
+				</ul>
+			</div>
+
+			<!-- Icons for external sites and feeds. -->
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#"><span class="glyphicon glyphicon-calendar" aria-hidden="true" title="Google Calendar"></span></a></li><!-- Google Calendar -->
+				<li><a href="#"><span class="glyphicon glyphicon-education" aria-hidden="true" title="RSS feed"></span></a></li> <!-- RSS -->
+				<li><a href="#"><span class="glyphicon glyphicon-bitcoin" aria-hidden="true" title="Facebook"></span></a></li><!-- Facebook -->
+				<li><a href="#"><span class="glyphicon glyphicon-apple" aria-hidden="true" title="???"></span></a></li><!-- glyphicon glyphicon-text-size -->
+				<li><a href="#"><span class="glyphicon glyphicon-fire" aria-hidden="true" title="Change your language"></span></a></li><!-- Language -->
+				<li id="header-language-switcher">
+					<!-- I'm going to ignore this warning: -->
+					<!-- Flags represent countries, not languages. Numerous countries use the same language as another country, and numerous countries have more than one official language. -->
+					<a href="#" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle">
+						<img src="{% language_flag_url LANGUAGE_CODE %}" />
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						{% language_chooser THEME_PREFIX|add:'/language_chooser.html' %}
+					</ul>
+				</li>
+			</ul>
+		</div><!-- /.container-fluid -->
+	</nav>
+
+	<header id="header-image" class="hidden-xs hidden-sm">
+		<div id="header-right">
+			{% placeholder "header" %}
+		</div>
+		<div id="header-logo">
+			<a href="/{{ request.LANGUAGE_CODE }}/">
+				<img src="{% static THEME_PREFIX|add:'/logo.png' %}" title="click the logo to go to the main page" />
+			</a>
+		</div>
+		<div id="header-caption">
+			<h1>Leonardo da Vinci</h1>
+			<p>Studievereniging Natuurwetenschappen en Science Nijmegen</p>
+		</div>
+	</header>
+
+	<div id="header-main-affix">
+		<div class="container">
+			<nav id="header-menu-main" class="navbar navbar-default">
+				<!-- #todo: http://www.w3schools.com/bootstrap/bootstrap_affix.asp -->
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<!-- <a class="navbar-brand" href="#">Leonardo</a> -->
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							{% show_menu 1 5 5 5 THEME_PREFIX|add:'/menu_tree.html' %}
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Account <span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Action</a></li>
+									<li><a href="#">Another action</a></li>
+									<li><a href="#">Something else here</a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="#">Separated link</a></li>
+								</ul>
+							</li>
+						</ul>
+						<form class="navbar-form navbar-right" role="search">
+							<!-- <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button> -->
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Search">
+							</div>
+						</form>
+					</div><!-- /.navbar-collapse -->
+				</div><!-- /.container-fluid -->
+			</nav>
+		</div>
+	</div>
+</div>
+
+

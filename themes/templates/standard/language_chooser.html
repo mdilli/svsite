@@ -1,0 +1,16 @@
+
+{% load page_language_url from menu_tags %}
+{% load language_flag_url from language_flags %}
+{% load trans from i18n %}
+
+
+{% for language in languages %}
+	<li class="lang{% if current_language == language.0 %} active{% endif %}">
+		<a href="{% page_language_url language.0 %}" title="{% trans "Change to language:" %} {{ language.1 }}">
+			<img src="{% language_flag_url language.0 %}" />
+			{{ language.1 }}
+		</a>
+	</li>
+{% endfor %}
+
+

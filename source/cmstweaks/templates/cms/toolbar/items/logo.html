@@ -1,0 +1,11 @@
+{% load i18n %}
+
+{%  if THEME_PREFIX %}
+	<div id="toolbar-page-logo" class="cms-toolbar-item">
+		<a href="/" title="Made with Django CMS {{ cms_version }}">&nbsp;</a>
+	</div>
+{% else %}
+	<!-- no logo found for this theme -->
+{% endif %}
+
+

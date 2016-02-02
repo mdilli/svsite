@@ -1,0 +1,26 @@
+{% load menu_tags %}
+
+
+{% for child in children|slice:":4" %}
+	<li class="child">
+		<a href="{{ child.attr.redirect_url|default:child.get_absolute_url }}">
+			{{ child.get_menu_title }}
+		</a>
+	</li>
+{% endfor %}
+
+{% if children|length == 5 %}
+	<li class="child">
+		{% with children.4 as child %}
+			<a href="{{ child.attr.redirect_url|default:child.get_absolute_url }}">
+				{{ child.get_menu_title }}
+			</a>
+		{% endwith %}
+	</li>
+{% elif children|length > 5 %}
+	<li class="child">
+		<span>{{ children|length|add:"-4" }} more...</span>
+	</li>
+{% endif %}
+
+
