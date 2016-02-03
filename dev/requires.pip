@@ -29,6 +29,7 @@ djangocms-grid
 cmsplugin-filer  # this installs pillow and filer a.o.
 django-resized
 
+django_cleanup    # delete files if model is changed
 django-reversion==1.9.*  # this works for now but will break for newer django; keep finely balanced with django and cms versions
 
 django-bower
@@ -36,6 +37,8 @@ django-bower
 django_countries
 
 django-display-exceptions
+
+django_extensions   # for autoslugfield
 
 ### OPTIONAL ###
 # python-memcached

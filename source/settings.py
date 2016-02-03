@@ -1,6 +1,7 @@
 
 from base64 import urlsafe_b64encode
 from django.core.exceptions import ImproperlyConfigured
+from django.core.urlresolvers import reverse_lazy
 from os.path import dirname, abspath, join
 from struct import pack
 
@@ -17,6 +18,7 @@ TEMPLATE_DEBUG = DEBUG
 FILER_DEBUG = DEBUG  # easy-thumbnail exceptions propagated?
 
 INSTALLED_APPS = (
+	'tweaks',               # should be before adminstyle and allauth
 
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -24,20 +26,19 @@ INSTALLED_APPS = (
 	'django.contrib.messages', # required for cmd toolbar
 	'django.contrib.staticfiles',
 	'django.contrib.sites',    # required for some cms thing and allauth
-	'django.contrib.sitemaps', #todo
+	'django.contrib.sitemaps',
 
 	'allauth',
 	'allauth.account',
 	'allauth.socialaccount',
 
+	# providers: http://django-allauth.readthedocs.org/en/latest/providers.html (some need https)
 	'allauth.socialaccount.providers.facebook',
 	'allauth.socialaccount.providers.github',
 	'allauth.socialaccount.providers.google',
 	'allauth.socialaccount.providers.linkedin_oauth2',
 	'allauth.socialaccount.providers.openid',
 	# todo: cncz accounts
-
-	'cmstweaks',               # should be before adminstyle
 
 	'cms',                     # django CMS itself - must be after custom user model app #todo
 	'sekizai',                 # for JavaScript and CSS management
@@ -69,6 +70,9 @@ INSTALLED_APPS = (
 	# 'djangocms_oembed',      # too outdated, doesn't work
 	# 'djangocms_table',       # too outdated, doesn't work
 
+	'birthdays',
+
+	'django_cleanup',          # deletes files if their model is deleted or changed
 	'reversion',
 
 	'djangobower',
@@ -77,6 +81,8 @@ INSTALLED_APPS = (
 	'django_countries',
 
 	'display_exceptions',
+
+	'svfinance',
 
 	'base',
 	'theme',
@@ -119,6 +125,10 @@ ROOT_URLCONF = 'urls'
 APPEND_SLASH = True  # CommonMiddleware is disabled, but CMS also checks this
 CSRF_FAILURE_VIEW = 'base.views.csrf_failure'
 FILER_CANONICAL_URL = 'canon/'  # url after filer/ for canonical urls
+LOGIN_URL = reverse_lazy('account_login')
+LOGIN_REDIRECT_URL = '/'  # todo: reverse cms home
+LOGOUT_URL = reverse_lazy('account_logout')
+ACCOUNT_LOGOUT_REDIRECT_URL = LOGIN_REDIRECT_URL
 
 TEMPLATES = [
 	{
@@ -145,10 +155,24 @@ TEMPLATES = [
 	},
 ]
 
+# AUTH_USER_MODEL = '' # <== todo
+
 AUTHENTICATION_BACKENDS = (
 	'django.contrib.auth.backends.ModelBackend',
 	'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED = False # todo: change?
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_FORMS = {} # {‘login’: ‘myapp.forms.LoginForm’} # see also ACCOUNT_SIGNUP_FORM_CLASS and SOCIALACCOUNT_FORMS
+#ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'  # this is login name
+#ACCOUNT_USER_MODEL_EMAIL_FIELD = 'email'
+ACCOUNT_PASSWORD_MIN_LENGTH = 7
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+ACCOUNT_SESSION_REMEMBER = True
+SOCIALACCOUNT_QUERY_EMAIL = True
 
 CMS_PERMISSION = True
 
@@ -192,6 +216,8 @@ SLIDER_IMG_HEIGHT = 150
 FILE_UPLOAD_PERMISSIONS = 0o640
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
@@ -277,11 +303,14 @@ THUMBNAIL_HIGH_RESOLUTION = True   # retina thumbnails from easy_thumbnail
 TEXT_SAVE_IMAGE_FUNCTION='cmsplugin_filer_image.integrations.ckeditor.create_image_plugin'  # allow dragging images into the text editor
 FILER_IMAGE_USE_ICON = True
 
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+
 SESSION_COOKIE_NAME = 'session'
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 15
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+ACCOUNT_SESSION_COOKIE_AGE = SESSION_COOKIE_AGE
 
 CSRF_COOKIE_NAME = 'validate'
 CSRF_COOKIE_HTTPONLY = True

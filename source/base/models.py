@@ -6,7 +6,7 @@ Imported from __init__.py
 from cms.models import Page, Title
 from django.core.cache import cache
 from django.db.models import signals
-from cmstweaks.admin import shrink_cms_admin
+from tweaks.admin import shrink_cms_admin
 
 
 def refresh_menu_cache(sender, **kwargs):

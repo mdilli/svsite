@@ -1,3 +1,4 @@
+
 from cms.sitemaps import CMSSitemap
 from django.conf import settings
 from django.conf.urls import include, url
@@ -10,13 +11,15 @@ import cms.urls
 import badges.urls
 import minimal_logger.urls
 import allauth.urls
+import birthdays.urls
 from base.views import playground
 
 
 urlpatterns = i18n_patterns(
 	url(r'^playground', playground),
-	url(r'^accounts/', include(allauth.urls)),
+	url(r'^account/', include(allauth.urls)),
 	url(r'^badge/', include(badges.urls)),
+	url(r'^bd/', include(birthdays.urls)), #todo
 	url(r'^admin/', include(admin.site.urls)),
 	url(r'^filer/', include(filer.urls)),   # django filer canonical urls (ones that don't change if you upload a new version)
 	url(r'^log/', include(minimal_logger.urls)),
