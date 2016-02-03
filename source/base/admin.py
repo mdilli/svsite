@@ -8,12 +8,12 @@
 from django.contrib import admin
 from django.contrib.admin import AdminSite
 from django.contrib.auth.models import Group
-from django.contrib.sites.models import Site
+from django.utils.translation import ugettext_lazy as _
 
 
 class SuperuserAdminSite(AdminSite):
 
-	site_header = 'Superuser administration'
+	site_header = _('Superuser administration')
 	site_title = site_header
 	site_url = '/'
 	index_title = site_header
@@ -26,7 +26,7 @@ class SuperuserAdminSite(AdminSite):
 
 class CensusAdminSite(AdminSite):
 
-	site_header = 'Census member administration'
+	site_header = _('Member administration')
 	site_title = site_header
 	site_url = '/'
 	index_title = site_header
@@ -34,14 +34,13 @@ class CensusAdminSite(AdminSite):
 	def has_permission(self, request):
 		if not request.user.is_active:
 			return False
-		return request.user.has_permission_census()
+		return request.user.has_permission_census
 
 
-superuser_admin = SuperuserAdminSite(name = 'superuser')
-census_admin = CensusAdminSite(name = 'census')
+superuser_admin = SuperuserAdminSite(name='superuser')
+census_admin = CensusAdminSite(name='census')
 
 
 admin.site.unregister(Group)
-""" Site is unregistered in Team, which is hackish, but this app is loaded before Site. """
 
 

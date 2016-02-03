@@ -1,7 +1,7 @@
-
 from django.contrib.admin import ModelAdmin
+
 from activity.models import Activity
-from ctrl.admin import superuser_admin
+from base.admin import superuser_admin
 
 
 class ActivityAdmin(ModelAdmin):
