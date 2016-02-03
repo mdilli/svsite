@@ -19,6 +19,7 @@ FILER_DEBUG = DEBUG  # easy-thumbnail exceptions propagated?
 
 INSTALLED_APPS = (
 	'tweaks',               # should be before adminstyle and allauth
+	'member',               # not sure if this needs to be on top but if there's a preference it's probably top.
 
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -155,7 +156,7 @@ TEMPLATES = [
 	},
 ]
 
-# AUTH_USER_MODEL = '' # <== todo
+AUTH_USER_MODEL = 'member.Member'
 
 AUTHENTICATION_BACKENDS = (
 	'django.contrib.auth.backends.ModelBackend',

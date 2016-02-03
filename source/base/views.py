@@ -6,6 +6,7 @@ from django.shortcuts import redirect, render
 def playground(request):
 	#todo: remove eventually
 	#assert settings.DEBUG
+	print(request.user.groups)
 	raise Exception('hello world!')
 	add_message(request, DEBUG, 'Here is a message for you!')  # doesn't show
 	add_message(request, INFO, 'Here is a message for you again!')
