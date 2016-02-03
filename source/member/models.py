@@ -1,13 +1,12 @@
+from site import getsitepackages
 
-from cms.models import GlobalPagePermissionManager
 from django.conf import settings
-from django.contrib.auth.models import Group, UserManager
+from django.contrib.auth.models import Group, UserManager, AbstractUser
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
-from member.alt_auth import AltAbstractUser
 
 
-class Member(AltAbstractUser):
+class Member(AbstractUser):
 
 	slug = AutoSlugField(populate_from='username', unique=True)
 	birthday = models.DateField(blank=True, null=True, default=None)
@@ -27,8 +26,7 @@ class Member(AltAbstractUser):
 	def get_absolute_url(self):
 		return '/'  # todo
 
-
-GlobalPagePermissionManager
+getsitepackages()
 
 # if not hasattr(Group, '_is_extended'):
 # 	setattr(Group, '_is_extended', True)
