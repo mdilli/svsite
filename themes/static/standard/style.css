@@ -212,5 +212,33 @@
 	z-index: 1051;
 }
 
+/* Menu tweaks (from avem) */
+#menu_account_parent
+{
+	margin: 0 -15px;
+	padding: 0 15px;
+}
+
+#menu_account
+{
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+}
+
+@media (max-width: 767px)  /* bootstrap sm */
+{
+	#menu_account_parent
+	{
+		background-color: rgba(255, 255, 255, 1);
+	}
+}
+
+.large-dropdown
+{
+	/* larger dropdown for forms, like login */
+	width: 40em !important;
+	padding: .7em;
+}
 
 

@@ -379,7 +379,4 @@ if DEBUG:
 else:
 	STATIC_ROOT = join(BASE_DIR, 'dev', 'static', VERSION_HASH.decode('ascii'))
 
-if DEBUG:
-	CMS_CACHE_DURATIONS = dict(content=0, menus=0, permissions=0)
-
 

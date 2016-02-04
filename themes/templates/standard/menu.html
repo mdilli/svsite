@@ -83,41 +83,7 @@
 						<ul class="nav navbar-nav">
 							{% show_menu 1 5 5 5 THEME_PREFIX|add:'/menu_tree.html' %}
 						</ul>
-
-{#						<ul class="nav navbar-nav navbar-right">#}
-{##}
-{#							#}
-{##}
-{#							<li class="dropdown">#}
-{#								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#}
-{#									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Account <span class="caret"></span>#}
-{#								</a>#}
-{#								<ul class="dropdown-menu">#}
-{#									<li><a href="#">Action</a></li>#}
-{#									<li><a href="#">Another action</a></li>#}
-{#									<li><a href="#">Something else here</a></li>#}
-{#									<li role="separator" class="divider"></li>#}
-{#									<li><a href="#">Separated link</a></li>#}
-{#								</ul>#}
-{#							</li>#}
-{#						</ul>#}
-{#						<form class="navbar-form navbar-right" role="search">#}
-{#							<!-- <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button> -->#}
-{#							<div class="form-group">#}
-{#								<input type="text" class="form-control" placeholder="Search">#}
-{#							</div>#}
-{#						</form>#}
 					</div><!-- /.navbar-collapse -->
-
-
-					{#{% block site_js %}#}
-					{#	<script src="{% static 'script.js' %}"></script>#}
-					{#	<script>#}
-					{#		var autocomplete_url = "{% url 'autocomplete' %}";#}
-					{#	</script>#}
-					{#	<script src="{% static 'bootstrap3-typeahead.min.js' %}"></script>#}
-					{#{% endblock site_js %}#}
-
 
 					<!-- Account options for small displays: a second collapse item -->
 					<div id="menu_account_parent" class="hidden-lg hidden-md hidden-sm visible-xs">
@@ -143,7 +109,9 @@
 									{% if request.user.is_authenticated %}
 										{% include THEME_PREFIX|add:'/menu_items_account.html' %}
 									{% else %}
-										{% include THEME_PREFIX|add:'/menu_items_login.html' %}
+{#										<div style="width: 200px; padding: 0.5em;">#}
+											{% include THEME_PREFIX|add:'/menu_items_login.html' %}
+{#										</div>#}
 									{% endif %}
 								</ul>
 							</li>
