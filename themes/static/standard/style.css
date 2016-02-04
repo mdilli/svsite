@@ -195,4 +195,22 @@
 	margin-top: 0.3em;
 }
 
+/* Search autocomplete (from avem) */
+.highlighted
+{
+	background-color: #EEE;
+	font-weight: bolder;
+}
+
+.typeahead.dropdown-menu
+{
+	overflow-x: hidden;
+}
+
+.typeahead
+{
+	z-index: 1051;
+}
+
+
 

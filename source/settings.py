@@ -115,6 +115,7 @@ MIDDLEWARE_CLASSES = (
 BOWER_INSTALLED_APPS = (
 	# 'bootstrap#3.3.6',
 	'bootswatch-dist#3.3.6-simplex',
+	'bootstrap3-typeahead#4.0.0',
 	'jquery#2.2.0',
 	'smartmenus#1.0.0',
 	'MathJax#2.6.0',

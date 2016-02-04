@@ -43,25 +43,28 @@
 	{
 		/* The data */
 		var image_list = JSON.parse('{{ image_list }}');
-		/* Insert slide window */
-		var slide_container = $('{{ header_selector }}');
-		slide_container.css('position', 'relative');
-		var first_slide_window = $('<div class="image_slider_window">&nbsp;</div>');
-		var gradient_overlay = $('<div class="image_slider_gradient">&nbsp;</div>');
-		slide_container.append(gradient_overlay);
-		var image_preloader = $('<img src="' + image_list[0].url + '" alt="preload" style="display: none;" />');
-		$('body').append(image_preloader);
-		function next_img(old_elem, images, k)
-		{
-			var current_elem = $('<div class="image_slider_window" style="background-image: url(' + images[k].url + ');">&nbsp;</div>');
-			slide_container.prepend(current_elem);
-			var next_k = (k + 1) % images.length;
-			image_preloader.attr('src', images[next_k].url);
-			old_elem.fadeOut(5000, function(disappeared_elem)
-				{ $(this).remove(); }.bind(null, old_elem));
-			setTimeout(next_img.bind(null, current_elem, images, next_k), 14000);
+		if (image_list.length > 0) {
+			/* Insert slide window */
+			var slide_container = $('{{ header_selector }}');
+			slide_container.css('position', 'relative');
+			var first_slide_window = $('<div class="image_slider_window">&nbsp;</div>');
+			var gradient_overlay = $('<div class="image_slider_gradient">&nbsp;</div>');
+			slide_container.append(gradient_overlay);
+			var image_preloader = $('<img src="' + image_list[0].url + '" alt="preload" style="display: none;" />');
+			$('body').append(image_preloader);
+			function next_img(old_elem, images, k) {
+				var current_elem = $('<div class="image_slider_window" style="background-image: url(' + images[k].url + ');">&nbsp;</div>');
+				slide_container.prepend(current_elem);
+				var next_k = (k + 1) % images.length;
+				image_preloader.attr('src', images[next_k].url);
+				old_elem.fadeOut(5000, function (disappeared_elem) {
+					$(this).remove();
+				}.bind(null, old_elem));
+				setTimeout(next_img.bind(null, current_elem, images, next_k), 14000);
+			}
+
+			next_img(first_slide_window, image_list, 0);
 		}
-		next_img(first_slide_window, image_list, 0);
 	});
 </script>
 

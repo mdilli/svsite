@@ -83,27 +83,130 @@
 						<ul class="nav navbar-nav">
 							{% show_menu 1 5 5 5 THEME_PREFIX|add:'/menu_tree.html' %}
 						</ul>
-						<ul class="nav navbar-nav navbar-right">
+
+{#						<ul class="nav navbar-nav navbar-right">#}
+{##}
+{#							#}
+{##}
+{#							<li class="dropdown">#}
+{#								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#}
+{#									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Account <span class="caret"></span>#}
+{#								</a>#}
+{#								<ul class="dropdown-menu">#}
+{#									<li><a href="#">Action</a></li>#}
+{#									<li><a href="#">Another action</a></li>#}
+{#									<li><a href="#">Something else here</a></li>#}
+{#									<li role="separator" class="divider"></li>#}
+{#									<li><a href="#">Separated link</a></li>#}
+{#								</ul>#}
+{#							</li>#}
+{#						</ul>#}
+{#						<form class="navbar-form navbar-right" role="search">#}
+{#							<!-- <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button> -->#}
+{#							<div class="form-group">#}
+{#								<input type="text" class="form-control" placeholder="Search">#}
+{#							</div>#}
+{#						</form>#}
+					</div><!-- /.navbar-collapse -->
+
+
+					{#{% block site_js %}#}
+					{#	<script src="{% static 'script.js' %}"></script>#}
+					{#	<script>#}
+					{#		var autocomplete_url = "{% url 'autocomplete' %}";#}
+					{#	</script>#}
+					{#	<script src="{% static 'bootstrap3-typeahead.min.js' %}"></script>#}
+					{#{% endblock site_js %}#}
+
+
+					<!-- Account options for small displays: a second collapse item -->
+					<div id="menu_account_parent" class="hidden-lg hidden-md hidden-sm visible-xs">
+						<div class="collapse navbar-collapse" id="menu_account">
+							<ul class="nav navbar-nav">
+								{% if request.user.is_authenticated %}
+									{% include THEME_PREFIX|add:'/menu_items_account.html' %}
+								{% else %}
+									{% include THEME_PREFIX|add:'/menu_items_login.html' %}
+								{% endif %}
+							</ul>
+						</div>
+					</div>
+
+					<!-- Account options for large displays: a normal dropdown menu -->
+					<div class="visisble-lg visisble-md visisble-sm hidden-xs">
+						<ul class="nav navbar-nav navbar-right navbar-nocollapse">
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Account <span class="caret"></span>
+									<i class="glyphicon glyphicon-user"></i> {% if request.user.is_authenticated %}{% firstof request.user.get_short_name 'account' %}{% else %}login{% endif %} <b class="caret"></b>
 								</a>
-								<ul class="dropdown-menu">
-									<li><a href="#">Action</a></li>
-									<li><a href="#">Another action</a></li>
-									<li><a href="#">Something else here</a></li>
-									<li role="separator" class="divider"></li>
-									<li><a href="#">Separated link</a></li>
+								<ul class="dropdown-menu {% if not request.user.is_authenticated %}large-dropdown{% endif %}">
+									{% if request.user.is_authenticated %}
+										{% include THEME_PREFIX|add:'/menu_items_account.html' %}
+									{% else %}
+										{% include THEME_PREFIX|add:'/menu_items_login.html' %}
+									{% endif %}
 								</ul>
 							</li>
 						</ul>
-						<form class="navbar-form navbar-right" role="search">
-							<!-- <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button> -->
-							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Search">
+					</div>
+
+					<!-- Search for medium devices as a button with dropdown formfield (the other one is inside collapse) -->
+					<div class="hidden-lg hidden-md visible-sm hidden-xs">
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown">
+								<a href="#" id="menu-search-dropdown-button" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+									<i class="glyphicon glyphicon-search"></i> search
+									<span class="caret"></span>
+								</a>
+								<ul id="menu-search-dropdown" class="dropdown-menu large-dropdown">
+									<li class="form-group">
+										<form action="{% url 'search' %}" method="GET" title="cltr+H">
+											<div class="input-group">
+												<input id="search_field" type="text" name="q" class="form-control search-typeahead" placeholder="Search" autocomplete="off">
+												<div class="input-group-btn" >
+													<label class="btn btn-default" for="search_submit_dropdown">
+														<i class="glyphicon glyphicon-search"></i>
+													</label>
+												</div>
+											</div>
+											<input type="submit" style="display: none;" id="search_submit_dropdown" />
+										</form>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="menu_general">
+						<ul class="nav navbar-nav">
+							{% block menu_info %}
+							{% endblock menu_info %}
+							{% block menu %}
+								<!-- add menu items here -->
+							{% endblock menu %}
+						</ul>
+
+						<!-- Search for very large (in bar) or very small (in collapse) sites -->
+						<div class="visible-lg visible-md hidden-sm visible-xs">
+							<div id="menu-search-mainbar" class="nav navbar-form navbar-right">
+								<form class="form-inline" role="search" action="{% url 'search' %}" method="GET" title="cltr+H">
+									<div class="form-group">
+										<div class="input-group">
+											<input id="search_field" type="text" name="q" class="form-control search-typeahead" value="{{ query }}" placeholder="Search" {% block menu_autofocus %}autofocus{% endblock menu_autofocus %} data-provide="typeahead" autocomplete="off">
+											<div class="input-group-btn" onclick="">
+												<label class="btn btn-default" for="search_submit_bar">
+													<i class="glyphicon glyphicon-search"></i>
+												</label>
+											</div>
+										</div>
+									</div>
+									<input type="submit" style="display: none;" id="search_submit_bar" />
+								</form>
 							</div>
-						</form>
-					</div><!-- /.navbar-collapse -->
+						</div>
+					</div>
+
 				</div><!-- /.container-fluid -->
 			</nav>
 		</div>
