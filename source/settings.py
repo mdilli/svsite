@@ -29,6 +29,10 @@ INSTALLED_APPS = (
 	'django.contrib.sites',    # required for some cms thing and allauth
 	'django.contrib.sitemaps',
 
+	'haystack',
+	'aldryn_search',
+	'spurl',  # for aldryn-search
+
 	'allauth',
 	'allauth.account',
 	'allauth.socialaccount',
@@ -83,7 +87,7 @@ INSTALLED_APPS = (
 
 	'display_exceptions',
 
-	'svfinance',
+	# 'svfinance',
 
 	'base',
 	'theme',
@@ -176,6 +180,11 @@ ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_SESSION_REMEMBER = True
 SOCIALACCOUNT_QUERY_EMAIL = True
 
+CMS_TOOLBAR_URL__EDIT_ON = 'admin'
+CMS_TOOLBAR_URL__EDIT_OFF = 'admin_off'     # uncommon
+CMS_TOOLBAR_URL__BUILD = 'admin_build'      # uncommon
+CMS_TOOLBAR_URL__DISABLE = 'admin_disable'  # uncommon
+
 CMS_PERMISSION = True
 
 CMS_TEMPLATES = (
@@ -236,8 +245,6 @@ CMS_CACHE_DURATIONS = dict(
 	permissions=60*15,
 )
 
-WSGI_APPLICATION = 'wsgi.application'
-
 LANGUAGE_CODE = 'nl'
 LANGUAGES = (
 	('nl', ('Dutch')),  # using gettext_noop here causes a circular import
@@ -274,6 +281,40 @@ CMS_LANGUAGES = {
 	],
 	'default': default
 }
+
+# Elasticsearch vcs Solr: http://www.datanami.com/2015/01/22/solr-elasticsearch-question/
+HAYSTACK_CONNECTIONS = dict(
+	default=dict(
+		ENGINE='haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+		URL='http://localhost:9200/',
+		INDEX_NAME='sv_default',
+	),
+	nl=dict(
+		ENGINE='haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+		URL='http://localhost:9200/',
+		INCLUDE_SPELLING=True,
+		INDEX_NAME='sv_nl',
+	),
+	en=dict(
+		ENGINE='haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+		URL='http://localhost:9200/',
+		INCLUDE_SPELLING=True,
+		INDEX_NAME='sv_nl',
+	),
+	cn=dict(
+		ENGINE='haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+		URL='http://localhost:9200/',
+		INCLUDE_SPELLING=True,
+		INDEX_NAME='sv_nl',
+	),
+)
+HAYSTACK_ROUTERS = ['aldryn_search.router.LanguageRouter',]
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+HAYSTACK_LIMIT_TO_REGISTERED_MODELS = False
+ALDRYN_SEARCH_REGISTER_APPHOOK = True
+ALDRYN_SEARCH_PAGINATION = 30
+
+WSGI_APPLICATION = 'wsgi.application'
 
 TIME_ZONE = 'UTC'
 USE_I18N = True

@@ -40,7 +40,14 @@ django-display-exceptions
 
 django_extensions   # for autoslugfield
 
+django-bootstrap-form
+
+# apt-get install elasticsearch (and maybe need this bugfix: http://stackoverflow.com/questions/27273998/why-elasticsearch-wont-run-on-ubuntu-14-04)
+django-haystack
+# elasticsearch-py>1.0 # doesn't exist
+elasticsearch>=1.0.0,<2.0.0
+
+
 ### OPTIONAL ###
 # python-memcached
-
 
