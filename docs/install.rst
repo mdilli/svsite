@@ -59,7 +59,8 @@ Make sure to replace ``YOUR_URL``, or leave it out to run on localhost. You can 
 To **(re)start the server** later, go to the correct directory and run::
 
 	source env/bin/activate  # only if you use virtualenv
-	python3 source/manage.py runserver_plus --cert dev/cert YOUR_URL
+	python3 source/manage.py runserver_plus --cert dev/cert YOUR_URL  # old #todo
+	python source/manage.py runsslserver localhost.markv.nl:8443  # new
 
 Note that this is just for development! When the website is going live, you should probably use a webserver such as Apache.
 

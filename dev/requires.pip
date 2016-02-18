@@ -34,7 +34,8 @@ django-reversion==1.9.*  # this works for now but will break for newer django; k
 
 django-bower
 
-django_countries
+django-countries
+django-hvad
 
 django-display-exceptions
 

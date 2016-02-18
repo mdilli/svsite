@@ -29,10 +29,6 @@ INSTALLED_APPS = (
 	'django.contrib.sites',    # required for some cms thing and allauth
 	'django.contrib.sitemaps',
 
-	'haystack',
-	'aldryn_search',
-	'spurl',  # for aldryn-search
-
 	'allauth',
 	'allauth.account',
 	'allauth.socialaccount',
@@ -54,6 +50,8 @@ INSTALLED_APPS = (
 
 	'djangocms_text_ckeditor', # order doesn't matter
 
+	'hvad',                    # model translations (for placeholders)
+
 	'filer',                   # for cms-filer
 	'easy_thumbnails',         # for cms-filer
 	'mptt',                    # for cms-filer
@@ -74,6 +72,12 @@ INSTALLED_APPS = (
 	'djangocms_grid',
 	# 'djangocms_oembed',      # too outdated, doesn't work
 	# 'djangocms_table',       # too outdated, doesn't work
+
+	'haystack',                # all this search stuff after cms
+	'aldryn_common',
+	'aldryn_search',
+	'standard_form',
+	'spurl',                   # for aldryn-search
 
 	'birthdays',
 

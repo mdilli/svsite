@@ -5,10 +5,20 @@
 	Second admin: https://stackoverflow.com/questions/3206856/how-to-have-2-different-admin-sites-in-a-django-project
 """
 
+from cms.admin.placeholderadmin import PlaceholderAdminMixin
 from django.contrib import admin
 from django.contrib.admin import AdminSite
 from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
+from hvad.admin import TranslatableAdmin
+from base.models import SearchResults
+
+
+class MultilingualModelAdmin(TranslatableAdmin, PlaceholderAdminMixin, admin.ModelAdmin):
+	pass
+
+
+admin.site.register(SearchResults, MultilingualModelAdmin)
 
 
 class SuperuserAdminSite(AdminSite):

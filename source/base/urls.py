@@ -1,15 +1,12 @@
 
 from cms.sitemaps import CMSSitemap
-from django.conf import settings
 from django.conf.urls import include, url
-from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from haystack.views import SearchView
 import minimal_logger.urls
 from base.views import playground
 from base.forms import SearchForm
-from base.views import autocomplete
-
+from searcher.views import autocomplete
 
 urlpatterns = (
 	url(r'^playground/$', playground),

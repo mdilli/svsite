@@ -37,3 +37,4 @@ target/
 playground/
 dev/bower/
 current.txt
+*.sqlite3
