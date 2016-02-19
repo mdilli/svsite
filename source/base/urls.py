@@ -16,8 +16,6 @@ urlpatterns = (
 	# url(r'^backup/db$', download_database, name='backup_db'),
 	# url(r'^backup$', lambda request: redirect(reverse('backup_db')), name='backup'),
 	# url(r'^backup/restore$', upload_database, name='restore'),
-	url(r'^search/$', SearchView(template='search_page.html', form_class=SearchForm), name='search'),
-	url(r'^autocomplete/$', autocomplete, name='autocomplete'),
 )
 
 

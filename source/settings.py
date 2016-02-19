@@ -78,6 +78,7 @@ INSTALLED_APPS = (
 	'aldryn_search',
 	'standard_form',
 	'spurl',                   # for aldryn-search
+	'searcher',
 
 	'birthdays',
 
@@ -315,7 +316,7 @@ HAYSTACK_CONNECTIONS = dict(
 HAYSTACK_ROUTERS = ['aldryn_search.router.LanguageRouter',]
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 HAYSTACK_LIMIT_TO_REGISTERED_MODELS = False
-ALDRYN_SEARCH_REGISTER_APPHOOK = True
+ALDRYN_SEARCH_REGISTER_APPHOOK = False
 ALDRYN_SEARCH_PAGINATION = 30
 
 WSGI_APPLICATION = 'wsgi.application'

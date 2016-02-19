@@ -9,11 +9,11 @@ from django.db.models import signals, CharField
 from hvad.models import TranslatableModel, TranslatedFields
 
 
-class SearchResults(TranslatableModel):
-	translations = TranslatedFields(
-		title=CharField(max_length=64),
-	)
-	placeholder = PlaceholderField('search_results')
+# class SearchResults(TranslatableModel):
+# 	translations = TranslatedFields(
+# 		title=CharField(max_length=64),
+# 	)
+# 	placeholder = PlaceholderField('search_results')
 
 
 def refresh_menu_cache(sender, **kwargs):

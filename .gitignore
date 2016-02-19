@@ -37,4 +37,7 @@ target/
 playground/
 dev/bower/
 current.txt
+dev/data/
+dev/bower/
+dev/static/
 *.sqlite3
