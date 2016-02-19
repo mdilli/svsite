@@ -1,11 +1,11 @@
 
 """
-	Inspired by https://github.com/clutchio/clutch/blob/master/django_ext/http.py but some changes:
+Inspired by https://github.com/clutchio/clutch/blob/master/django_ext/http.py but some changes:
 
-	- Use json instead of simplejson, see http://stackoverflow.com/questions/712791/what-are-the-differences-between-json-and-simplejson-python-modules/
-	- Minetype doesn't depend on DEBUG; that seems like it's create very annoying bugs with no benefit.
-	- Allow the encoder, mimetype and indent to be changed.
-	- Callback removed until it's needed... Not very sure if that should be generally available...
+- Use json instead of simplejson, see http://stackoverflow.com/questions/712791/what-are-the-differences-between-json-and-simplejson-python-modules/
+- Minetype doesn't depend on DEBUG; that seems like it's create very annoying bugs with no benefit.
+- Allow the encoder, mimetype and indent to be changed.
+- Callback removed until it's needed... Not very sure if that should be generally available...
 """
 
 from json import dumps
@@ -20,4 +20,5 @@ class JSONResponse(HttpResponse):
 			content_type = mime
 		content = dumps(data, indent = indent, **json_kwargs)
 		super(JSONResponse, self).__init__(content = content, content_type = content_type, status = status_code)
+
 

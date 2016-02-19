@@ -1,25 +1,17 @@
 
-from django.shortcuts import render
 from django.template.defaultfilters import striptags
 from django.utils.html import escape
 from django.views.decorators.cache import never_cache
 from haystack.query import SearchQuerySet
 from haystack.utils import Highlighter
 from base.views import render_cms_special
-from searcher.models import SearchResults
 from searcher.utils import JSONResponse
 
 
 def search(request):
-	instance = SearchResults.objects.all()[0]
+	results = []
 	return render_cms_special(request, 'search_results.html', dict(
-		instance=instance,
-	))
-	#todo: update to use render_cms_special
-	instance = SearchResults.objects.all()[0]
-	return render(request, 'get_theme_special.html', dict(  #todo: not hardcoded theme
-		instance=instance,
-		page_include='search_results.html',
+		results=results,
 	))
 
 

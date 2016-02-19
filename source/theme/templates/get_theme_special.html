@@ -1,0 +1,34 @@
+
+{% comment %}
+	This should mirror get_theme but without the 'content' placeholder, instead including 'page_include'.
+{% endcomment %}
+
+{% load cms_toolbar from cms_tags %}
+{% load render_block from sekizai_tags %}
+
+
+{% include 'global_head.html' %}
+
+<!doctype html>
+<html lang="en">
+	<head>
+		{% include THEME_HEAD %}
+
+		{% render_block "css" %}
+
+	</head>
+	<body>
+		{% cms_toolbar %}
+
+		{% if THEME_BASE %}
+			{% include THEME_BASE %}
+		{% else %}
+			{% include 'default_body_special.html' with special=True %}
+		{% endif %}
+
+		{{ MINIMAL_LOG_JAVASCRIPT_HANDLING_CODE }}
+		{% render_block "js" %}
+	</body>
+</html>
+
+

@@ -47,4 +47,9 @@ There is a special version of `render`, namely `base.render_cms_special`, that y
 
 It is important to note that ``my_template.html`` in this example should render *just* the content part, not the full page. Don't ``{% extend %}`` the base template (or anything, for that matter); this is done automatically.
 
+In order for placeholderes to show up and for things to be integrated into the cms, you will need to add this view/app as an app-hook_ (this is the normal way; the only difference is that you should use ``render_cms_special``).
+
+
+.. _app-hook: http://docs.django-cms.org/en/develop/how_to/apphooks.html
+
 
