@@ -42,6 +42,6 @@ To create your own theme, these are the requirements:
 		{% placeholder "sidebar" %}
 		{% placeholder "bottom-row" %}
 
-	You do not need to define ``{% block %}``s. You won't be able to extend them since Django doesn't let you extend blocks from included templates.
+	You do not need to define ``{% block %}`` . You won't be able to extend them since Django doesn't let you extend blocks from included templates.
 
 

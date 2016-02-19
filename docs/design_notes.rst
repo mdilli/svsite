@@ -4,6 +4,11 @@ Design notes (hacks)
 
 Some parts are less than elegant. Although, at the time of writing, it seems there may not be a better way, it warrants a warning anyway.
 
+Migrating
+-------------------------------
+
+Clean migrations don't quite work for some cms addons. Find the :doc:`migration info <install>` in the installation documentation.
+
 Themes
 -------------------------------
 
@@ -19,7 +24,7 @@ Special pages
 This relates to those pages (e.g. search results) that should not be plugins in the CMS, but should be integrated into it anyway (to be in the menu, be moved and allow placeholders).
 
 What I would have preferred to do would be to have such pages (as apphooks) extend the main template and overwrite ``{% block content %}``.
-However, because of themes, ``{% block content %}`` is necessarily defined in an ``{% include %}``d file.
+However, because of themes, ``{% block content %}`` is necessarily defined in an ``{% include %}`` file.
 Django cannot extend blocks defined in included files (regrettably) since they are each rendered separately (not so much 'included').
 
 

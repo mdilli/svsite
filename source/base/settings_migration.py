@@ -2,9 +2,7 @@
 """
 These special settings are necessary because there's a migration conflict without them.
 
-For a clean migration, follow these steps:
-	python source/manage.py migrate --settings=base.settings_migration
-	python source/manage.py migrate --settings=settings
+See the :doc:`documentation <install>` for info.
 """
 
 from settings import *
