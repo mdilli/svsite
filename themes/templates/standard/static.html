@@ -19,7 +19,7 @@
 {% endaddtoblock "css" %}
 
 {% addtoblock "css" %}
-	<link rel="stylesheet" href="{% static 'standard/style.css' %}">
+	<link rel="stylesheet" href="{% static THEME_PREFIX|add:'/style.css' %}">
 {% endaddtoblock "css" %}
 
 
@@ -118,7 +118,7 @@
 {% endaddtoblock "js" %}
 
 {% addtoblock "js" %}
-	<script type="text/javascript" src="{% static 'standard/script.js' %}"></script>
+	<script type="text/javascript" src="{% static THEME_PREFIX|add:'/script.js' %}"></script>
 {% endaddtoblock "js" %}
 
 

@@ -86,7 +86,6 @@ INSTALLED_APPS = (
 	'reversion',
 
 	'djangobower',
-	'sslserver',               # in debug mode only
 
 	'django_countries',
 

@@ -3,11 +3,11 @@
    :toctree: _autosum
 
    activity
+   badges
    base
    birthdays
-   content
-   ctrl
    member
-
-
-#todo
+   searcher
+   slider
+   theme
+   tweaks

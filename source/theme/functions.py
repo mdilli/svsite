@@ -8,18 +8,7 @@ from os.path import join, exists, basename
 
 class Theme:
 	"""
-	A theme consists of these directories:
-
-	- templates/  - required, and should contain base.html (optionally head.html)
-	- static/     - any static files, if desired
-	- info/       - optional extra files, for example:
-		readme.rst
-		description.rst
-		credits.rst
-		license.txt
-
-	Note that the split into head and body is necessary because sekizai requires
-	the css and js blocks
+	See the :doc:`documentation <layout>` for the structure of themes.
 	"""
 	def __init__(self, name):
 		assert match(r'^[a-zA-Z][a-zA-Z0-9\.\-,_]+$', name), \

@@ -35,9 +35,10 @@ coverage.xml
 target/
 .idea/
 playground/
-dev/bower/
 current.txt
+dev/bower/
 dev/data/
 dev/bower/
 dev/static/
+dev/media/
 *.sqlite3

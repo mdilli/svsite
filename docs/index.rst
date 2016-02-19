@@ -5,19 +5,21 @@ Using
 -------------------------------
 
 .. toctree::
-   :maxdepth: 1
+	:maxdepth: 1
 
-   install.rst
-   layout.rst
+	install.rst
+	local_settings.rst
+	layout.rst
 
 Extending
 -------------------------------
 
 .. toctree::
-   :maxdepth: 1
+	:maxdepth: 1
 
-   contribute.rst
-   models.rst
+	contribute.rst
+	models.rst
+	design_notes.rst
 
 Components
 ...............................

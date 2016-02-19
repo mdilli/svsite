@@ -63,7 +63,8 @@ apps.rst:
 .PHONY: images/models.dot
 images/models.dot:
 	@printf 'creating a grapg of all models in images/models.dot\n'
-	python3 ../source/manage.py graph_models --all | grep -v '^  //' | grep -v '^[[:space:]]*$$' > images/models.dot
+	mkdir -p images
+	python3 ../source/manage.py graph_models --all --settings=base.settings_development | grep -v '^  //' | grep -v '^[[:space:]]*$$' > images/models.dot
 
 html: prep
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
