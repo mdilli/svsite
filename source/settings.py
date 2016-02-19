@@ -193,6 +193,7 @@ CMS_PERMISSION = True
 
 CMS_TEMPLATES = (
 	('get_theme.html', gettext('Standard template')),
+	('get_theme_special.html', gettext('Special template (no content)')),
 )
 
 # http://docs.django-cms.org/en/develop/reference/configuration.html#cms-placeholder-conf

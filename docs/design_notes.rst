@@ -25,7 +25,26 @@ This relates to those pages (e.g. search results) that should not be plugins in 
 
 What I would have preferred to do would be to have such pages (as apphooks) extend the main template and overwrite ``{% block content %}``.
 However, because of themes, ``{% block content %}`` is necessarily defined in an ``{% include %}`` file.
-Django cannot extend blocks defined in included files (regrettably) since they are each rendered separately (not so much 'included').
+Django cannot extend blocks defined in included files (regrettably) since they are each rendered separately (not so much 'included'), making the block useless.
 
+The 'solution' used is to force templates to include a dynamic template instead of the `content` placeholder for such pages.
+::
+
+	{% if page_include %}
+		{% include page_include %}
+	{% else %}
+		{% placeholder "content" %}
+	{% endif %}
+
+There is a special version of `render`, namely `base.render_cms_special`, that you can use like this:
+::
+
+	def my_view(request):
+		value = 'do some query or something'
+		return render_cms_special(request, 'my_template.html', dict(
+			key=value,
+		))
+
+It is important to note that ``my_template.html`` in this example should render *just* the content part, not the full page. Don't ``{% extend %}`` the base template (or anything, for that matter); this is done automatically.
 
 

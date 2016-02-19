@@ -43,8 +43,11 @@
 									{% endblock bla %}
 {#									<h1>Example page header <small>Subtext for header</small></h1>#}
 								</div>
-
-								{% placeholder "content" %}
+								{% if page_include %}
+									{% include page_include %}
+								{% else %}
+									{% placeholder "content" %}
+								{% endif %}
 							</article>
 						{% endblock content %}
 					</content>

@@ -23,9 +23,15 @@
 	<div class="row">
 		<div class="col-xs-12 col-md-8">
 			<content>
-				{% block content %}
+				{% comment %}
+					Here "special" refers to it being a apphooked page that provides it's own content but
+					should use the other placeholders. It's set to True if included from get_theme_special.html.
+				{% endcomment %}
+				{% if special %}
+					{% include page_include %}
+				{% else %}
 					{% placeholder "content" %}
-				{% endblock content %}
+				{% endif %}
 			</content>
 		</div>
 		<div class="col-xs-12 col-md-4">

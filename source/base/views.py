@@ -3,6 +3,19 @@ from django.contrib.messages import add_message, DEBUG, INFO, SUCCESS, WARNING, 
 from django.shortcuts import redirect, render
 
 
+def render_cms_special(request, template, context=None, **kwargs):
+	"""
+	Special render function to render special pages integrated into the cms (apphooks). It renders `template` in
+	place of `content` placeholder, assuming the theme behaves as prescribed in the documentation.
+
+	Note that `template` should just be the content part, not a whole page (e.g. no ``<head>``, don't ``{% extend %}``),
+	this is contrary to how the normal `render` behaves.
+	"""
+	context = context or {}
+	context['page_include'] = template
+	return render(request, 'get_theme_special.html', context, **kwargs)
+
+
 def playground(request):
 	#todo: remove eventually
 	#assert settings.DEBUG

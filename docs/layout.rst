@@ -4,7 +4,7 @@ Layout
 
 svSite should provide a fully functional site (with :doc:`minimal work <install>`), but you may want to personalize the look, which will take time. That's inevitable. Here is some information on how to do it.
 
-Requirements
+Theme requirements
 -------------------------------
 
 To create your own theme, these are the requirements:
@@ -33,7 +33,10 @@ To create your own theme, these are the requirements:
 	You can also hard-code ``{% static 'theme_name/logo.png' %}``. This behaves differently in case another theme extends this one.
 
 *
-	The ``base.html`` template should not extend anything (it is itself included). It should define precisely these placeholders:
+	For the ``base.html`` template:
+
+	* It should not extend anything (it is itself included).
+	* It should define precisely these placeholders:
 	::
 
 		{% placeholder "header" %}
@@ -42,6 +45,15 @@ To create your own theme, these are the requirements:
 		{% placeholder "sidebar" %}
 		{% placeholder "bottom-row" %}
 
-	You do not need to define ``{% block %}`` . You won't be able to extend them since Django doesn't let you extend blocks from included templates.
+	* It should ``{% include include_page %}`` if it's set, e.g. a structure like this:
+	::
+
+		{% if page_include %}
+			{% include page_include %}
+		{% else %}
+			{% placeholder "content" %}
+		{% endif %}
+
+	* You do not need to define ``{% block %}`` . You won't be able to extend them since Django doesn't let you extend blocks from included templates.
 
 
