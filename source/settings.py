@@ -164,6 +164,8 @@ TEMPLATES = [
 		},
 	},
 ]
+DISPLAY_EXCEPTIONS_BASE_TEMPLATE = 'exception_base.html'
+DISPLAY_EXCEPTIONS_RENDER_FUNC = 'tweaks.views.display_exception'
 
 AUTH_USER_MODEL = 'member.Member'
 
@@ -304,13 +306,13 @@ HAYSTACK_CONNECTIONS = dict(
 		ENGINE='haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
 		URL='http://localhost:9200/',
 		INCLUDE_SPELLING=True,
-		INDEX_NAME='sv_nl',
+		INDEX_NAME='sv_en',
 	),
-	cn=dict(
+	zh=dict(
 		ENGINE='haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
 		URL='http://localhost:9200/',
 		INCLUDE_SPELLING=True,
-		INDEX_NAME='sv_nl',
+		INDEX_NAME='sv_zh',
 	),
 )
 PLACEHOLDERS_SEARCH_LIST = {

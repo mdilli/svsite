@@ -1,0 +1,36 @@
+
+{% load trans from i18n %}
+{% load page_attribute from cms_tags %}
+
+
+<div class="page-header">
+	<h1 id="caption">
+		{% block caption %}
+			{% page_attribute "title" %}
+		{% endblock caption %}
+	</h1>
+</div>
+
+<div id="message">
+	{% block message %}
+		{{ message|linebreaks }}
+	{% endblock message %}
+</div>
+
+{% block icon %}
+	<span class="glyphicon glyphicon-question-sign"></span>
+{% endblock icon %}
+
+<div id="actions">
+	<div class="btn-group" role="group">
+		{% block actions %}
+			{% if next %}
+				<a href="{{ next }}" class="btn btn-default"><span class="glyphicon glyphicon-arrow-right"></span> {% trans 'Continue' %}</a>
+			{% else %}
+				<a href="/" class="btn btn-default"><span class="glyphicon glyphicon-home"></span> {% trans 'Okay' %}</a>
+			{% endif %}
+		{% endblock actions %}
+	</div>
+</div>
+
+

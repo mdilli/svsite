@@ -16,6 +16,9 @@ class Member(AbstractUser):
 	def teams(self):
 		return Team.objects.filter(user=self)
 
+	def listed_teams(self):
+		return Team.objects.filter(user=self, listed=True)
+
 	def __str__(self):
 		return self.get_full_name()
 

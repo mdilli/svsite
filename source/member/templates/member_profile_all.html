@@ -1,0 +1,20 @@
+
+{% load user_display from account %}
+{% load page_attribute from cms_tags %}
+
+
+<div class="page-header">
+	<h1>{% page_attribute "title" %}</h1>
+</div>
+
+<p>There are currently {{ users.count }} users.</p>
+
+<ul>
+	{% for user in users %}
+		<li><a href="{{ user.get_absolute_url }}">{% user_display user %}</a></li>
+	{% endfor %}
+</ul>
+
+<p>You can also use <a href="{% url 'search' %}">search</a> to find specific users.</p>
+
+

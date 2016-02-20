@@ -1,9 +1,9 @@
 
 from aldryn_search.utils import alias_from_language
+from django.conf import settings
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.utils.translation import get_language_from_request
 from django.utils.html import escape
-from django.views.decorators.cache import never_cache
 from haystack.inputs import AutoQuery
 from haystack.query import SearchQuerySet
 from base.views import render_cms_special
@@ -17,12 +17,14 @@ def search(request, per_page=20):
 	"""
 	query = escape(request.GET.get('q', '')).strip()
 
+	language_code = get_language_from_request(request, check_path=True)
+	language_name = dict(settings.LANGUAGES)[language_code]
+
 	if not query:
 		paginator = Paginator([], per_page)
 		page = paginator.page(1)
 		count = 0
 	else:
-		language_code = get_language_from_request(request, check_path=True)
 		connection_alias = alias_from_language(language_code)
 		sqs = SearchQuerySet(using=connection_alias)
 		sqs = sqs.filter(text=AutoQuery(query))
@@ -44,6 +46,7 @@ def search(request, per_page=20):
 		query=query,
 		count=count,
 		results=page,
+		language_name=language_name,
 	))
 
 

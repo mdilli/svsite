@@ -3,19 +3,27 @@
 {% load highlight from highlight %}
 {% load language_flag_url from language_flags %}
 {% load pagination_url from pagination %}
+{% load page_attribute from cms_tags %}
 
 
-<form action="{% url 'search' %}" method="get">
-	<div class="input-group">
-		<input type="text" name="q" class="form-control search-typeahead" value="{{ query }}" placeholder="Search for..." autofocus data-provide="typeahead">
-		<span class="input-group-btn">
-			<button class="btn btn-default" type="button">
-				<i class="glyphicon glyphicon-search"></i>
-				Search
-			</button>
-		</span>
-	</div>
-</form>
+<div class="page-header">
+	<h1>{% page_attribute "title" %}</h1>
+</div>
+
+<div>
+	<form action="{% url 'search' %}" method="get">
+		<div class="input-group">
+			<input type="text" name="q" class="form-control search-typeahead" value="{{ query }}" placeholder="Search for..." autofocus data-provide="typeahead">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="button">
+					<i class="glyphicon glyphicon-search"></i>
+					Search
+				</button>
+			</span>
+		</div>
+	</form>
+	<br />
+</div>
 
 <p>
 	{% if query %}
@@ -23,7 +31,7 @@
 {#			There are {{ count }} matches for <strong>{{ query }}</strong> in <img src="{% language_flag_url language_code %}" /> {{ language_name }}.#}
 {#			Search <a href="?q={{ query }}">all languages</a>. {# back to page 1 #}
 {#		{% else %}#}
-			There are {{ count }} match{{ count|pluralize:"es" }} for <strong>{{ query }}</strong>.
+			There are {{ count }} match{{ count|pluralize:"es" }} for <strong>{{ query }}</strong> in {{ language_name }}.
 {#		{% endif %}#}
 	{% else %}
 		Enter a search query in the search box.
@@ -49,8 +57,8 @@
 				{% highlight result.text with query %}
 			{% endif %}
 		</li>
-	{% empty %}
-		<li>No results found.</li>
+{#	{% empty %}#}
+{#		<li>No results found.</li>#}
 	{% endfor %}
 </ol>
 

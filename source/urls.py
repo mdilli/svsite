@@ -18,8 +18,8 @@ from base.views import playground
 
 urlpatterns = i18n_patterns(
 	url(r'^\$playground', playground),
-	url(r'^account/', include(member.urls)),
-	url(r'^account/', include(allauth.urls)),
+	url(r'^member/', include(member.urls)),
+	url(r'^member/', include(allauth.urls)),
 	url(r'^badge/', include(badges.urls)),
 	url(r'^search/', include(searcher.urls)),
 	url(r'^birthday/', include(birthdays.urls)), #todo

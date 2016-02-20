@@ -37,15 +37,13 @@
 					<content>
 						{% block content %}
 							<article>
-								<div class="page-header">
-									{% block bla %}
-									<h1>{% page_attribute "title" %}</h1>
-									{% endblock bla %}
-{#									<h1>Example page header <small>Subtext for header</small></h1>#}
-								</div>
 								{% if page_include %}
 									{% include page_include %}
 								{% else %}
+									<div class="page-header">
+										<h1>{% page_attribute "title" %}</h1>
+	{#									<h1>Example page header <small>Subtext for header</small></h1>#}
+									</div>
 									{% placeholder "content" %}
 								{% endif %}
 							</article>
