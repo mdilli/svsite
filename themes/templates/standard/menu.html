@@ -79,9 +79,11 @@
 					</div>
 
 					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<div class="collapse navbar-collapse" id="cms-menu">
 						<ul class="nav navbar-nav">
-							{% show_menu 0 5 5 5 THEME_PREFIX|add:'/menu_tree.html' %}
+							{% block menu %}
+								{% show_menu 0 5 5 5 THEME_PREFIX|add:'/menu_tree.html' %}
+							{% endblock menu %}
 						</ul>
 					</div><!-- /.navbar-collapse -->
 
@@ -147,13 +149,13 @@
 
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="menu_general">
-						<ul class="nav navbar-nav">
-							{% block menu_info %}
-							{% endblock menu_info %}
-							{% block menu %}
-								<!-- add menu items here -->
-							{% endblock menu %}
-						</ul>
+{#						<ul class="nav navbar-nav">#}
+{#							{% block menu_info %}#}
+{#							{% endblock menu_info %}#}
+{#							{% block menu %}#}
+{#								<li><a href="/">Special item</a></li>#}
+{#							{% endblock menu %}#}
+{#						</ul>#}
 
 						<!-- Search for very large (in bar) or very small (in collapse) sites -->
 						<div class="visible-lg visible-md hidden-sm visible-xs">

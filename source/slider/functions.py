@@ -44,7 +44,6 @@ def construct_slider_image_list(img_count=8):
 			'url': img.image.url,
 			'elem': None,
 		})
-	print(dumps(info, indent=None))
 	return mark_safe(dumps(info, indent=None))
 
 

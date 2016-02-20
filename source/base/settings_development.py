@@ -12,6 +12,14 @@ INSTALLED_APPS = tuple(INSTALLED_APPS) + (
 	'django_extensions',       # for development (making docs)
 )
 
+try:
+	# browse search index from the admin https://github.com/kezabelle/django-haystackbrowser
+	import haystackbrowser
+except ImportError:
+	print('haystackbrowser not installed')
+else:
+	INSTALLED_APPS += ('haystackbrowser',)
+
 if 'runserver' in argv:
 	stderr.write('you should use ssl server:\n')
 	stderr.write('python source/manage.py runsslserver localhost.markv.nl:8443\n')

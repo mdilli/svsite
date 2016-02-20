@@ -164,6 +164,11 @@
 	border-radius: 0 0 5px 5px;
 }
 
+#cms-menu
+{
+	float: left;
+}
+
 /* Affix menu to top of screen when scrolling */
 #header-main-affix.affix
 {
@@ -210,6 +215,17 @@
 .typeahead
 {
 	z-index: 1051;
+}
+/* Search results */
+.search-results
+{
+	list-style-type: none;
+	padding: 0;
+}
+
+.search-results li
+{
+	margin-bottom: 0.5em;
 }
 
 /* Menu tweaks (from avem) */

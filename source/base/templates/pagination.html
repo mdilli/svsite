@@ -1,0 +1,27 @@
+
+{% load pagination_url nearby_pages from pagination %}
+
+
+<nav class="text-center">
+	<ul class="pagination pagination-centered">
+		<li {% if not items.has_previous %}class="disabled"{% endif %}>
+			<a href="{% if items.has_previous %}{% pagination_url items.previous_page_number %}{% endif %}" aria-label="Previous">
+				<span aria-hidden="true">&laquo;</span>
+			</a>
+		</li>
+		{% for pagenr in items|nearby_pages %}
+			{% if pagenr %}
+				<li {% if items.number == pagenr %}class="active"{% endif %}><a href="{% pagination_url pagenr %}">{{ pagenr }}</a></li>
+			{% else %}
+				<li class="disabled"><a href="#">...</a></li>
+			{% endif %}
+		{% endfor %}
+		<li {% if not items.has_next %}class="disabled"{% endif %}>
+			<a href="{% if items.has_next %}{% pagination_url items.next_page_number %}{% endif %}" aria-label="Next">
+				<span aria-hidden="true">&raquo;</span>
+			</a>
+		</li>
+	</ul>
+</nav>
+
+

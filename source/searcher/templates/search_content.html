@@ -1,0 +1,46 @@
+
+{% load timesince_short from formatting %}
+{% load highlight from highlight %}
+
+
+<form action="{% url 'search' %}" method="get">
+	<div class="input-group">
+		<input type="text" class="form-control" name="q" value="{{ query }}" placeholder="Search for..." autofocus>
+		<span class="input-group-btn">
+			<button class="btn btn-default" type="button">
+				<i class="glyphicon glyphicon-search"></i>
+				Search
+			</button>
+		</span>
+	</div>
+</form>
+
+{% if query %}
+	<p>There are {{ count }} matches for <strong>{{ query }}</strong>.</p>
+{% else %}
+	<p>Enter a search query in the search box (hint: ctrl+H).</p>
+{% endif %}
+
+<ol class="search-results">
+	{% for result in results %}
+		<li>
+
+			<strong>
+				<a href="{{ result.url }}">
+					{% highlight result.title with query %}
+				</a>
+			</strong>
+			{{ result.pub_date|timesince_short }}
+			<br />
+			{% if result.text %}
+				{% highlight result.text with query %}
+			{% endif %}
+		</li>
+	{% empty %}
+		<li>No results found.</li>
+	{% endfor %}
+</ol>
+
+{% include 'pagination.html' with items=results %}
+
+

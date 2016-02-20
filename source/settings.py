@@ -74,10 +74,10 @@ INSTALLED_APPS = (
 	# 'djangocms_table',       # too outdated, doesn't work
 
 	'haystack',                # all this search stuff after cms
-	'aldryn_common',
+	# 'aldryn_common',
 	'aldryn_search',
-	'standard_form',
-	'spurl',                   # for aldryn-search
+	# 'standard_form',           # for aldryn-search
+	# 'spurl',                   # for aldryn-search
 	'searcher',
 
 	'birthdays',
@@ -173,7 +173,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_EMAIL_REQUIRED = False # todo: change?
+ACCOUNT_EMAIL_REQUIRED = False  # todo: change?
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_FORMS = {} # {‘login’: ‘myapp.forms.LoginForm’} # see also ACCOUNT_SIGNUP_FORM_CLASS and SOCIALACCOUNT_FORMS
@@ -313,11 +313,18 @@ HAYSTACK_CONNECTIONS = dict(
 		INDEX_NAME='sv_nl',
 	),
 )
+PLACEHOLDERS_SEARCH_LIST = {
+	'*': {
+		'include': ['content',],
+		'exclude': ['header', 'top-row', 'sidebar', 'bottom-row',],
+	}
+}
+# HAYSTACK_ROUTERS = ['searcher.utils.LanguageSearchRouter',]
 HAYSTACK_ROUTERS = ['aldryn_search.router.LanguageRouter',]
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 HAYSTACK_LIMIT_TO_REGISTERED_MODELS = False
 ALDRYN_SEARCH_REGISTER_APPHOOK = False
-ALDRYN_SEARCH_PAGINATION = 30
+# ALDRYN_SEARCH_PAGINATION = 50
 
 WSGI_APPLICATION = 'wsgi.application'
 

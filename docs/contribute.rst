@@ -7,7 +7,7 @@ Say you want to make some changes. Perhaps they turn out great, and you want to 
 Linux / bash
 -------------------------------
 
-You will need to make sure you 'can push'_ code to Github by setting up ssh keys. Then fork the svsite repository and follow these steps.
+You will need to make sure you `can push`_ code to Github by setting up ssh keys. Then fork the svsite repository and follow these steps.
 
 You will need ``python3``, ``pip``, a database (``sqlite3`` is default and easy, but slow), ``virtualenv``, ``git``, ``elasticsearch`` and some SSL packages. Just type::
 
