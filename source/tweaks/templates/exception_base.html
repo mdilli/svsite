@@ -1,36 +1,51 @@
 
 {% load trans from i18n %}
 {% load page_attribute from cms_tags %}
+{% load addtoblock from sekizai_tags %}
 
 
-<div class="page-header">
-	<h1 id="caption">
+{% addtoblock "css" %}
+	<style>
+		#exception-alert
+		{
+			font-size: 22pt;
+		}
+
+		#exception-alert strong
+		{
+			font-size: 42pt;
+		}
+
+		#content-container
+		{
+			padding: 2em;
+		}
+	</style>
+{% endaddtoblock "css" %}
+
+
+<div id="exception-alert" class="alert alert-danger">
+	<strong>
+		{% block icon %}
+			<span class="glyphicon glyphicon-question-sign"></span>
+		{% endblock icon %}
 		{% block caption %}
 			{% page_attribute "title" %}
 		{% endblock caption %}
-	</h1>
-</div>
-
-<div id="message">
+	</strong>
 	{% block message %}
 		{{ message|linebreaks }}
 	{% endblock message %}
 </div>
 
-{% block icon %}
-	<span class="glyphicon glyphicon-question-sign"></span>
-{% endblock icon %}
-
-<div id="actions">
-	<div class="btn-group" role="group">
-		{% block actions %}
-			{% if next %}
-				<a href="{{ next }}" class="btn btn-default"><span class="glyphicon glyphicon-arrow-right"></span> {% trans 'Continue' %}</a>
-			{% else %}
-				<a href="/" class="btn btn-default"><span class="glyphicon glyphicon-home"></span> {% trans 'Okay' %}</a>
-			{% endif %}
-		{% endblock actions %}
-	</div>
+<div id="exception-actions" class="btn-group btn-group-justified" role="group">
+	{% block actions %}
+		{% if next %}
+			<a href="{{ next }}" class="btn btn-default"><span class="glyphicon glyphicon-arrow-right"></span> {% trans 'Continue' %}</a>
+		{% else %}
+			<a href="/" class="btn btn-default"><span class="glyphicon glyphicon-home"></span> {% trans 'Okay' %}</a>
+		{% endif %}
+	{% endblock actions %}
 </div>
 
 

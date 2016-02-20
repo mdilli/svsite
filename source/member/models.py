@@ -1,5 +1,6 @@
 
 from django.contrib.auth.models import Group, UserManager, AbstractUser, GroupManager
+from django.core.urlresolvers import reverse
 from django_extensions.db.fields import AutoSlugField
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
@@ -24,13 +25,13 @@ class Member(AbstractUser):
 
 	def get_full_name(self):
 		full_name = '{0:s} {1:s}'.format(self.first_name, self.last_name)
-		return full_name.strip() or self.username
+		return full_name.strip() or self.username.title()
 
 	def get_short_name(self):
-		return self.first_name or self.username
+		return self.first_name or self.username.title()
 
 	def get_absolute_url(self):
-		return '/'  # todo
+		return reverse('profile_info', kwargs=dict(pk=self.pk, label=self.slug))
 
 	def has_permission_superuser(self):
 		return True  # todo
