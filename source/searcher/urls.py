@@ -1,7 +1,5 @@
 
 from django.conf.urls import url
-from haystack.views import SearchView
-from base.forms import SearchForm
 from searcher.views import autocomplete, search
 
 

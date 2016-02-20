@@ -1,6 +1,8 @@
 
 {% load timesince_short from formatting %}
 {% load highlight from highlight %}
+{% load language_flag_url from language_flags %}
+{% load pagination_url from pagination %}
 
 
 <form action="{% url 'search' %}" method="get">
@@ -15,21 +17,32 @@
 	</div>
 </form>
 
-{% if query %}
-	<p>There are {{ count }} matches for <strong>{{ query }}</strong>.</p>
-{% else %}
-	<p>Enter a search query in the search box (hint: ctrl+H).</p>
-{% endif %}
+<p>
+	{% if query %}
+{#		{% if language_code %}#}
+{#			There are {{ count }} matches for <strong>{{ query }}</strong> in <img src="{% language_flag_url language_code %}" /> {{ language_name }}.#}
+{#			Search <a href="?q={{ query }}">all languages</a>. {# back to page 1 #}
+{#		{% else %}#}
+			There are {{ count }} matches for <strong>{{ query }}</strong>.
+{#		{% endif %}#}
+	{% else %}
+		Enter a search query in the search box.
+	{% endif %}
+</p>
 
 <ol class="search-results">
 	{% for result in results %}
 		<li>
-
 			<strong>
 				<a href="{{ result.url }}">
 					{% highlight result.title with query %}
 				</a>
 			</strong>
+			{% if not language_code %}
+{#				<a href="?q={{ query }}&lang={{ result.language }}"> {# back to page 1 #}
+					<img src="{% language_flag_url result.language %}" style="opacity: 0.5;" /> {# todo tmp #}
+{#				</a>#}
+			{% endif %}
 			{{ result.pub_date|timesince_short }}
 			<br />
 			{% if result.text %}

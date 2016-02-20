@@ -1,11 +1,12 @@
 
 from aldryn_search.utils import alias_from_language
+from django.conf import settings
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.utils.translation import get_language_from_request
 from django.template.defaultfilters import striptags
 from django.utils.html import escape
 from django.views.decorators.cache import never_cache
-from haystack.query import SearchQuerySet, EmptySearchQuerySet
+from haystack.query import SearchQuerySet
 from haystack.utils import Highlighter
 from base.views import render_cms_special
 from searcher.utils import JSONResponse
@@ -16,17 +17,28 @@ def search(request, per_page=20):
 	#todo: I get results in wrong languages and ones that don't match
 
 	query = escape(request.GET.get('q', '')).strip()
+	# language_code = escape(request.GET.get('lang', '')).strip()
+	# language_name = None
+	# if language_code:
+	# 	for key, language_name in settings.LANGUAGES:
+	# 		if key == language_code:
+	# 			break
+	# 	else:
+	# 		raise AssertionError('unknown language "{0:s}"'.format(language_code))
 
 	if not query:
 		paginator = Paginator([], per_page)
 		page = paginator.page(1)
 		count = 0
 	else:
-		language = get_language_from_request(request, check_path=True)
-		connection_alias = alias_from_language(language)
+		language_code = get_language_from_request(request, check_path=True)
+		connection_alias = alias_from_language(language_code)
 		sqs = SearchQuerySet(using=connection_alias)
 		sqs.auto_query(query) #todo
 
+		# if language_code:
+		# 	print('yes yes', language_code)
+		# sqs = sqs.filter(language=language_code)
 		if not request.user.is_authenticated():
 			sqs = sqs.exclude(login_required=True)
 		count = sqs.count()
@@ -43,6 +55,8 @@ def search(request, per_page=20):
 		query=query,
 		count=count,
 		results=page,
+		# language_code=language_code,
+		# language_name=language_name,
 	))
 
 

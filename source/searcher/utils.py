@@ -1,11 +1,7 @@
 
 from json import dumps
-from cms.utils import get_language_code
 from django.http import HttpResponse
 from django.conf import settings
-from django.utils.translation import get_language
-from haystack.constants import DEFAULT_ALIAS
-from haystack.routers import BaseRouter
 
 
 class JSONResponse(HttpResponse):
@@ -23,22 +19,4 @@ class JSONResponse(HttpResponse):
 			content_type = mime
 		content = dumps(data, indent = indent, **json_kwargs)
 		super(JSONResponse, self).__init__(content = content, content_type = content_type, status = status_code)
-
-
-class LanguageSearchRouter(BaseRouter):
-	"""
-	Based on Aldryn search.
-	"""
-	def for_read(self, **hints):
-		language = get_language_code(get_language())
-		if language not in settings.HAYSTACK_CONNECTIONS:
-			return DEFAULT_ALIAS
-		return language
-
-	def for_write(self, **hints):
-		language = get_language_code(get_language())
-		if language not in settings.HAYSTACK_CONNECTIONS:
-			return DEFAULT_ALIAS
-		return language
-
 
