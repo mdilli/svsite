@@ -132,7 +132,7 @@
 									<li class="form-group">
 										<form action="{% url 'search' %}" method="GET" title="cltr+H">
 											<div class="input-group">
-												<input id="search_field" type="text" name="q" class="form-control search-typeahead" placeholder="Search" autocomplete="off">
+												<input type="text" name="q" class="form-control search-typeahead" placeholder="Search" autocomplete="off">
 												<div class="input-group-btn" >
 													<label class="btn btn-default" for="search_submit_dropdown">
 														<i class="glyphicon glyphicon-search"></i>
@@ -149,13 +149,6 @@
 
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="menu_general">
-{#						<ul class="nav navbar-nav">#}
-{#							{% block menu_info %}#}
-{#							{% endblock menu_info %}#}
-{#							{% block menu %}#}
-{#								<li><a href="/">Special item</a></li>#}
-{#							{% endblock menu %}#}
-{#						</ul>#}
 
 						<!-- Search for very large (in bar) or very small (in collapse) sites -->
 						<div class="visible-lg visible-md hidden-sm visible-xs">
@@ -163,7 +156,7 @@
 								<form class="form-inline" role="search" action="{% url 'search' %}" method="GET" title="cltr+H">
 									<div class="form-group">
 										<div class="input-group">
-											<input id="search_field" type="text" name="q" class="form-control search-typeahead" value="{{ query }}" placeholder="Search" {% block menu_autofocus %}autofocus{% endblock menu_autofocus %} data-provide="typeahead" autocomplete="off">
+											<input type="text" name="q" class="form-control search-typeahead" value="{{ query }}" placeholder="Search" {% block menu_autofocus %}autofocus{% endblock menu_autofocus %} data-provide="typeahead" autocomplete="off">
 											<div class="input-group-btn" onclick="">
 												<label class="btn btn-default" for="search_submit_bar">
 													<i class="glyphicon glyphicon-search"></i>
