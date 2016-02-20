@@ -23,7 +23,7 @@
 {#			There are {{ count }} matches for <strong>{{ query }}</strong> in <img src="{% language_flag_url language_code %}" /> {{ language_name }}.#}
 {#			Search <a href="?q={{ query }}">all languages</a>. {# back to page 1 #}
 {#		{% else %}#}
-			There are {{ count }} matches for <strong>{{ query }}</strong>.
+			There are {{ count }} match{{ count|pluralize:"es" }} for <strong>{{ query }}</strong>.
 {#		{% endif %}#}
 	{% else %}
 		Enter a search query in the search box.

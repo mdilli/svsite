@@ -1,11 +1,11 @@
 
 from aldryn_search.utils import alias_from_language
-from django.conf import settings
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.utils.translation import get_language_from_request
 from django.template.defaultfilters import striptags
 from django.utils.html import escape
 from django.views.decorators.cache import never_cache
+from haystack.inputs import AutoQuery
 from haystack.query import SearchQuerySet
 from haystack.utils import Highlighter
 from base.views import render_cms_special
@@ -14,7 +14,7 @@ from searcher.utils import JSONResponse
 
 def search(request, per_page=20):
 
-	#todo: I get results in wrong languages and ones that don't match
+	#todo: published, e.g. by not being draft and by having passed start date
 
 	query = escape(request.GET.get('q', '')).strip()
 	# language_code = escape(request.GET.get('lang', '')).strip()
@@ -34,11 +34,11 @@ def search(request, per_page=20):
 		language_code = get_language_from_request(request, check_path=True)
 		connection_alias = alias_from_language(language_code)
 		sqs = SearchQuerySet(using=connection_alias)
-		sqs.auto_query(query) #todo
+		sqs = sqs.filter(text=AutoQuery(query))
 
 		# if language_code:
 		# 	print('yes yes', language_code)
-		# sqs = sqs.filter(language=language_code)
+		sqs = sqs.filter(language=language_code)
 		if not request.user.is_authenticated():
 			sqs = sqs.exclude(login_required=True)
 		count = sqs.count()
