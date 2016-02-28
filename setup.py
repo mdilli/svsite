@@ -52,6 +52,7 @@ setup(
 		'Programming Language :: Python :: 3.4',
 		'Framework :: Django :: 1.9',
 		'Environment :: Web Environment',
+		'Do Not Upload By Accident',
 	],
 	cmdclass = {'test': PyTest},  #todo add a comment what this does and why it's a good idea...
 )
