@@ -16,7 +16,7 @@ Installing dependencies
 
 For this to work, you will need ``python3-dev`` including ``pip`` and a database (``sqlite3`` is default and easy, but slow). Things will be easier and better with ``virtualenv`` (or ``pew``) and ``git``, so probably get those too. You'll also need ``libjpeg-dev`` and the dev version of Python because of ``pillow``. You can install them with::
 
-	sudo apt-get install python3-dev sqlite3 python-virtualenv git libjpeg-dev
+	sudo apt-get install python3-dev sqlite3 python-virtualenv git libjpeg-dev python-pip
 
 Get the code. The easiest way is with git, replacing ``SITENAME``::
 

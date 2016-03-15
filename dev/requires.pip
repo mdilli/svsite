@@ -1,9 +1,9 @@
 
-django==1.8.*
+django==1.8
 django-cms==3.2.0  # 3.2.1 breaks migrations even more
 django-classy-tags==0.7.1
 django-sekizai
-django-treebeard==3.*
+django-treebeard==3
 djangocms-admin-style
 html5lib==0.999
 django-formtools>=1.0
@@ -30,7 +30,7 @@ cmsplugin-filer  # this installs pillow and filer a.o.
 django-resized
 
 django_cleanup    # delete files if model is changed
-django-reversion==1.9.*  # this works for now but will break for newer django; keep finely balanced with django and cms versions
+django-reversion==1.9  # this works for now but will break for newer django; keep finely balanced with django and cms versions
 
 django-bower
 

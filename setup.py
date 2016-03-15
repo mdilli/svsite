@@ -25,7 +25,7 @@ class PyTest(Command):
 		raise SystemExit(errno)
 
 
-with open('dev/requirements.pip', 'r') as fh:
+with open('dev/requires.pip', 'r') as fh:
 	requirements = fh.read().splitlines()
 
 
