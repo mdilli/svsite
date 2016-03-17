@@ -12,11 +12,13 @@ import member.urls
 import birthdays.urls
 import base.urls
 import searcher.urls
+import svfinance.urls
 from base.admin import superuser_admin, census_admin
 from base.views import playground
 
 
 urlpatterns = i18n_patterns(
+	url(r'^€/', include(svfinance.urls)),
 	url(r'^\$playground', playground),
 	url(r'^member/', include(member.urls)),
 	url(r'^member/', include(allauth.urls)),
