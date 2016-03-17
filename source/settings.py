@@ -73,11 +73,13 @@ INSTALLED_APPS = (
 	# 'djangocms_oembed',      # too outdated, doesn't work
 	# 'djangocms_table',       # too outdated, doesn't work
 
+	'sortedm2m',               # team member roles
+
 	'haystack',                # all this search stuff after cms
 	# 'aldryn_common',
 	'aldryn_search',
-	# 'standard_form',           # for aldryn-search
-	# 'spurl',                   # for aldryn-search
+	# 'standard_form',         # for aldryn-search
+	# 'spurl',                 # for aldryn-search
 	'searcher',
 
 	'birthdays',

@@ -1,10 +1,15 @@
 
 from cms.models import PageUser
-from django.contrib import admin
+from django.contrib.sites.models import Site
+from django.contrib.sites.admin import SiteAdmin
+from base.admin import content_admin, superuser_admin
 
-# Register your models here.
 
 def shrink_cms_admin():
-	admin.site.unregister(PageUser)
+	content_admin.unregister(PageUser)
+
+
+content_admin.unregister(Site)
+superuser_admin.register(Site, SiteAdmin)
 
 

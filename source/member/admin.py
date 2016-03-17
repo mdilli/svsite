@@ -1,10 +1,21 @@
 
+from allauth.account.models import EmailAddress
+from allauth.account.models import EmailConfirmation
+from allauth.socialaccount.models import SocialApp, SocialToken, SocialAccount
+from allauth.socialaccount.providers.openid.admin import OpenIDNonceAdmin
+from allauth.socialaccount.providers.openid.admin import OpenIDStoreAdmin
+from allauth.socialaccount.providers.openid.models import OpenIDNonce, OpenIDStore
+from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from django.forms import ModelForm, ModelMultipleChoiceField
-from base.admin import census_admin
+from django.contrib.auth.models import Group
+from django.db import models
+from django.forms import ModelForm, ModelMultipleChoiceField, CharField
+from base.admin import census_admin, content_admin
 from base.admin import superuser_admin
-from .models import Member, Team
+from .models import Member, Team, TeamRole, TeamAdmin
+from allauth.account.admin import EmailAddressAdmin, EmailConfirmationAdmin
+from allauth.socialaccount.admin import SocialAccountAdmin, SocialTokenAdmin, SocialAppAdmin
 
 
 class SystemMemberAdmin(UserAdmin):
@@ -51,12 +62,24 @@ class TeamAdminForm(ModelForm):
 		return instance
 
 
+class TeamAdminAdmin(admin.TabularInline):
+	model = TeamAdmin
+	fields = ['member',]
+	extra = 1
+
+
+class TeamRoleAdmin(admin.TabularInline):
+	model = TeamRole
+	fields = ['member', 'role',]
+	extra = 1
+	formfield_overrides = {models.TextField: {'widget': forms.TextInput},}
+
+
 class SystemTeamAdmin(admin.ModelAdmin):
 	form = TeamAdminForm
 	fieldsets = (
 		(None, {'fields': ('name',)}),
-		('Information', {'fields': ('description', 'listed', 'slug',)}),
-		('Information', {'fields': ('member_count', 'users',)}),
+		('Information', {'fields': ('description', 'listed', 'slug', 'member_count',)}),
 		('Permissions', {'fields': ('permission_census', 'permission_superuser', 'system',)}),
 	)
 	readonly_fields = ('system', 'member_count', 'slug',)
@@ -67,6 +90,10 @@ class SystemTeamAdmin(admin.ModelAdmin):
 	filter_horizontal = tuple()
 	show_full_result_count = True
 	view_on_site = True
+	inlines = [TeamAdminAdmin, TeamRoleAdmin,]
+
+	# class Media:
+	# 	css = dict(all=('admin/hide_admin_inline_name.css',))
 
 	def save_model(self, request, obj, form, change):
 		if obj.system and not request.user.is_superuser:
@@ -78,7 +105,22 @@ class CensusTeamAdmin(SystemTeamAdmin):
 	readonly_fields = SystemTeamAdmin.readonly_fields + ('permission_superuser',)
 
 
+content_admin.unregister(Group)
+content_admin.unregister(EmailAddress)
+content_admin.unregister(EmailConfirmation)
+content_admin.unregister(SocialApp)
+content_admin.unregister(SocialToken)
+content_admin.unregister(SocialAccount)
+content_admin.unregister(OpenIDNonce)
+content_admin.unregister(OpenIDStore)
 census_admin.register(Team, CensusTeamAdmin)
+census_admin.register(EmailAddress, EmailAddressAdmin)
+census_admin.register(EmailConfirmation, EmailConfirmationAdmin)
+census_admin.register(SocialApp, SocialAppAdmin)
+census_admin.register(SocialToken, SocialTokenAdmin)
+census_admin.register(SocialAccount, SocialAccountAdmin)
+census_admin.register(OpenIDNonce, OpenIDNonceAdmin)
+census_admin.register(OpenIDStore, OpenIDStoreAdmin)
 superuser_admin.register(Team, SystemTeamAdmin)
 
 

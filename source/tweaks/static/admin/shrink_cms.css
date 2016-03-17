@@ -36,4 +36,19 @@
 	display: none;
 }
 
+/*
+	Remove names from tabular inline listings.
+	From Avem theme (which got it from http://stackoverflow.com/questions/5086537/how-to-omit-object-name-from-djangos-tabularinline-admin-view).
+*/
+
+td.original p
+{
+	display: none;
+}
+
+.inline-group .tabular tr.has_original td
+{
+	padding-top: 5px;
+}
+
 

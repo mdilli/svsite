@@ -1,9 +1,12 @@
 
+from django.conf import settings
 from django.contrib.auth.models import Group, UserManager, AbstractUser, GroupManager
 from django.core.urlresolvers import reverse
+from django.db.models.signals import m2m_changed, post_save
 from django_extensions.db.fields import AutoSlugField
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
+from sortedm2m.fields import SortedManyToManyField
 
 
 class Member(AbstractUser):
@@ -41,14 +44,14 @@ class Member(AbstractUser):
 
 
 class Team(Group):
-	#name = models.CharField(max_length = 48, unique = True, error_messages = {'unique': 'A team with that name already exists.'})
 	slug = AutoSlugField(populate_from='name', unique=True, help_text='This value is used as identifier in places like urls.')
 	listed = models.BooleanField(default=False)
 	description = models.TextField(default='', blank=True)
 	permission_census = models.BooleanField(default=False)
 	permission_superuser = models.BooleanField(default=False)
 	system = models.BooleanField(default=False)
-	# members = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, through='teams.TeamMember')
+	admins = models.ManyToManyField(settings.AUTH_USER_MODEL, through='member.TeamAdmin', related_name='admin_teams')
+	roles = SortedManyToManyField(settings.AUTH_USER_MODEL, through='member.TeamRole', related_name='team_roles')
 
 	objects = GroupManager()
 
@@ -70,18 +73,52 @@ class Team(Group):
 		return self.user_set.count()
 
 
-
-# class TeamRole(models.Model):
-# 	member = models.ForeignKey(settings.AUTH_USER_MODEL)
-# 	team = models.ForeignKey('member.Team')
+class TeamMemberBase(models.Model):
+	member = models.ForeignKey(settings.AUTH_USER_MODEL)
+	team = models.ForeignKey('member.Team')
 	# group = models.ForeignKey('auth.Group')
-# 	admin = models.BooleanField(default=False, help_text='Admins can and and remove members and update details.')
-# 	role = models.CharField(max_length=64, blank=True, default='')
-#
-# 	class Meta:
-# 		unique_together = ('member', 'group',)
-#
-# 	def __str__(self):
-# 		return '{0:} ∈ {1:}'.format(self.member, self.team)
+
+	class Meta:
+		unique_together = ('member', 'team',)
+		abstract = True
+
+	def __str__(self):
+		return '{0:} A∈ {1:}'.format(self.member, self.team)
+
+
+class TeamAdmin(TeamMemberBase):
+	pass
+
+
+class TeamRole(TeamMemberBase):
+	# group = models.ForeignKey('auth.Group')
+	# is_active = models.BooleanField(default=False, help_text='Admins can and and remove members and update details.')
+	# is_member = models.BooleanField(default=True, help_text='Admins can and and remove members and update details.')
+	role = models.TextField(blank=True, default='')
+
+
+def mirror_members(*args, **kwargs):
+	print('*** MIRRORING MEMBERS ***')
+	print(args, kwargs)
+	return
+	if action == 'post_clear':
+		pass
+	if action == 'post_add':
+		pass
+	print('MIRRORING MEMBERS')
+	group = instance
+	# groups = reverse
+	print('instance', instance)
+	print('reverse', reverse)
+	print('sender', sender)
+	print('pk_set', pk_set)
+	print('action', action)
+	print('signal', signal)
+	print('model', model)
+	print('using', using)
+
+
+#m2m_changed.connect(mirror_members, sender=Team.roles.through)
+post_save.connect(mirror_members, sender=TeamRole)
 
 

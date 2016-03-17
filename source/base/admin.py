@@ -7,7 +7,6 @@
 
 from django.contrib import admin
 from django.contrib.admin import AdminSite
-from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
 # from base.models import SearchResults
 
@@ -47,8 +46,7 @@ class CensusAdminSite(AdminSite):
 
 superuser_admin = SuperuserAdminSite(name='superuser')
 census_admin = CensusAdminSite(name='census')
-
-
-admin.site.unregister(Group)
+content_admin = admin.site
+content_admin.site_header = content_admin.site_title = _('Content administration')
 
 
