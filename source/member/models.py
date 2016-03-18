@@ -2,17 +2,17 @@
 from django.conf import settings
 from django.contrib.auth.models import Group, UserManager, AbstractUser, GroupManager
 from django.core.urlresolvers import reverse
-from django.db.models.signals import m2m_changed, post_save
+from django.db.models.signals import m2m_changed, post_save, post_delete
 from django_extensions.db.fields import AutoSlugField
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
-from sortedm2m.fields import SortedManyToManyField
+from ordered_model.models import OrderedModel
 
 
 class Member(AbstractUser):
-
 	slug = AutoSlugField(populate_from='username', unique=True)
 	birthday = models.DateField(blank=True, null=True, default=None)
+	# note: do NOT change groups directly, use Team.roles instead
 
 	objects = UserManager()
 
@@ -51,7 +51,7 @@ class Team(Group):
 	permission_superuser = models.BooleanField(default=False)
 	system = models.BooleanField(default=False)
 	admins = models.ManyToManyField(settings.AUTH_USER_MODEL, through='member.TeamAdmin', related_name='admin_teams')
-	roles = SortedManyToManyField(settings.AUTH_USER_MODEL, through='member.TeamRole', related_name='team_roles')
+	roles = models.ManyToManyField(settings.AUTH_USER_MODEL, through='member.TeamRole', related_name='team_roles')
 
 	objects = GroupManager()
 
@@ -90,35 +90,28 @@ class TeamAdmin(TeamMemberBase):
 	pass
 
 
-class TeamRole(TeamMemberBase):
+class TeamRole(OrderedModel, TeamMemberBase):
 	# group = models.ForeignKey('auth.Group')
 	# is_active = models.BooleanField(default=False, help_text='Admins can and and remove members and update details.')
 	# is_member = models.BooleanField(default=True, help_text='Admins can and and remove members and update details.')
 	role = models.TextField(blank=True, default='')
+	# order = models.IntegerField(default=0, unique=True)
 
+	order_with_respect_to = 'team'
 
-def mirror_members(*args, **kwargs):
-	print('*** MIRRORING MEMBERS ***')
-	print(args, kwargs)
-	return
-	if action == 'post_clear':
+	class Meta(OrderedModel.Meta, TeamMemberBase.Meta):
 		pass
-	if action == 'post_add':
-		pass
-	print('MIRRORING MEMBERS')
-	group = instance
-	# groups = reverse
-	print('instance', instance)
-	print('reverse', reverse)
-	print('sender', sender)
-	print('pk_set', pk_set)
-	print('action', action)
-	print('signal', signal)
-	print('model', model)
-	print('using', using)
 
 
-#m2m_changed.connect(mirror_members, sender=Team.roles.through)
+def mirror_members(*, signal, using, sender, instance, **kwargs):
+	#todo: may be faster to attach to m2m_changed
+	print('**** MIRROR ****')
+	roles = instance.team.roles.all()
+	instance.team.user_set.clear()
+	instance.team.user_set.add(*roles)
+
+
 post_save.connect(mirror_members, sender=TeamRole)
+post_delete.connect(mirror_members, sender=TeamRole)
 
 

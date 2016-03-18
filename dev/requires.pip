@@ -1,6 +1,8 @@
 
 requests
 
+django-ordered-model
+
 django-allauth
 
 django==1.8
