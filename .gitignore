@@ -6,6 +6,7 @@ env
 env/
 build/
 develop-eggs/
+node_modules/
 dist/
 downloads/
 eggs/
@@ -44,3 +45,5 @@ dev/static/
 dev/media/
 *.sqlite3
 svfinance
+source/local.py
+

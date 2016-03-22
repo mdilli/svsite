@@ -41,4 +41,7 @@ MINIMAL_LOG_URL = 'https://markv.nl/log/add'
 DEBUG = True
 FILER_DEBUG = DEBUG
 
+SESSION_COOKIE_SECURE = CSRF_COOKIE_SECURE = False
+
+
 

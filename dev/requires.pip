@@ -22,6 +22,8 @@ django-formtools>=1.0
 # because installing lxml with pip freezes the whole os for me.
 #
 
+aldryn-search
+
 djangocms-text-ckeditor
 
 djangocms-googlemap
@@ -60,4 +62,7 @@ django_minimal_log
 
 ### OPTIONAL ###
 # python-memcached
+# mysqlclient
+# psycopg2
+
 
