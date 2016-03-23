@@ -1,11 +1,12 @@
 
 requests
+django-ipware
 
 django-ordered-model
 
 django-allauth
 
-django==1.8
+django<1.9
 django-cms==3.2.0  # 3.2.1 breaks migrations even more
 django-classy-tags==0.7.1
 django-sekizai

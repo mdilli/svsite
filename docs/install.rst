@@ -77,7 +77,7 @@ Then you can start the test-server. This is not done with the normal ``runserver
 
 We use this special command to use a secure connection, which is enforced by default. In this test mode, an unsigned certificate is used, so you might have to add a security exception.
 
-Make sure to replace ``YOUR_URL``, or leave it out to run on localhost. You can stop the server with ``ctrl+C``.
+You can replace the url and port. You can stop the server with ``ctrl+C``.
 
 Next time
 ...............................
