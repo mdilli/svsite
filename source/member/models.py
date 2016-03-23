@@ -53,6 +53,7 @@ class Team(Group):
 	admins = models.ManyToManyField(settings.AUTH_USER_MODEL, through='member.TeamAdmin', related_name='admin_teams')
 	roles = models.ManyToManyField(settings.AUTH_USER_MODEL, through='member.TeamRole', related_name='team_roles')
 
+
 	objects = GroupManager()
 
 	class Meta:
@@ -63,14 +64,17 @@ class Team(Group):
 		return self.name
 
 	def get_absolute_url(self):
-		return '/'  # todo
-		# return reverse('group_info', kwargs = {'pk': self.pk, 'label': slugify(self.name)})
+		return reverse('team_info', kwargs=dict(slug=self.slug))
 
 	def natural_key(self):
 		return (self.slug,)
 
 	def member_count(self):
 		return self.user_set.count()
+
+	@property
+	def role_throughs(self):
+		return TeamRole.objects.filter(team=self)
 
 
 class TeamMemberBase(models.Model):
@@ -94,7 +98,7 @@ class TeamRole(OrderedModel, TeamMemberBase):
 	# group = models.ForeignKey('auth.Group')
 	# is_active = models.BooleanField(default=False, help_text='Admins can and and remove members and update details.')
 	# is_member = models.BooleanField(default=True, help_text='Admins can and and remove members and update details.')
-	role = models.TextField(blank=True, default='')
+	title = models.TextField(blank=True, default='')
 	# order = models.IntegerField(default=0, unique=True)
 
 	order_with_respect_to = 'team'

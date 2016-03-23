@@ -1,0 +1,18 @@
+
+{% load user_display from account %}
+{% load page_attribute from cms_tags %}
+
+
+<div class="page-header">
+	<h1>{% page_attribute "title" %}</h1>
+</div>
+
+<ul>
+	{% for team in teams %}
+		<li><a href="{{ team.get_absolute_url }}">{{ team.name }}</a></li>
+	{% endfor %}
+</ul>
+
+<p>You can also use <a href="{% url 'search' %}">search</a> to find specific groups.</p>
+
+

@@ -8,7 +8,7 @@ from member.cms_menu import MemberMenu
 class MemberApphook(CMSApp):
 	name = _('Members')
 	app_name = 'member'
-	urls = ['member.urls']
+	urls = ['member.member_urls']
 	menus = [MemberMenu]
 
 

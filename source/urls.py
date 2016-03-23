@@ -8,7 +8,7 @@ import filer.urls
 import cms.urls
 import badges.urls
 import allauth.urls
-import member.urls
+import member.member_urls, member.team_urls
 import birthdays.urls
 import base.urls
 import searcher.urls
@@ -20,8 +20,9 @@ from base.views import playground
 urlpatterns = i18n_patterns(
 	url(r'^€/', include(svfinance.urls)),
 	url(r'^\$playground', playground),
-	url(r'^member/', include(member.urls)),
-	url(r'^member/', include(allauth.urls)),
+	url(r'^member/', include(member.member_urls)),
+	url(r'^cie/', include(member.team_urls)),
+	url(r'^account/', include(allauth.urls)),
 	url(r'^badge/', include(badges.urls)),
 	url(r'^search/', include(searcher.urls)),
 	url(r'^birthday/', include(birthdays.urls)), #todo

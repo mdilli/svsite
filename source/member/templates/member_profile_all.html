@@ -9,7 +9,7 @@
 
 <p>There are currently {{ users.count }} users.</p>
 
-<ul>
+<ul class="list-dynamic-columns">
 	{% for user in users %}
 		<li><a href="{{ user.get_absolute_url }}">{% user_display user %}</a></li>
 	{% endfor %}

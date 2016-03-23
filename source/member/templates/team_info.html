@@ -1,0 +1,47 @@
+
+{% load user_display from account %}
+
+
+<div class="page-header">
+	<h1>{{ team.name }}</h1>
+</div>
+
+{% if not team.listed %}
+	<p><em>{{ team.name|title }} is an unlisted team; it is only visible to members.</em></p>
+{% endif %}
+
+<p>{{ team.description }}</p>
+
+{#admins = models.ManyToManyField(settings.AUTH_USER_MODEL, through='member.TeamAdmin', related_name='admin_teams')#}
+
+
+<p>Members of {{ team.name }}:</p>
+<ol>
+	{% for role in team.role_throughs %}
+		<li>
+			<a href="{{ role.member.get_absolute_url }}">
+				<strong>{% user_display role.member %}</strong>
+			</a>
+			<em>{{ role.title }}</em>
+		</li>
+	{% empty %}
+		<li>No members.</li>
+	{% endfor %}
+</ol>
+
+<p>Admins of {{ team.name }}:</p>
+<ul>
+	{% for member in team.admins.all %}
+		<li>
+			<a href="{{ member.get_absolute_url }}">
+				{% user_display member %}
+			</a>
+		</li>
+	{% empty %}
+		<li>No members.</li>
+	{% endfor %}
+</ul>
+
+{#<p>You can use <a href="{% url 'search' %}">search</a> to find more teams.</p>#}
+
+
