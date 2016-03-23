@@ -13,7 +13,7 @@
 	{% endblock head_title %}
 </title>
 {% block favicon %}
-	<link rel="shortcut icon" type="image/png" href="{% static '{{ THEME_PREFIX }}/favicon.png' %}"/>
+	<link rel="shortcut icon" type="image/png" href="{% static THEME_PREFIX|add:'/img/favicon.png' %}"/>
 {% endblock favicon %}
 
 <meta name="keywords" content="{% block keywords %}{% endblock keywords %}" />
@@ -38,7 +38,8 @@
 {% endblock meta_compatibility %}
 
 {% block meta_social %}
-	<meta property="og:image" content="{% static '{{ THEME_PREFIX }}/img/favicon.png' %}" />
+
+	<meta property="og:image" content="{% static THEME_PREFIX|add:'/img/favicon.png' %}" />
 	<meta property="og:title" content="{% page_attribute "page_title" %}" />
 {% endblock meta_social %}
 
