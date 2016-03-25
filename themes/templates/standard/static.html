@@ -46,20 +46,20 @@
 
 {% addtoblock "js" %}
 	<!-- jQuery is included with djangocms, but only in edit mode, so still include a copy. #todo: not sure what happens... -->
-	<script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+	<script src="{% static 'jquery/dist/jquery.min.js' %}" defer></script>
 {% endaddtoblock "js" %}
 
 {% addtoblock "js" %}
-	<script src="{% static 'bootswatch-dist/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'bootswatch-dist/js/bootstrap.min.js' %}" defer></script>
 {% endaddtoblock "js" %}
 
 {% addtoblock "js" %}
-	<script src="{% static 'smartmenus/dist/jquery.smartmenus.min.js' %}"></script>
-	<script src="{% static 'smartmenus/dist/addons/bootstrap/jquery.smartmenus.bootstrap.js' %}"></script>
+	<script src="{% static 'smartmenus/dist/jquery.smartmenus.min.js' %}" defer></script>
+	<script src="{% static 'smartmenus/dist/addons/bootstrap/jquery.smartmenus.bootstrap.js' %}" defer></script>
 {% endaddtoblock "js" %}
 
 {% addtoblock "js" %}
-	<script type="text/x-mathjax-config">
+	<script type="text/x-mathjax-config" async>
 		MathJax.Hub.Config({
 			imageFont: null,
 			extensions: ["tex2jax.js"],
@@ -73,12 +73,12 @@
 
 {% addtoblock "js" %}
 	<!-- Load d3.js and c3.js -->
-	<script src="{% static 'd3/d3.min.js' %}" charset="utf-8"></script>
-	<script src="{% static 'c3/c3.min.js' %}"></script>
+	<script src="{% static 'd3/d3.min.js' %}" charset="utf-8" defer></script>
+	<script src="{% static 'c3/c3.min.js' %}" defer></script>
 {% endaddtoblock "js" %}
 
 {% addtoblock "js" %}
-	<script src="{% static 'bootstrap3-typeahead/bootstrap3-typeahead.min.js' %}"></script>
+	<script src="{% static 'bootstrap3-typeahead/bootstrap3-typeahead.min.js' %}" defer></script>
 	<script>
 	/*
 	Autocompletion for search using a continuation of typehead (from avem).
@@ -118,7 +118,7 @@
 {% endaddtoblock "js" %}
 
 {% addtoblock "js" %}
-	<script type="text/javascript" src="{% static THEME_PREFIX|add:'/script.js' %}"></script>
+	<script type="text/javascript" src="{% static THEME_PREFIX|add:'/script.js' %}" defer></script>
 {% endaddtoblock "js" %}
 
 

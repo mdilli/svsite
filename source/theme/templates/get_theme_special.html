@@ -1,6 +1,7 @@
 
 {% comment %}
 	This should mirror get_theme but without the 'content' placeholder, instead including 'page_include'.
+
 {% endcomment %}
 
 {% load cms_toolbar from cms_tags %}
@@ -16,6 +17,8 @@
 
 		{% render_block "css" %}
 
+		{{ MINIMAL_LOG_JAVASCRIPT_HANDLING_CODE }}
+		{% render_block "js" %}
 	</head>
 	<body>
 		{% cms_toolbar %}
@@ -25,9 +28,6 @@
 		{% else %}
 			{% include 'default_body_special.html' with special=True %}
 		{% endif %}
-
-		{{ MINIMAL_LOG_JAVASCRIPT_HANDLING_CODE }}
-		{% render_block "js" %}
 	</body>
 </html>
 
