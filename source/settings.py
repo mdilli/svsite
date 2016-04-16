@@ -62,6 +62,7 @@ INSTALLED_APPS = (
 	'cmsplugin_filer_image',   # from cms-filer, special migration needed
 	'cmsplugin_filer_teaser',  # from cms-filer, special migration needed
 	'cmsplugin_filer_video',   # from cms-filer, special migration needed
+	'cmsplugin_raw_html',
 
 	'djangocms_googlemap',
 	'djangocms_inherit',
