@@ -47,9 +47,13 @@ Now you are ready to make your chances!
 
 After you are done and have tested your changes (and converted space-indents to tabs), you can suggest it for inclusion into svsite by means of a `pull request`_
 
-A general note
+External services
 -------------------------------
 
+There is a minimal api for building some external services, which is described in :doc:`integration_api`.
+
+A general note
+-------------------------------
 
 Good luck! why-we-never-forget-our-fellow-coders_
 
