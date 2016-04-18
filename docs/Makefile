@@ -52,16 +52,21 @@ clean:
 	rm -rf $(BUILDDIR)/* _autosum
 
 
-prep: apps.rst images/models.dot
+prep: _autosum _autosum/apps.rst images/models.dot
 
-.PHONY: apps.rst
-apps.rst:
-	@printf 'creating list of apps in apps.rst\n'
-	@printf ".. comment: this is an automatically generated file, do not change manually\n.. autosummary::\n   :toctree: _autosum\n\n" > apps.rst
-	@for file in $$(find ../source/ -mindepth 2 -maxdepth 2 -name '__init__.py'); do echo "   $$(basename $$(dirname $$file))"; done | sort >> apps.rst
+_autosum/apps.rst: ../source
+	mkdir -p -m 700 _autosum
+	@printf 'creating list of apps in _autosum/apps.rst\n'
+	@printf ".. comment: this is an automatically generated file, do not change manually\n.. autosummary::\n   :toctree: _autosum\n\n" > _autosum/apps.rst
+	@for file in $$(find ../source/ -mindepth 2 -maxdepth 2 -name '__init__.py'); do echo "   $$(basename $$(dirname $$file))"; done | sort >> _autosum/apps.rst
 
-.PHONY: images/models.dot
-images/models.dot:
+_autosum: ../source
+	# for file in $$(find ../source/ -mindepth 1 -maxdepth 1 -type d -regex '^[^_]+$$'); do sphinx-apidoc $$file -d 0 -o _autosum -f; done
+	@printf 'creating documentation from source code (too many files, but will be fixed by ToC)'
+	#sphinx-apidoc ../source -f -d 0 -o _autosum
+	sphinx-apidoc ../source -f -o _autosum
+
+images/models.dot: ../source
 	@printf 'creating a grapg of all models in images/models.dot\n'
 	mkdir -p images
 	python3 ../source/manage.py graph_models --all --settings=base.settings_development | grep -v '^  //' | grep -v '^[[:space:]]*$$' > images/models.dot
@@ -95,13 +100,13 @@ htmlhelp: prep
 	$(SPHINXBUILD) -b htmlhelp $(ALLSPHINXOPTS) $(BUILDDIR)/htmlhelp
 	@echo
 	@echo "Build finished; now you can run HTML Help Workshop with the" \
-	      ".hhp project file in $(BUILDDIR)/htmlhelp."
+		  ".hhp project file in $(BUILDDIR)/htmlhelp."
 
 qthelp: prep
 	$(SPHINXBUILD) -b qthelp $(ALLSPHINXOPTS) $(BUILDDIR)/qthelp
 	@echo
 	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
-	      ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
+		  ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
 	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/svSite.qhcp"
 	@echo "To view the help file:"
 	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/svSite.qhc"
@@ -111,8 +116,8 @@ applehelp: prep
 	@echo
 	@echo "Build finished. The help book is in $(BUILDDIR)/applehelp."
 	@echo "N.B. You won't be able to view it unless you put it in" \
-	      "~/Library/Documentation/Help or install it in your application" \
-	      "bundle."
+		  "~/Library/Documentation/Help or install it in your application" \
+		  "bundle."
 
 devhelp: prep
 	$(SPHINXBUILD) -b devhelp $(ALLSPHINXOPTS) $(BUILDDIR)/devhelp
@@ -133,7 +138,7 @@ latex: prep
 	@echo
 	@echo "Build finished; the LaTeX files are in $(BUILDDIR)/latex."
 	@echo "Run \`make' in that directory to run these through (pdf)latex" \
-	      "(use \`make latexpdf' here to do that automatically)."
+		  "(use \`make latexpdf' here to do that automatically)."
 
 latexpdf: prep
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
@@ -162,7 +167,7 @@ texinfo: prep
 	@echo
 	@echo "Build finished. The Texinfo files are in $(BUILDDIR)/texinfo."
 	@echo "Run \`make' in that directory to run these through makeinfo" \
-	      "(use \`make info' here to do that automatically)."
+		  "(use \`make info' here to do that automatically)."
 
 info: prep
 	$(SPHINXBUILD) -b texinfo $(ALLSPHINXOPTS) $(BUILDDIR)/texinfo
@@ -184,17 +189,17 @@ linkcheck: prep
 	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(BUILDDIR)/linkcheck
 	@echo
 	@echo "Link check complete; look for any errors in the above output " \
-	      "or in $(BUILDDIR)/linkcheck/output.txt."
+		  "or in $(BUILDDIR)/linkcheck/output.txt."
 
 doctest: prep
 	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(BUILDDIR)/doctest
 	@echo "Testing of doctests in the sources finished, look at the " \
-	      "results in $(BUILDDIR)/doctest/output.txt."
+		  "results in $(BUILDDIR)/doctest/output.txt."
 
 coverage: prep
 	$(SPHINXBUILD) -b coverage $(ALLSPHINXOPTS) $(BUILDDIR)/coverage
 	@echo "Testing of coverage in the sources finished, look at the " \
-	      "results in $(BUILDDIR)/coverage/python.txt."
+		  "results in $(BUILDDIR)/coverage/python.txt."
 
 xml: prep
 	$(SPHINXBUILD) -b xml $(ALLSPHINXOPTS) $(BUILDDIR)/xml

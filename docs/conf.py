@@ -13,6 +13,7 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+import django
 from os import environ
 from os.path import join, abspath
 import sys
@@ -25,6 +26,8 @@ sys.path.insert(0, abspath(join('..', 'source')))
 
 # -- General configuration ------------------------------------------------
 on_rtd = environ.get('READTHEDOCS', None) == 'True'
+environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+django.setup()
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #needs_sphinx = '1.0'
@@ -88,7 +91,7 @@ language = None
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['_build', 'apps.rst']
+exclude_patterns = ['_build']
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.

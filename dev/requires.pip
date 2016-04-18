@@ -50,6 +50,7 @@ django-hvad
 django-display-exceptions
 
 django_extensions   # for autoslugfield
+django-model-utils  # for activity TimeFramedModel
 
 django-bootstrap-form
 

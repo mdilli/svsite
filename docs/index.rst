@@ -24,6 +24,6 @@ Extending
 Components
 ...............................
 
-.. include:: apps.rst
+.. include:: _autosum/apps.rst
 
 
