@@ -10,9 +10,8 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
 from django.db import models
-from django.forms import ModelForm, ModelMultipleChoiceField, CharField
+from django.forms import ModelForm, ModelMultipleChoiceField
 from ordered_model.admin import OrderedTabularInline
-
 from base.admin import census_admin, content_admin
 from base.admin import superuser_admin
 from .models import Member, Team, TeamRole, TeamAdmin
@@ -74,7 +73,7 @@ class TeamAdminAdmin(admin.TabularInline):
 class TeamRoleAdmin(OrderedTabularInline):
 	model = TeamRole
 	# list_display = ('team', 'member', 'role',)
-	fields = ('move_up_down_links', 'member', 'role', 'order',)
+	fields = ('move_up_down_links', 'member', 'title', 'order',)
 	readonly_fields = ('order', 'move_up_down_links',)
 	formfield_overrides = {models.TextField: {'widget': forms.TextInput},}
 	ordering = ('order',)

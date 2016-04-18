@@ -42,6 +42,10 @@ class Member(AbstractUser):
 	def has_permission_census(self):
 		return True  # todo
 
+	@property
+	def role_throughs(self):
+		return TeamRole.objects.filter(member=self)
+
 
 class Team(Group):
 	slug = AutoSlugField(populate_from='name', unique=True, help_text='This value is used as identifier in places like urls.')
