@@ -53,7 +53,7 @@ Users & groups
 -------------------------------
 
 #todo
-- build-in Django groups
+- built-in Django groups
 - CMS users
 
 

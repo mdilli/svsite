@@ -18,6 +18,7 @@ Extending
 	:maxdepth: 1
 
 	contribute.rst
+	integration_api.rst
 	models.rst
 	design_notes.rst
 

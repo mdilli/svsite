@@ -1,5 +1,5 @@
 
-Integration
+Integration API
 ===============================
 
 There is a ``https-json`` api for integrating external tools. It provides read-only access to information about users (``member``s) and groups (``team``s).

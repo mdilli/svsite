@@ -50,14 +50,15 @@ After you are done and have tested your changes (and converted space-indents to 
 External services
 -------------------------------
 
-There is a minimal api for building some external services, which is described in :doc:`integration_api`.
+There is a minimal api for building external services, which is described in :doc:`integration_api`. Such additions are welcome, you're encouraged to notify us when you complete one!
 
 A general note
 -------------------------------
 
-Good luck! why-we-never-forget-our-fellow-coders_
+Good luck! `Why we never forget our fellow coders`_
 
 .. _can push: https://help.github.com/articles/generating-ssh-keys/
 .. _pull request: https://help.github.com/articles/creating-a-pull-request/
-.. _why-we-never-forget-our-fellow-coders http://www.commitstrip.com/en/2014/11/21/why-we-never-forget-our-fellow-coders/
+.. _`Why we never forget our fellow coders`: http://www.commitstrip.com/en/2014/11/21/why-we-never-forget-our-fellow-coders/
+
 
