@@ -8,6 +8,6 @@ See the :doc:`documentation <install>` for info.
 from settings import *
 
 
-INSTALLED_APPS = tuple(app for app in INSTALLED_APPS if (not 'cmsplugin_filer_' in app))
+INSTALLED_APPS = tuple(app for app in INSTALLED_APPS if (not 'cmsplugin_filer_' in app and not app == 'tweaks'))
 
 
