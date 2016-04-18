@@ -21,9 +21,4 @@ Extending
 	models.rst
 	design_notes.rst
 
-Components
-...............................
-
-.. include:: _autosum/apps.rst
-
 

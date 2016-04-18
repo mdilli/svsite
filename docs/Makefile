@@ -52,7 +52,8 @@ clean:
 	rm -rf $(BUILDDIR)/* _autosum
 
 
-prep: _autosum _autosum/apps.rst images/models.dot
+#prep: _autosum _autosum/apps.rst images/models.dot
+prep: images/models.dot
 
 _autosum/apps.rst: ../source
 	mkdir -p -m 700 _autosum

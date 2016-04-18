@@ -13,7 +13,7 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import django
+# import django  # on for autodoc!
 from os import environ
 from os.path import join, abspath
 import sys
@@ -26,8 +26,8 @@ sys.path.insert(0, abspath(join('..', 'source')))
 
 # -- General configuration ------------------------------------------------
 on_rtd = environ.get('READTHEDOCS', None) == 'True'
-environ['DJANGO_SETTINGS_MODULE'] = 'settings'
-django.setup()
+# environ['DJANGO_SETTINGS_MODULE'] = 'settings'  # on for autodoc!
+# django.setup()  # on for autodoc!
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #needs_sphinx = '1.0'
@@ -36,12 +36,12 @@ django.setup()
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-	'sphinx.ext.autodoc',
-	'sphinx.ext.autosummary',
-	'sphinx.ext.doctest',
-	'sphinx.ext.coverage',
+	#'sphinx.ext.autodoc',
+	#'sphinx.ext.autosummary',
+	#'sphinx.ext.doctest',
+	#'sphinx.ext.coverage',
 	'sphinx.ext.mathjax',
-	'sphinx.ext.viewcode',
+	#'sphinx.ext.viewcode',
 	'sphinx.ext.graphviz',
 ]
 

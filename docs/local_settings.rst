@@ -90,11 +90,9 @@ You might also want to have a look at some of these:
 		},
 	}
 
-	SESSION_COOKIE_SECURE = False
-	CSRF_COOKIE_SECURE = False
+	SESSION_COOKIE_SECURE = CSRF_COOKIE_SECURE = False
 
-	DEBUG = False
-	FILER_DEBUG = DEBUG
+	DEBUG = FILER_DEBUG = False
 
 You can change other Django settings, particularly it might be worthwhile to have a look at globalization_ settings.
 
