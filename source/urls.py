@@ -13,6 +13,7 @@ import birthdays.urls
 import base.urls
 import searcher.urls
 import svfinance.urls
+import intapi.urls
 from base.admin import superuser_admin, census_admin
 from base.views import playground
 
@@ -32,6 +33,10 @@ urlpatterns = i18n_patterns(
 	url(r'^filer/', include(filer.urls)),   # django filer canonical urls (ones that don't change if you upload a new version)
 	url(r'^', include(base.urls)),
 	url(r'^', include(cms.urls)),
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+) + \
+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
+[
+	url(r'^\$intapi/', include(intapi.urls)),
+]
 
 

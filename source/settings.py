@@ -18,8 +18,9 @@ TEMPLATE_DEBUG = DEBUG
 FILER_DEBUG = DEBUG  # easy-thumbnail exceptions propagated?
 
 INSTALLED_APPS = (
-	'tweaks',               # should be before adminstyle and allauth
 	'member',               # not sure if this needs to be on top but if there's a preference it's probably top.
+	'tweaks',               # should be before adminstyle and allauth
+	'intapi',
 
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -62,7 +63,7 @@ INSTALLED_APPS = (
 	'cmsplugin_filer_image',   # from cms-filer, special migration needed
 	'cmsplugin_filer_teaser',  # from cms-filer, special migration needed
 	'cmsplugin_filer_video',   # from cms-filer, special migration needed
-	'cmsplugin_raw_html',
+	# 'cmsplugin_raw_html',
 
 	'djangocms_googlemap',
 	'djangocms_inherit',

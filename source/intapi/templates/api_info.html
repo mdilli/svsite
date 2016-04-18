@@ -1,0 +1,20 @@
+
+<h1>Integration API</h1>
+
+<p>Api for getting user info for semi-integrated apps.</p>
+
+<p>API urls:</p>
+<ul>
+	<li>Member list: {{ DOMAIN }}{% url 'user_list_api' %}</li>
+	<li>Member details: {{ DOMAIN }}{% url 'user_details_api' %}</li>
+	<li>Team list: {{ DOMAIN }}{% url 'team_list_api' %}</li>
+	<li>Team details: {{ DOMAIN }}{% url 'team_details_api' %}</li>
+</ul>
+
+<p>Server configuration:</p>
+<ul>
+	<li>Integration: {% if INTEGRATION_KEYS_COUNT %}ON ({{ INTEGRATION_KEYS_COUNT }} key{{ INTEGRATION_KEYS_COUNT|pluralize:" is,s are" }} set){% else %}OFF (key is not set){% endif %}</li>
+	<li>Email listing: {% if INTEGRATION_ALLOW_EMAIL == None %}OFF (setting not provided){% elif INTEGRATION_ALLOW_EMAIL %}ON (allowed in settings){% else %}OFF (not allowed in settings){% endif %}</li>
+</ul>
+
+
