@@ -51,8 +51,7 @@ Database
 
 We need a database. SQLite is used by default, which you could replace now or later (see :doc:`local settings <local_settings>`) for a substantial performance gain. To create the structure and an administrator, type this and follow the steps::
 
-	python3 source/manage.py migrate --settings=base.settings_migration
-	python3 source/manage.py migrate --settings=settings
+	python3 source/manage.py migrate
 	python3 source/manage.py createsuperuser
 
 Static files
