@@ -4,5 +4,10 @@ sphinx_rtd_theme
 pygraphviz
 
 pytest
+pytest-pythonpath
+pytest-django
+pytest-xdist
+
 django-sslserver
 
+beautifulsoup4

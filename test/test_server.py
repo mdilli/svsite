@@ -10,7 +10,22 @@ from django.conf import settings
 from pytest import mark
 from django.core.urlresolvers import reverse
 from requests import get
-from tests.utilities import create_user, get_form_errors
+from django.contrib.auth import get_user_model
+
+
+def create_user():
+	user = get_user_model()(email = 'test@domain.ext')
+	user.set_password('test')
+	user.save()
+	return user
+
+
+def get_form_errors(html):
+	# only tested for nonfield errors! extend when needed
+	soup = BeautifulSoup(html)
+	error_tags = soup.find_all(attrs = {'class': 'errorlist'})[0]
+	errors = [tag.contents[0] for tag in error_tags.contents]
+	return '; '.join(errors)
 
 
 def test_homepage(live_server):
@@ -41,6 +56,7 @@ def test_login(client):
 		'password': 'test',
 		'csrfmiddlewaretoken': csrf_token,
 	})
-	assert login_response.status_code == 302, 'login page didn\'t redirect after POST; login probably failed; "{0:s}"'.format(get_form_errors(login_response.content))
+	assert login_response.status_code == 302, 'login page didn\'t redirect after POST; login probably failed; "{0:s}"' \
+		.format(get_form_errors(login_response.content))
 
 
