@@ -4,7 +4,6 @@ from os import access, W_OK, X_OK, stat
 from re import findall, MULTILINE
 from stat import S_IROTH, S_IWOTH, S_IXOTH
 from os.path import join
-#from base.settings import DEBUG, DATA_DIR, BASE_DIR  # intentionally imported directly since DEBUG gets overwritten
 from django.conf import settings
 
 

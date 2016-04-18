@@ -12,9 +12,9 @@ def test_cms_check():
 
 		The `call_command` will raise an error when it fails, no need for asserts.
 	"""
-	null = open(devnull, 'a')
-	stdout_backup, sys.stdout = sys.stdout, null
-	call_command('cms', 'check', interactive = False, stdout = null)
-	sys.stdout = stdout_backup
+	with open(devnull, 'a') as null:
+		stdout_backup, sys.stdout = sys.stdout, null
+		call_command('cms', 'check', interactive = False, stdout = null)
+		sys.stdout = stdout_backup
 
 

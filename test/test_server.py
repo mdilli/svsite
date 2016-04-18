@@ -1,6 +1,6 @@
 
 """
-	A test to see if the server can start succesfully and let a user login.
+	A test to see if the server can start successfully and let a user login.
 
 	Note that being in test mode turns SSL off, so that is not tested.
 """
