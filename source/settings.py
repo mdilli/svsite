@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 from base64 import urlsafe_b64encode
 from django.core.exceptions import ImproperlyConfigured
@@ -192,7 +193,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_REQUIRED = False  # todo: change?
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
-ACCOUNT_FORMS = {} # {‘login’: ‘myapp.forms.LoginForm’} # see also ACCOUNT_SIGNUP_FORM_CLASS and SOCIALACCOUNT_FORMS
+ACCOUNT_FORMS = {} # {'login': 'myapp.forms.LoginForm'} # see also ACCOUNT_SIGNUP_FORM_CLASS and SOCIALACCOUNT_FORMS
 #ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'  # this is login name
 #ACCOUNT_USER_MODEL_EMAIL_FIELD = 'email'
 ACCOUNT_PASSWORD_MIN_LENGTH = 7
