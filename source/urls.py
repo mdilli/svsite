@@ -12,14 +12,14 @@ import member.member_urls, member.team_urls
 import birthdays.urls
 import base.urls
 import searcher.urls
-import svfinance.urls
+#import svfinance.urls
 import intapi.urls
 from base.admin import superuser_admin, census_admin
 from base.views import playground
 
 
 urlpatterns = i18n_patterns(
-	url(r'^€/', include(svfinance.urls)),
+#	url(r'^€/', include(svfinance.urls)),
 	url(r'^\$playground', playground),
 	url(r'^member/', include(member.member_urls)),
 	url(r'^cie/', include(member.team_urls)),
