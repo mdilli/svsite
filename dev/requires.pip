@@ -16,7 +16,7 @@ html5lib==0.999
 django-formtools>=1.0
 
 #
-# You should do
+# You could do
 #   apt-get install python3-lxml
 # and then link it using (update env name):
 #   ln -s /usr/lib/python3/dist-packages/lxml /home/mark/.local/share/virtualenvs/ENVNAME/lib/python3.4/site-packages/lxml
@@ -35,12 +35,12 @@ djangocms-style
 djangocms-column
 djangocms-grid
 
-django-filer
+django-filer>=1.1
 cmsplugin-filer  # this installs pillow and filer a.o.
 django-resized
 
 django_cleanup    # delete files if model is changed
-django-reversion==1.9  # this works for now but will break for newer django; keep finely balanced with django and cms versions
+django-reversion==1.9.3  # this works for now but will break for newer django; keep finely balanced with django and cms versions
 
 django-bower
 

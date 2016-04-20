@@ -7,8 +7,9 @@ Using
 .. toctree::
 	:maxdepth: 1
 
-	install.rst
+	install_dev.rst
 	local_settings.rst
+	install_live.rst
 	layout.rst
 
 Extending

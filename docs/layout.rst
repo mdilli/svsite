@@ -2,7 +2,7 @@
 Layout
 ===============================
 
-svSite should provide a fully functional site (with :doc:`minimal work <install>`), but you may want to personalize the look, which will take time. That's inevitable. Here is some information on how to do it.
+svSite should provide a fully functional site (with :doc:`minimal work <install_dev>`), but you may want to personalize the look, which will take time. That's inevitable. Here is some information on how to do it.
 
 Theme requirements
 -------------------------------
@@ -16,16 +16,14 @@ To create your own theme, these are the requirements:
 	* The ``info`` directory can contain any of these files: ``readme.rst``, ``description.rst``, ``credits.rst`` and ``license.txt``. Other files can be included but nothing special happens with them.
 
 *
-	Include static css/js files using:
-	::
+	Include static css/js files using::
 
 		{% load addtoblock from sekizai_tags %}
 		{% addtoblock "css" %}
 			<link rel="stylesheet" href="{% static THEME_PREFIX|add:'/css/style.css' %}">
 		{% endaddtoblock "css" %}
 
-	and other static files:
-	::
+	and other static files::
 
 		{% load static from staticfiles %}
 		<img src="{% static THEME_PREFIX|add:'/logo.png' %}" />
@@ -36,8 +34,7 @@ To create your own theme, these are the requirements:
 	For the ``base.html`` template:
 
 	* It should not extend anything (it is itself included).
-	* It should define precisely these placeholders:
-	::
+	* It should define precisely these placeholders::
 
 		{% placeholder "header" %}
 		{% placeholder "top-row" %}
@@ -45,8 +42,7 @@ To create your own theme, these are the requirements:
 		{% placeholder "sidebar" %}
 		{% placeholder "bottom-row" %}
 
-	* It should ``{% include include_page %}`` if it's set, e.g. a structure like this:
-	::
+	* It should ``{% include include_page %}`` if it's set, e.g. a structure like this::
 
 		{% if page_include %}
 			{% include page_include %}

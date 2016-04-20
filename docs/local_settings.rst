@@ -19,7 +19,7 @@ At least, your local settings should contain:
 
 	DATABASES = {  #todo: choose some database settings
 		'default': {
-			'ENGINE': 'django.db.backends.postgresql',
+			'ENGINE': 'django.db.backends.postgresql_psycopg2',
 			'NAME': 'database',
 			'USER': 'username',
 			'PASSWORD': 'PASSWORD',

@@ -90,6 +90,7 @@ INSTALLED_APPS = (
 	'django_cleanup',          # deletes files if their model is deleted or changed
 	'reversion',
 
+	'mod_wsgi.server',
 	'djangobower',
 
 	'django_countries',

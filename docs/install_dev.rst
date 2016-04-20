@@ -16,11 +16,13 @@ Installing dependencies
 
 For this to work, you will need ``python3-dev`` including ``pip`` and a database (``sqlite3`` is default and easy, but slow). Things will be easier and better with ``virtualenv`` or ``pew`` and ``git``, so probably get those too. You'll also need ``libjpeg-dev`` and the dev version of Python because of ``pillow``. You can install them with::
 
-	sudo apt-get install python3-dev sqlite3 git libjpeg-dev python-pip
+	sudo apt-get install python3.4-dev sqlite3 git libjpeg-dev python-pip
 	sudo apt-get install postgresql libpq-dev       # for postgres, only if you want that database
 	sudo apt-get install mysql-server mysql-client  # for mysql, only if you want that database
 
-Get the code. The easiest way is with git, replacing ``SITENAME``::
+Make sure you use the ``python3.X-dev`` that matches your python version (rather than ``python3-dev``). If there are problems, you might need `these packages`_.
+
+Now get the code. The easiest way is with git, replacing ``SITENAME``::
 
 	git clone https://github.com/mverleg/svsite.git SITENAME
 
@@ -86,10 +88,17 @@ To **(re)start the server** later, go to the correct directory and run::
 	pew workon sv  # only if you use virtualenv
 	python3 source/manage.py runsslserver localhost.markv.nl:8443 --settings=base.settings_development
 
-Note that this is just for development! When the website is going live, you should probably use a webserver such as Apache.
+This should allow for easy development and testing.
 
 .. rubric:: Footnotes
 
 .. [#footbower] If you don't want to install node and bower, you can easily download the packages listed in `dev/bower/json` by hand and put them in `env/bower`. Make sure they have a `dist` subdirectory where the code lives. You still need to run the ``collectstatic`` command if you do this.
+
+Going live
+-------------------------------
+
+Everything working and ready to launch the site for the world to see? Read :doc:`install_live`!
+
+.. _`these packages`: http://pillow.readthedocs.org/en/latest/installation.html#building-on-linux
 
 

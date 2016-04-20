@@ -26,7 +26,8 @@ class PyTest(Command):
 
 
 with open('dev/requires.pip', 'r') as fh:
-	requirements = fh.read().splitlines()
+	requirements = list(req.strip() for req in fh.read().splitlines())
+	requirements = list(req.split('#')[0] for req in requirements if (req and not req.startswith('#')))
 
 
 setup(

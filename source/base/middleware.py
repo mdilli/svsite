@@ -9,7 +9,7 @@ class HardAddSlashStripWwwMiddleware():
 		It does not check whether the page exists.
 	"""
 	def process_request(self, request):
-		if request.META['HTTP_HOST'].lower().find('www.') == 0:
+		if 'HTTP_HOST' in request.META and request.META['HTTP_HOST'].lower().find('www.') == 0:
 			return HttpResponsePermanentRedirect(request.build_absolute_uri().replace('//www.', '//'))
 		if not request.path.endswith('/'):
 			if not '.' in basename(request.path):

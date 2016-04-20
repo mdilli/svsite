@@ -7,7 +7,7 @@ Some parts are less than elegant. Although, at the time of writing, it seems the
 Migrating
 -------------------------------
 
-Clean migrations don't quite work for some cms addons. Find the :doc:`migration info <install>` in the installation documentation.
+Clean migrations don't quite work for some cms addons. Find the :doc:`migration info <install_dev>` in the installation documentation.
 
 Themes
 -------------------------------
