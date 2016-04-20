@@ -94,6 +94,11 @@ This should allow for easy development and testing.
 
 .. [#footbower] If you don't want to install node and bower, you can easily download the packages listed in `dev/bower/json` by hand and put them in `env/bower`. Make sure they have a `dist` subdirectory where the code lives. You still need to run the ``collectstatic`` command if you do this.
 
+Automatic tests
+-------------------------------
+
+There are only few automatic tests at this time, but more might be added. You are also more than welcome to add more yourself. The tests use ``py.test`` with a few addons, which are included in ``dev/requires_dev.pip``. If you installed those packages, you can run the tests by simply typing ``py.test`` in the root directory. It could take a while (possibly half a minute).
+
 Going live
 -------------------------------
 
