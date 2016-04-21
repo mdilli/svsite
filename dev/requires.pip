@@ -61,6 +61,7 @@ elasticsearch>=1.0.0,<2.0.0
 
 django_minimal_log
 
+mod_wsgi
 
 ### OPTIONAL ###
 # python-memcached

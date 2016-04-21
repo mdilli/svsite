@@ -6,7 +6,7 @@ pygraphviz
 pytest
 pytest-pythonpath
 pytest-django
-pytest-xdist
+# pytest-xdist
 
 django-sslserver
 
