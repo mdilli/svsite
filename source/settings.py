@@ -99,6 +99,8 @@ INSTALLED_APPS = (
 
 	'svfinance',
 
+	'bootstrapform',
+
 	'base',
 	'theme',
 	'badges',
@@ -145,6 +147,7 @@ BOWER_INSTALLED_APPS = (
 	'MathJax#2.6.0',
 	'd3#3.5.0',
 	'c3#0.4.10',
+	'eonasdan-bootstrap-datetimepicker',
 )
 
 ROOT_URLCONF = 'urls'
