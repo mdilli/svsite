@@ -97,7 +97,7 @@ INSTALLED_APPS = (
 
 	'display_exceptions',
 
-	#'svfinance',
+	'svfinance',
 
 	'base',
 	'theme',

@@ -44,6 +44,5 @@ dev/bower/
 dev/static/
 dev/media/
 *.sqlite3
-svfinance
 source/local.py
 
