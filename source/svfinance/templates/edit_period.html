@@ -1,0 +1,23 @@
+
+{% load bootstrap from bootstrap%}
+
+
+{% if period %}
+	<h1>Edit period {{ period }}</h1>
+{% else %}
+	<h1>Add new period</h1>
+{% endif %}
+
+<form role="form" method="POST" action="{% if period %}{% url 'edit_period' period=period.slug %}{% else %}{% url 'create_period' %}{% endif %}">
+	{{ period_form|bootstrap }}
+	<p>These teams will have access to this period:</p>
+	{% for form in access_forms %}
+		{{ form|bootstrap }}
+	{% endfor %}
+	{% csrf_token %}
+	<div class="form-group">
+		<input type="submit" value="{% if period %}Save{% else %}Add{% endif %}" class="btn btn-primary" />
+    </div>
+</form>
+
+

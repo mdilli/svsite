@@ -1,11 +1,12 @@
 
 from django.conf.urls import url
-from svfinance.views import list_transactions, auto_select_period
+from svfinance.views import edit_period, auto_select_period
 
 
 urlpatterns = [
 	url(r'^$', auto_select_period, name='auto_select_period'),
-	url(r'^(?P<period>[a-z0-9\-]+)/transactions/$', list_transactions, name='list_transactions'),
+	url(r'^~new/$', edit_period, kwargs=dict(period=None), name='create_period'),
+	url(r'^(?P<period>[a-z0-9\-]+)/transactions/$', edit_period, name='edit_period'),
 	# url(r'^$', TemplateView.as_view(template_name = 'home.html'), name = 'home'),
 	# url(r'^about/$', TemplateView.as_view(template_name = 'about.html'), name = 'about'),
 	# url(r'^about/study/$', TemplateView.as_view(template_name = 'about_study.html'), name = 'about_study'),
