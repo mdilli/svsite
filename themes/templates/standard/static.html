@@ -14,6 +14,10 @@
 {% endaddtoblock "css" %}
 
 {% addtoblock "css" %}
+	<link href="{% static 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
+{% endaddtoblock "css" %}
+
+{% addtoblock "css" %}
 	<!-- Load c3.css -->
 	<link href="{% static 'c3/c3.min.css' %}" rel="stylesheet" type="text/css">
 {% endaddtoblock "css" %}
@@ -51,6 +55,11 @@
 
 {% addtoblock "js" %}
 	<script src="{% static 'bootswatch-dist/js/bootstrap.min.js' %}" defer></script>
+{% endaddtoblock "js" %}
+
+{% addtoblock "js" %}
+	<script src="{% static 'moment/min/moment.min.js' %}" defer></script>
+	<script src="{% static 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}" defer></script>
 {% endaddtoblock "js" %}
 
 {% addtoblock "js" %}
