@@ -11,3 +11,7 @@ pytest-xdist
 django-sslserver
 
 beautifulsoup4
+
+git+https://github.com/kezabelle/django-haystackbrowser.git#egg=django-haystackbrowser
+
+
