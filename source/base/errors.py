@@ -1,4 +1,5 @@
 
+from django.conf import settings
 from django.shortcuts import render
 
 
@@ -14,6 +15,7 @@ def error_view(request, message, title = None, next = None, status = 400):
 		'message': message,
 		'title': title,
 		'next': next,
+		'BASE_TEMPLATE': settings.BASE_TEMPLATE,
 	}, status = status)
 
 

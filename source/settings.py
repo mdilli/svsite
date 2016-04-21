@@ -149,7 +149,7 @@ BOWER_INSTALLED_APPS = (
 
 ROOT_URLCONF = 'urls'
 APPEND_SLASH = True  # CommonMiddleware is disabled, but CMS also checks this
-CSRF_FAILURE_VIEW = 'base.views.csrf_failure'
+CSRF_FAILURE_VIEW = 'base.errors.csrf_failure'
 FILER_CANONICAL_URL = 'canon/'  # url after filer/ for canonical urls
 LOGIN_URL = reverse_lazy('account_login')
 LOGIN_REDIRECT_URL = '/'  # todo: reverse cms home
