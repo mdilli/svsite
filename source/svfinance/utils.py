@@ -1,6 +1,8 @@
 
+from string import ascii_lowercase, ascii_uppercase, digits
 from django.core.validators import RegexValidator, MinLengthValidator, MaxLengthValidator
 from django.utils.timezone import now
+from random import choice
 from re import sub
 
 
@@ -23,14 +25,16 @@ def to_code(name, check=True):
 	"""
 	Attempt to convert name to code. Raises an error if it fails.
 	"""
-	code = name.lower()
+	code = str(name or '')
+	code = code.lower()
 	code = sub(r'[\s\-+]', '_', code)
 	code = sub(r'[^a-z0-9_]', '', code)
 	code = sub(r'__+', '_', code)
 	code = sub(r'^[0-9_]+', '', code)
 	code = sub(r'_+$', '', code)
-	if check:
-		assert 2 <= len(code) <= 48, 'Length should be between 2 and 48.'
+	code = code[:48]
+	while len(code) < 2:
+		code += choice(ascii_lowercase + ascii_uppercase + digits)
 	return code
 
 
