@@ -10,10 +10,11 @@
 
 <form role="form" method="POST" action="{% if period %}{% url 'edit_period' period=period.slug %}{% else %}{% url 'create_period' %}{% endif %}">
 	{{ period_form|bootstrap }}
-	<p>These teams will have access to this period:</p>
+	<h2>Access</h2>
 	{% for form in access_forms %}
 		{{ form|bootstrap }}
 	{% endfor %}
+	{{ access_forms.management_form }}
 	{% csrf_token %}
 	<div class="form-group">
 		<input type="submit" value="{% if period %}Save{% else %}Add{% endif %}" class="btn btn-primary" />

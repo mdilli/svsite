@@ -1,0 +1,56 @@
+
+{% load bootstrap from bootstrap%}
+{% load euro from currency %}
+
+
+<h1>Accounts for {{ period }}</h1>
+
+<h2>Results</h2>
+<ol>
+	{% for account in expense_acc %}
+		<li>
+			{% if account.is_category %}
+				{{ account }}:
+				{{ account.children.count }} children
+			{% else %}
+				<a href="{% url 'list_account_transactions' period=period.slug account=account.code %}">{{ account }}</a>:
+			{% endif %}
+			{{ account.total|euro }}
+		</li>
+	{% endfor %}
+</ol>
+
+<h2>Balance</h2>
+<h3>Assets</h3>
+<ol>
+	{% for account in asset_acc %}
+		<li>
+			{% if account.is_category %}
+				{{ account }}:
+				{{ account.children.count }} children
+			{% else %}
+				<a href="{{ account.get_absolute_url }}">{{ account }}</a>:
+			{% endif %}
+			{{ account.total|euro }}
+		</li>
+	{% endfor %}
+	<li><a href="{% url 'budget_all' period=period.slug %}">Creditors</a> ({{ creditors|length }}) {{ creditor_total|euro }}</li>
+</ol>
+
+<h3>Liabilities</h3>
+<ol>
+	{% for account in liability_acc %}
+		<li>
+			{% if account.is_category %}
+				{{ account }}:
+				{{ account.children.count }} children
+			{% else %}
+				<a href="{% url 'list_account_transactions' period=period.slug account=account.code %}">{{ account }}</a>:
+			{% endif %}
+			{{ account.total|euro }}
+		</li>
+	{% endfor %}
+	<li><a href="{% url 'budget_all' period=period.slug %}">Debtors</a> ({{ debtors|length }}) {{ debtor_total|euro }}</li>
+</ol>
+
+

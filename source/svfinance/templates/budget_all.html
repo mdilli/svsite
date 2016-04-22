@@ -1,0 +1,50 @@
+
+{% load euro from currency %}
+{% load user_display from account %}
+
+
+{% if period %}
+	<h1>Budgets for {{ period }}</h1>
+{% else %}
+	<h1>Budgets (all time)</h1>
+{% endif %}
+
+<h2>Users</h2>
+<ul>
+	{% for account, user, total, lines in debtcred_user %}
+		<li><a href="{{ account.get_absolute_url }}">{% user_display user %}</a> {{ total|euro }}</li>
+		{% if lines %}
+			<ul>
+				{% for line in lines %}
+					<li>
+						<a href="{% if period %}{{ line.get_absolute_url }}{% else %}{% url 'budget_user' user=user.slug %}{% endif %}">
+							{{ line.transaction.message }}
+						</a>:
+						{{ line.amount|euro }}
+					</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	{% endfor %}
+</ul>
+
+<h2>Others</h2>
+<ul>
+	{% for account, total, lines in debtcred_other %}
+		<li><a href="{{ account.get_absolute_url }}">{{ account.name }}</a> {{ total|euro }}</li>
+		{% if lines %}
+			<ul>
+				{% for line in lines %}
+					<li>
+						<a href="{% if period %}{{ line.get_absolute_url }}{% else %}{% url 'budget_user' user=user.slug %}{% endif %}">
+							{{ line.transaction.message }}
+						</a>:
+						{{ line.amount|euro }}
+					</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	{% endfor %}
+</ul>
+
+
