@@ -19,6 +19,7 @@ from base.views import playground
 
 
 urlpatterns = i18n_patterns(
+	url(r'^€/', include(svfinance.urls)),
 	url(r'^\$playground', playground),
 	url(r'^member/', include(member.member_urls)),
 	url(r'^cie/', include(member.team_urls)),
@@ -36,7 +37,6 @@ urlpatterns = i18n_patterns(
 static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
 [
 	url(r'^\$intapi/', include(intapi.urls)),
-	url(r'^€/', include(svfinance.urls)),
 ]
 
 

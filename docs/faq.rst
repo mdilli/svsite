@@ -25,5 +25,3 @@ Okay, this one hasn't been asked "frequently" in the strict meaning of the word,
   if you were using the plugin that was removed, then those use cases will be gone. The alternative is reverting the update.
 
 
-
-

@@ -113,7 +113,6 @@ class TeamRole(OrderedModel, TeamMemberBase):
 
 def mirror_members(signal, using, sender, instance, **kwargs):
 	#todo: may be faster to attach to m2m_changed
-	print('**** MIRROR ****')
 	roles = instance.team.roles.all()
 	instance.team.user_set.clear()
 	instance.team.user_set.add(*roles)
