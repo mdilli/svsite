@@ -193,6 +193,25 @@ AUTHENTICATION_BACKENDS = (
 	'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+AUTH_PASSWORD_VALIDATORS = [
+	dict(
+		NAME='django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+		OPTIONS=dict(
+			max_similarity=0.75,
+			user_attributes=['username', 'first_name', 'last_name', 'email',],  #todo
+		),
+	),
+	dict(
+		NAME='django.contrib.auth.password_validation.MinimumLengthValidator',
+		OPTIONS=dict(
+			min_length=7,
+		)
+	),
+	dict(
+		NAME='django.contrib.auth.password_validation.CommonPasswordValidator',
+	),
+]
+
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_REQUIRED = False  # todo: change?
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
