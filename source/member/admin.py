@@ -54,7 +54,6 @@ class TeamAdminForm(ModelForm):
 		super(TeamAdminForm, self).__init__(*args, **kwargs)
 		if self.instance.pk:
 			self.initial['users'] = self.instance.user_set.values_list('pk', flat=True)
-
 	def save(self, *args, **kwargs):
 		instance = super(TeamAdminForm, self).save(*args, **kwargs)
 		if instance.pk:

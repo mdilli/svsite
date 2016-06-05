@@ -3,7 +3,7 @@ from aldryn_search.base import AldrynIndexBase
 from haystack import indexes
 
 
-class TitleACIndex(AldrynIndexBase):
+class MemberIndex(AldrynIndexBase):
 	"""
 	Like Aldryn index, but with autocomplete.
 	"""

@@ -7,6 +7,8 @@ class TitleACIndex(AldrynIndexBase):
 	"""
 	Like Aldryn index, but with autocomplete.
 	"""
+	index_title = True
+
 	autocomplete = indexes.NgramField()
 
 	def prepare_autocomplete(self, object):
