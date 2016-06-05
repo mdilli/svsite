@@ -40,9 +40,9 @@ INSTALLED_APPS = (
 
 	# providers: http://django-allauth.readthedocs.org/en/latest/providers.html (some need https)
 	'allauth.socialaccount.providers.facebook',
-	'allauth.socialaccount.providers.github',
+	# 'allauth.socialaccount.providers.github',
 	'allauth.socialaccount.providers.google',
-	'allauth.socialaccount.providers.linkedin_oauth2',
+	# 'allauth.socialaccount.providers.linkedin_oauth2',
 	'allauth.socialaccount.providers.openid',
 	# todo: cncz accounts
 

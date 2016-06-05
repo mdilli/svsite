@@ -10,6 +10,7 @@ urlpatterns = [
 	url(r'^info/(?P<pk>\d+)/$', member_profile, name='profile_info'),  #todo: use slug instead of id
 	url(r'^info/(?P<pk>\d+)-(?P<label>[-\w]+)/$', member_profile, name='profile_info'),
 	url(r'^login_register/$', lambda request: HttpResponse('not impl.'), name='profile_settings'),  # todo: already implemented? -> hard to implement (handle incorrect credentials)
+	url(r'^', lambda request: HttpResponse('nothing')), # todo
 ]
 
 

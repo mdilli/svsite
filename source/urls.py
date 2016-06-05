@@ -26,7 +26,7 @@ urlpatterns = i18n_patterns(
 	url(r'^account/', include(allauth.urls)),
 	url(r'^badge/', include(badges.urls)),
 	url(r'^search/', include(searcher.urls)),
-	url(r'^birthday/', include(birthdays.urls)), #todo
+	url(r'^birthday/', include(birthdays.urls)),  #todo
 	url(r'^\$content/', include(admin.site.urls)),
 	url(r'^\$sudo/', include(superuser_admin.urls)),
 	url(r'^\$members/', include(census_admin.urls)),

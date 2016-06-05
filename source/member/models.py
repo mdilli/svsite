@@ -18,6 +18,7 @@ class Member(AbstractUser):
 	birthday = models.DateField(blank=True, null=True, default=None)
 	# note: do NOT change groups directly, use Team.roles instead
 	theme = models.CharField(max_length=16, choices=THEMES, blank=True, null=True, default=None)
+	# avatar = models.ImageField()
 
 	objects = UserManager()
 

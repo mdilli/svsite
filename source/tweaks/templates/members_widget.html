@@ -1,0 +1,28 @@
+
+{% load user_display from account %}
+
+
+<article>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">{{ title }}</h3>
+		</div>
+		<div class="panel-body">
+			<p>{{ description }}</p>
+			{% if users %}
+				<ul class="media-list">
+					{% for user in users %}
+						<li class="media">
+							<a href="{{ user.get_absolute_url }}">
+								Hello: {% user_display user %}
+								{{ user.socialaccount_set.all.0.get_avatar_ur }}
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+		</div>
+	</div>
+</article>
+
+
