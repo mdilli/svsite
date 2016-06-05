@@ -3,12 +3,13 @@ from display_exceptions import NotFound, PermissionDenied
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
+from django.contrib.messages import add_message
+from django.core.urlresolvers import reverse, NoReverseMatch
 from django.db.models import When, Case
 from django.db.models.functions import Value, Concat
+from django.http import HttpResponse
 from django.shortcuts import redirect
-from base.views import render_cms_special
-
+from base.views import render_cms_special, notification
 
 # @login_required
 from member.models import Team
@@ -60,15 +61,42 @@ def member_profile_all(request):
 def member_profile(request, pk=None, label=None):
 	#todo: cms update title
 	if pk is None:
-		if not request.user.is_authenticated:
+		if not request.user.is_authenticated():
 			return '{0:s}?next={1:s}'.format(redirect(settings.LOGIN_URL), request.path)
 		return redirect(reverse('profile_info', kwargs=dict(pk=request.user.pk, label=request.user.slug)))
 	try:
 		user = get_user_model().objects.get(pk=pk)
 	except get_user_model().DoesNotExist:
 		raise NotFound(message='No user with key {0:} found.'.format(pk), caption='User not found', next=reverse('profile_info_all'))
+	if user.slug != label:
+		return redirect(user.get_absolute_url())
 	return render_cms_special(request, 'member_profile.html', dict(
 		user=user,
 	))
+
+
+def member_setup_info(request):
+	try:
+		reverse('profile_info_all')
+	except NoReverseMatch:
+		if request.user.is_staff:
+			return notification(request,
+				title='Member app not set up',
+				message='The member app seems not to have been added yet. Go to the page where you want the member ' +
+					'structure, go to advanced settings and add the Member app. This will add the appropriate urls,' +
+					' which cannot be found now. You can check this page to see if it worked. (Needs staff status)',
+			)
+		return notification(request,
+			title='Not available yet',
+			message='Sorry, due to a small setup problem, this page is not available yet. Check back soon!',
+		)
+	else:
+		if request.user.is_staff:
+			return notification(request,
+				title='Why are you here?',
+				message='This page shows information for staff in case the user app is not set up yet. ' +
+					'However, it seems to be set up now (urls can be found), so there is no reason to be sent here...',
+			)
+		return redirect(reverse('home'))
 
 
