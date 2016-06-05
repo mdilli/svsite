@@ -8,11 +8,11 @@
 {% load render_block from sekizai_tags %}
 
 
-{% include 'global_head.html' %}
-
 <!doctype html>
 <html lang="en">
 	<head>
+		<!-- theme: {{ THEME.name }} -->
+		{% include 'global_head.html' %}
 		{% include THEME_HEAD %}
 
 		{% render_block "css" %}

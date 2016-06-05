@@ -24,7 +24,7 @@ class SystemMemberAdmin(UserAdmin):
 		(None, {'fields': ('username', 'password')}),
 		('Personal', {'fields': ('first_name', 'last_name',)}),
 		('Contact', {'fields': ('email',)}),
-		('Technical', {'fields': ('is_active', 'last_login', 'date_joined',)}),
+		('Technical', {'fields': ('is_active', 'last_login', 'date_joined', 'theme',)}),
 	)
 	readonly_fields = ('last_login', 'date_joined',)
 	list_display = ('username', 'first_name', 'last_name', 'is_active',)

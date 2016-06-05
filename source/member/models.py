@@ -2,17 +2,22 @@
 from django.conf import settings
 from django.contrib.auth.models import Group, UserManager, AbstractUser, GroupManager
 from django.core.urlresolvers import reverse
-from django.db.models.signals import m2m_changed, post_save, post_delete
+from django.db.models.signals import post_save, post_delete
 from django_extensions.db.fields import AutoSlugField
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from ordered_model.models import OrderedModel
+from theme.functions import get_themes
+
+
+THEMES = tuple((name[:16], theme.disp_name()) for name, theme in get_themes().items())
 
 
 class Member(AbstractUser):
 	slug = AutoSlugField(populate_from='username', unique=True)
 	birthday = models.DateField(blank=True, null=True, default=None)
 	# note: do NOT change groups directly, use Team.roles instead
+	theme = models.CharField(max_length=16, choices=THEMES, blank=True, null=True, default=None)
 
 	objects = UserManager()
 
