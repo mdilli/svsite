@@ -1,0 +1,10 @@
+
+{% load page_language_url from menu_tags %}
+
+
+<link href="{% page_language_url current_language %}" hreflang="{{ current_language }}" rel="alternate">
+{% for language in languages %}
+	<link href="{% page_language_url language.0 %}" hreflang="{{ current_language }}" rel="alternate">
+{% endfor %}
+
+

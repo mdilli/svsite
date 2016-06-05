@@ -1,0 +1,101 @@
+
+{% load static from staticfiles %}
+{% load addtoblock from sekizai_tags %}
+{% load load_attach_image_slider from header_slider %}
+
+{% addtoblock "css" %}
+<link href="http://leonardo.science.ru.nl/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+	<link rel="stylesheet" href="{% static 'bootswatch-dist/css/bootstrap.min.css' %}">
+	<!-- might be problematic with <IE9 but tough luck for those people -->
+
+	<link href="{% static 'smartmenus/dist/addons/bootstrap/jquery.smartmenus.bootstrap.css' %}" rel="stylesheet">
+	<!-- Load c3.css -->
+	<link href="{% static 'c3/c3.min.css' %}" rel="stylesheet" type="text/css">
+
+	<link rel="stylesheet" href="{% static THEME_PREFIX|add:'/style.css' %}">
+
+
+	<style>
+		.user_icon
+		{
+			width: 64px;
+			height: 64px;
+			overflow: hidden;
+			position: relative;
+			margin-right: 0.5em;
+		}
+		.user_icon img
+		{
+			width: auto;
+			height: 64px;
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+	</style>
+
+	<!-- jQuery is included with djangocms, but only in edit mode, so still include a copy. #todo: not sure what happens... -->
+	<script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+
+	<script src="{% static 'bootswatch-dist/js/bootstrap.min.js' %}"></script>
+
+	<script src="{% static 'smartmenus/dist/jquery.smartmenus.min.js' %}"></script>
+	<script src="{% static 'smartmenus/dist/addons/bootstrap/jquery.smartmenus.bootstrap.js' %}"></script>
+
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			imageFont: null,
+			extensions: ["tex2jax.js"],
+			jax: ["input/TeX","output/HTML-CSS"],
+			tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]},
+			MathMenu: { showRenderer: false },
+		});
+	</script>
+	<script type="text/javascript" src="{% static 'MathJax/MathJax.js' %}?config=TeX-AMS-MML_HTMLorMML"></script>
+
+	<!-- Load d3.js and c3.js -->
+	<script src="{% static 'd3/d3.min.js' %}" charset="utf-8"></script>
+	<script src="{% static 'c3/c3.min.js' %}"></script>
+
+	<script src="{% static 'bootstrap3-typeahead/bootstrap3-typeahead.min.js' %}"></script>
+	<script>
+	/*
+	Autocompletion for search using a continuation of typehead (from avem).
+	Relies on autocomplete_url being set and that url returning json matches.
+	*/
+	var autocomplete_url = "{% url 'autocomplete' %}";
+	var $input = $('.search-typeahead');
+	$input.typeahead({
+		minLength: 2,
+		items: 8,
+		delay: 100,
+		autoSelect: true,
+		source: function (query, process)
+		{
+			$.getJSON(autocomplete_url + '?q=' + query, function(process, data)
+			{
+				process(data);
+
+			}.bind(null, process));
+		},
+		afterSelect: function (element)
+		{
+			console.log('selected', element);
+			if (element.url)
+			{
+				console.log('redirect', element.url);
+				window.location.href = element.url;
+			}
+		}
+	});
+	</script>
+
+	{# slider app #}
+	{% load_attach_image_slider "#header-image" %}
+
+	<script type="text/javascript" src="{% static THEME_PREFIX|add:'/script.js' %}"></script>
+	
+	
+{% endaddtoblock "css" %}
+
+

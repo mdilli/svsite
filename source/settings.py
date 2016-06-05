@@ -18,6 +18,9 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 FILER_DEBUG = DEBUG  # easy-thumbnail exceptions propagated?
 
+SITE_DISP_NAME = 'svSite'
+SITE_DISP_TAGLINE = 'Make your own website for your group!'
+
 INSTALLED_APPS = (
 	'member',               # not sure if this needs to be on top but if there's a preference it's probably top.
 	'tweaks',               # should be before adminstyle and allauth

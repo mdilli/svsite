@@ -5,14 +5,13 @@
 {% load language_flag_url from language_flags %}
 {% load get_current_language from i18n %}
 {% get_current_language as LANGUAGE_CODE %}
-
-
+    
 <div id="header-container" class="container"> <!-- if you remove this, the menu will be wider -->
-	<nav id="header-menu-top" class="navbar navbar-default hidden-xs hidden-sm">
-		<div class="container-fluid">
+	<nav id="header-menu-top" class="navbar navbar-default hidden-xs hidden-sm" style="min-height:33px;">
+		<div class="container-fluid" style="stylebackground-image: url(http://leonardo.science.ru.nl/templates/al_monalisa/images/menubar_separator.png); height:33px;" >
 			<!-- Breadcrumbs to curent page. -->
-			<div class="nav navbar-nav">
-				<ul class="breadcrumb">
+			<div class="nav navbar-nav" style="height:33px;">
+				<ul class="breadcrumb" style="height:33px;">
 					{% block breadcrumb %}
 						{% show_breadcrumb 0 THEME_PREFIX|add:'/breadcrumbs.html' %}
 					{% endblock %}
@@ -26,12 +25,22 @@
 			</div>
 
 			<!-- Icons for external sites and feeds. -->
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="glyphicon glyphicon-calendar" aria-hidden="true" title="Google Calendar"></span></a></li><!-- Google Calendar -->
-				<li><a href="#"><span class="glyphicon glyphicon-education" aria-hidden="true" title="RSS feed"></span></a></li> <!-- RSS -->
-				<li><a href="#"><span class="glyphicon glyphicon-bitcoin" aria-hidden="true" title="Facebook"></span></a></li><!-- Facebook -->
-				<li><a href="#"><span class="glyphicon glyphicon-apple" aria-hidden="true" title="???"></span></a></li><!-- glyphicon glyphicon-text-size -->
-				<li><a href="#"><span class="glyphicon glyphicon-fire" aria-hidden="true" title="Change your language"></span></a></li><!-- Language -->
+			<ul class="nav navbar-nav navbar-right" style="margin-top:-3px">
+			<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+									<i class="glyphicon glyphicon-user"></i> {% if request.user.is_authenticated %}{% firstof request.user.get_short_name 'account' %}{% else %}login{% endif %} <b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu {% if not request.user.is_authenticated %}large-dropdown{% endif %}">
+									{% if request.user.is_authenticated %}
+										{% include THEME_PREFIX|add:'/menu_items_account.html' %}
+									{% else %}
+{#										<div style="width: 200px; padding: 0.5em;">#}
+											{% include THEME_PREFIX|add:'/menu_items_login.html' %}
+{#										</div>#}
+									{% endif %}
+								</ul>
+							</li>
+
 				<li id="header-language-switcher">
 					<!-- I'm going to ignore this warning: -->
 					<!-- Flags represent countries, not languages. Numerous countries use the same language as another country, and numerous countries have more than one official language. -->
@@ -57,8 +66,8 @@
 			</a>
 		</div>
 		<div id="header-caption">
-			<h1>{{ SITE_DISP_NAME }}</h1>
-			<p>{{ SITE_DISP_TAGLINE }}</p>
+			<h1>Leonardo da Vinci</h1>
+			<p>Studievereniging Natuurwetenschappen en Science Nijmegen</p>
 		</div>
 	</header>
 
@@ -103,20 +112,7 @@
 					<!-- Account options for large displays: a normal dropdown menu -->
 					<div class="visisble-lg visisble-md visisble-sm hidden-xs">
 						<ul class="nav navbar-nav navbar-right navbar-nocollapse">
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-									<i class="glyphicon glyphicon-user"></i> {% if request.user.is_authenticated %}{% firstof request.user.get_short_name 'account' %}{% else %}login{% endif %} <b class="caret"></b>
-								</a>
-								<ul class="dropdown-menu {% if not request.user.is_authenticated %}large-dropdown{% endif %}">
-									{% if request.user.is_authenticated %}
-										{% include THEME_PREFIX|add:'/menu_items_account.html' %}
-									{% else %}
-{#										<div style="width: 200px; padding: 0.5em;">#}
-											{% include THEME_PREFIX|add:'/menu_items_login.html' %}
-{#										</div>#}
-									{% endif %}
-								</ul>
-							</li>
+							
 						</ul>
 					</div>
 
@@ -152,7 +148,7 @@
 
 						<!-- Search for very large (in bar) or very small (in collapse) sites -->
 						<div class="visible-lg visible-md hidden-sm visible-xs">
-							<div id="menu-search-mainbar" class="nav navbar-form navbar-right">
+							<div id="menu-search-mainbar" class="nav navbar-form navbar-right" style="margin-right: -35px;">
 								<form class="form-inline" role="search" action="{% url 'search' %}" method="GET" title="cltr+H">
 									<div class="form-group">
 										<div class="input-group">

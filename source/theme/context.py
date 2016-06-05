@@ -20,6 +20,7 @@ def theme_context(request):
 		'THEME_PREFIX': theme.prefix(),
 		'THEME_BASE': theme.relative_template_path(),
 		'THEME_HEAD': theme.relative_template_head_path(),
+		'SITE_DISP_NAME': settings.SITE_DISP_NAME,
 	}
 
 
