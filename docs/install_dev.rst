@@ -90,6 +90,7 @@ To **(re)start the server** later, go to the correct directory and run::
 
 This should allow for easy development and testing.
 
+
 .. rubric:: Footnotes
 
 .. [#footbower] If you don't want to install node and bower, you can easily download the packages listed in `dev/bower/json` by hand and put them in `env/bower`. Make sure they have a `dist` subdirectory where the code lives. You still need to run the ``collectstatic`` command if you do this.
