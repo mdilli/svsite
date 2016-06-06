@@ -1,0 +1,278 @@
+
+/* CSS style here */
+/* Birthday or other profile images */
+/* todo: replace by misc */
+.user_icon
+{
+	width: 64px;
+	height: 64px;
+	overflow: hidden;
+	position: relative;
+	margin-right: 0.5em;
+}
+
+.user_icon img
+{
+	width: auto;
+	height: 64px;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+/* CMS toolbar */
+#toolbar-page-logo
+{
+	display: inline-block;
+	background-image: url('topmenu_icon.png');
+	width: 46px;
+	height: 46px;
+	margin-right: -10px;
+}
+
+/* Shoutbox profile images */
+.user_icon_chat
+{
+	width: 32px;
+	height: 32px;
+	overflow: hidden;
+	position: relative;
+	margin-right: 0.5em;
+}
+
+.user_icon_chat img
+{
+	width: auto;
+	height: 32px;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.chat_message h5 span
+{
+	float: right;
+}
+
+/* Header */
+#header-container
+{
+	margin-top: 6px;
+	margin-bottom: 18px;
+}
+
+/* Top menu bar with icons */
+#header-menu-top
+{
+	margin-bottom: 0;
+	border-radius: 5px 5px 0 0;
+}
+
+#header-menu-top .breadcrumb
+{
+	margin-bottom: 0;
+	margin-top: 3px;
+}
+
+#header-menu-top .breadcrumb li:not(.active) a
+{
+	color: inherit;
+}
+
+#header-menu-top .child-crumbs > li:first-child ::before
+{
+	color: inherit;
+	content: '\bb\a0';
+}
+
+#header-menu-top .child-crumbs > li + li::before
+{
+	color: inherit;
+	content: '&';
+}
+
+#header-language-switcher
+{
+	margin-top: -2px;
+	margin-right: 6px;
+}
+
+/* Image bar at the top */
+#header-image
+{
+	height: 150px;
+	letter-spacing: 3px;
+	overflow: hidden;
+}
+
+#header-caption
+{
+	font-weight: bold;
+	/*text-shadow: 0 0 1px white;*/
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+#header-caption h1
+{
+	color: black;
+	padding-top: .5em;
+	font-size: 36px;
+	margin: 0 0 0 150px;
+}
+
+#header-caption p
+{
+	color: black;
+	font-size: 24px;
+	margin: 0 0 24px 150px;
+	max-width: 650px;
+}
+
+#header-logo
+{
+	float: left;
+	width: 150px;
+	height: 150px;
+	overflow: hidden;
+	margin-right: 1em;
+}
+
+#header-logo img
+{
+	margin: 15px;
+	max-width: 120px;
+	max-height: 120px;
+	/*filter: drop-shadow(-1px 0 white);*/
+}
+
+#header-logo img:hover
+{
+	cursor: pointer;
+	filter: drop-shadow(0 0 2px white);
+}
+
+#header-right
+{
+	/*min-width: 220px;*/
+	height: 100%;
+	float: right;
+}
+
+/* Lower menu bar */
+#header-menu-main
+{
+	margin-bottom: 0;
+	border-radius: 0 0 5px 5px;
+	/*max-height: 50px;*/
+	/*background-color: purple;*/
+}
+
+#cms-menu
+{
+	float: left;
+}
+
+/* Affix menu to top of screen when scrolling */
+#header-main-affix.affix
+{
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	z-index: 10;
+}
+
+#header-main-affix > .container
+{
+	margin: 0 -15px 0 -15px;
+}
+
+#header-main-affix.affix > .container
+{
+	margin: 0 auto 0 auto;
+}
+
+/* Content */
+#content-container
+{
+	min-height: 600px;
+}
+
+#content-container .page-header, #content-container .page-header h1
+{
+	margin-top: 0.3em;
+}
+
+/* Search autocomplete (from avem) */
+.highlighted
+{
+	background-color: #EEE;
+	font-weight: bolder;
+}
+
+.typeahead.dropdown-menu
+{
+	overflow-x: hidden;
+}
+
+.typeahead
+{
+	z-index: 1051;
+}
+/* Search results */
+.search-results
+{
+	list-style-type: none;
+	padding: 0;
+}
+
+.search-results li
+{
+	margin-bottom: 0.5em;
+}
+
+/* Menu tweaks (from avem) */
+#menu_account_parent
+{
+	margin: 0 -15px;
+	padding: 0 15px;
+}
+
+#menu_account
+{
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+}
+
+@media (max-width: 767px)  /* bootstrap sm */
+{
+	#menu_account_parent
+	{
+		background-color: rgba(255, 255, 255, 1);
+	}
+}
+
+.large-dropdown
+{
+	/* larger dropdown for forms, like login */
+	width: 40em !important;
+	padding: .7em;
+}
+
+/* Columns (e.g. users) */
+.list-dynamic-columns li
+{
+	display: inline-block;
+	float: left;
+	width: 140px;
+	margin: 0 20px 0 0;
+	list-style-type: none;
+}
+
+.list-dynamic-columns:after
+{
+    content: '';
+    display: block;
+    clear: both;
+}
