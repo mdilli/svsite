@@ -10,10 +10,6 @@ from struct import pack
 BASE_DIR = dirname(dirname(abspath(__file__)))
 gettext = lambda s: s  # djangocms translation voodoo
 
-with open(join(BASE_DIR, 'dev', 'VERSION')) as fh:
-	parts = fh.read().strip().split('.')
-	VERSION = int(parts[0]), int(parts[1]), int(parts[2]) if len(parts) > 2 else 0
-
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 FILER_DEBUG = DEBUG  # easy-thumbnail exceptions propagated?
@@ -445,10 +441,6 @@ except ImportError:
 
 # It seems STATICFILES_STORAGE does not work with django-filer; it doesn't even let me use manage.py help anymore
 # STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'  # ManifestStaticFilesStorage
-# This adds a hash of the version to static path, to prevent incorrect caching.
-# Not a great idea in the end because it doesn't work if static files refer to each other by absolute path.
-VERSION_HASH = urlsafe_b64encode(pack('=I', 65536*VERSION[0] + 256*VERSION[1] + VERSION[2])).rstrip(b'=').rstrip(b'A')
-STATIC_ROOT = join(STATIC_ROOT, VERSION_HASH.decode('ascii'))
 
 
 

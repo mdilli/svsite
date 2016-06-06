@@ -84,8 +84,11 @@ The idea is to run a wsgi server, and let Apache proxypass the requests to it. H
 		# PLACE HTTPS STUFF HERE. More on that later.
 
 		# This is for static files, which should be served by Apache without Django's help
-		# There is some cache stuff, which you can turn off by removing it
-		Alias /static/ /data/static/svsite/
+		# There is some cache stuff, which you can turn off by removing it.
+		# Need to make a ProxyPass exception, since ProxyPass is handled
+		# before Alias so it swallows everything otherwise.
+		Alias /static /data/static/svsite
+		ProxyPass /static !
 		<Directory /data/static/svsite/>
 			ExpiresActive On
 			ExpiresDefault "access plus 1 day"
@@ -95,9 +98,10 @@ The idea is to run a wsgi server, and let Apache proxypass the requests to it. H
 			Allow from all
 		</Directory>
 
-		# Media is similar to static, but without cache
+		# Media is similar to static, but without cache.
 		# (note that anyone can access any files if they have the url)
-		Alias /media/ /data/media/svsite/
+		Alias /media /data/media/svsite
+		ProxyPass /media !
 		<Directory /data/media/svsite/>
 			Options -Indexes
 			Order deny,allow
@@ -109,7 +113,7 @@ The idea is to run a wsgi server, and let Apache proxypass the requests to it. H
 		ProxyPass / http://localhost:8081/ retry=0
 		ProxyPassReverse / http://localhost:8081/
 
-		# Apache logs (don't forget to set up logging in Django settings)
+		# Apache logs (don't forget to set up logging in Django settings).
 		LogLevel info
 		ErrorLog ${APACHE_LOG_DIR}/svsite-error.log
 		CustomLog ${APACHE_LOG_DIR}/svsite-access.log common
@@ -134,6 +138,12 @@ Then we need to make sure that the wsgi server is always running. There are many
 	script
 		cd /live/svsite
 		/path_to_virtualenv/bin/python3.4 source/manage.py runmodwsgi --log-to-terminal --user www-data --group devs --host=localhost --port 8081 --pythonpath=/path_to_virtualenv/svsite/lib/python3.4/site-packages source/wsgi.py
+	end script
+
+	# make sure the wsgi process is gone, otherwise you can't restart
+	post-stop script
+	    kill $(cat /var/run/svleo.pid)
+	    rm -f /var/run/svleo.pid
 	end script
 
 After saving this, you can use these self-explanatory commands::

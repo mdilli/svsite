@@ -19,7 +19,7 @@ def render_cms_special(request, template, context=None, **kwargs):
 def playground(request):
 	#todo: remove eventually
 	#assert settings.DEBUG
-	print(request.user.groups)
+	#print(request.user.groups)
 	raise Exception('hello world!')
 	add_message(request, DEBUG, 'Here is a message for you!')  # doesn't show
 	add_message(request, INFO, 'Here is a message for you again!')

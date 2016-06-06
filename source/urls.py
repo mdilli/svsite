@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 import filer.urls
 import cms.urls
+from django.shortcuts import redirect
 import badges.urls
 import allauth.urls
 import member.member_urls, member.team_urls
