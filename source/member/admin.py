@@ -24,7 +24,7 @@ class SystemMemberAdmin(UserAdmin):
 		(None, {'fields': ('username', 'password')}),
 		('Personal', {'fields': ('first_name', 'last_name',)}),
 		('Contact', {'fields': ('email',)}),
-		('Technical', {'fields': ('is_active', 'last_login', 'date_joined',)}),
+		('Technical', {'fields': ('is_active', 'last_login', 'date_joined', 'theme',)}),
 	)
 	readonly_fields = ('last_login', 'date_joined',)
 	list_display = ('username', 'first_name', 'last_name', 'is_active',)
@@ -54,7 +54,6 @@ class TeamAdminForm(ModelForm):
 		super(TeamAdminForm, self).__init__(*args, **kwargs)
 		if self.instance.pk:
 			self.initial['users'] = self.instance.user_set.values_list('pk', flat=True)
-
 	def save(self, *args, **kwargs):
 		instance = super(TeamAdminForm, self).save(*args, **kwargs)
 		if instance.pk:

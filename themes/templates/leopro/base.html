@@ -1,0 +1,111 @@
+
+{% load placeholder page_attribute from cms_tags %}
+
+
+{% include THEME_PREFIX|add:'/static.html' %}
+
+
+
+<!-- Default menu -->
+{% include THEME_PREFIX|add:'/menu.html' %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+
+			{% placeholder "top-row" %}
+
+			{% block messages %}
+				{% if messages %} {# todo #}
+					<div class="messages">
+						{% for message in messages %}
+							<div class="alert alert-{% if message.tags %}{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}{% else %}info{{ message.tags }}"{% endif %} alert-dismissible" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<strong>{{ message.tags|title }}</strong> {{ message }}
+							</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+			{% endblock messages %}
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row"> <!-- This is the grid system - it makes sure everything adapts to small windows, like phones -->
+		<div class="col-xs-12 col-md-3">
+
+{#			{% placeholder "submenu" %}    {# todo: remove? #}
+{#			{% placeholder "sidelogin" %}  {# todo: remove? #}
+			{% placeholder "sidebar" %}
+{#			{% placeholder "sidecontact" %}{# todo: remove? #}
+
+			<!-- Here we can place sidebar things, like menus, birthdays, etc; -->
+
+			<!--Shoutbox-->
+			{% block chat_widget %}
+				<article>
+					<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Contact</h3>
+					</div>
+					<div class="panel-body">
+
+<div style="align:center; text-align:left;">
+<strong>Email bestuur</strong>
+<a href="mailto:leonardo@science.ru.nl">leonardo@science.ru.nl</a><br/><br/>
+<strong> Post</strong><br/>
+Leonardo Da Vinci<br> Postbus 9010<br> 6500 GL Nijmegen
+<hr>
+</div>
+<div style="align:center; text-align:center;">
+<img width="128" height="60" src="http://leonardo.science.ru.nl/images/sponsor/logo-dressme.jpg" alt="Dressme Clothing" title="Dressme Clothing" style="margin: 5px;">
+<a href="https://www.asml.com/asml/show.do?lang=EN&amp;ctx=32512&amp;rid=45949&amp;ppc=CAM_Leonardo-da-Vinci_210"><img width="137" height="38" src="http://leonardo.science.ru.nl/images/sponsor/asml-logo-source-press.png" alt="ASML" title="ASML" style="margin: 5px;"></a>
+<a href="http://www.uzuma.nl/" title="Green Juice - Uzuma"><img src="http://leonardo.science.ru.nl/images/sponsor/uzuma.jpg" alt="Green Juice - Uzuma " title="Green Juice - Uzuma " style="margin: 5px;"></a>
+<br>
+<a href="http://www.fom.nl/" title="FOM - Fundamenteel Onderzoek der Materie" target="_blank"><img width="147" height="103" src="http://leonardo.science.ru.nl/images/sponsor/fomlogo_fc.png" alt="FOM - Fundamenteel Onderzoek der Materie" title="FOM - Fundamenteel Onderzoek der Materie"></a>
+&nbsp;
+
+<img width="150" height="69" src="http://leonardo.science.ru.nl/images/sponsor/onlinecasinologo.jpg">
+<a href="mercachem.html"><img width="211" height="29" src="http://leonardo.science.ru.nl/images/stories/mercachem%20logo%20voor%20websites.gif"></a>
+<a href="http://leonardo.studieboekenwebshop.nl/" target="_blank"><img width="150" height="147" style="margin: 5px;" alt="boekenservice" src="http://leonardo.science.ru.nl/images/sponsor/unnamed.jpg"></a>
+</div>
+					</div>
+				</div>
+				</article>
+			{% endblock chat_widget %}
+		</div>
+		<div class="col-xs-12 col-md-9">
+			<div id="content-container" class="panel panel-default" style="min-height:800px;">
+				<div class="panel-body">
+					<content>
+						{% block content %}
+							<article>
+								{% if page_include %}
+									{% include page_include %}
+								{% else %}
+									<div class="page-header">
+										<h1>{% page_attribute "title" %}</h1>
+	{#									<h1>Example page header <small>Subtext for header</small></h1>#}
+									</div>
+									{% placeholder "content" %}
+								{% endif %}
+							</article>
+						{% endblock content %}
+					</content>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			{% placeholder "bottom-row" %}
+		</div>
+	</div>
+</div>
+
+

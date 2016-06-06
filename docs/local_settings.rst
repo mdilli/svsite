@@ -15,6 +15,9 @@ At least, your local settings should contain:
 	SITE_URL = 'svleo.markv.nl'  #todo: update url
 	ALLOWED_HOSTS = [SITE_URL, 'localhost']
 
+	SITE_DISP_NAME = 'svSite'  #todo: update site name and tagline
+	SITE_DISP_TAGLINE = 'Make your own website for your group!'
+
 	SECRET_KEY = ''  #todo: generate a long random string
 
 	DATABASES = {  #todo: choose some database settings

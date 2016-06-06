@@ -14,6 +14,9 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 FILER_DEBUG = DEBUG  # easy-thumbnail exceptions propagated?
 
+SITE_DISP_NAME = 'svSite'
+SITE_DISP_TAGLINE = 'Make your own website for your group!'
+
 INSTALLED_APPS = (
 	'member',               # not sure if this needs to be on top but if there's a preference it's probably top.
 	'tweaks',               # should be before adminstyle and allauth
@@ -33,9 +36,9 @@ INSTALLED_APPS = (
 
 	# providers: http://django-allauth.readthedocs.org/en/latest/providers.html (some need https)
 	'allauth.socialaccount.providers.facebook',
-	'allauth.socialaccount.providers.github',
+	# 'allauth.socialaccount.providers.github',
 	'allauth.socialaccount.providers.google',
-	'allauth.socialaccount.providers.linkedin_oauth2',
+	# 'allauth.socialaccount.providers.linkedin_oauth2',
 	'allauth.socialaccount.providers.openid',
 	# todo: cncz accounts
 
@@ -188,6 +191,25 @@ AUTHENTICATION_BACKENDS = (
 	'django.contrib.auth.backends.ModelBackend',
 	'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+AUTH_PASSWORD_VALIDATORS = [
+	dict(
+		NAME='django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+		OPTIONS=dict(
+			max_similarity=0.75,
+			user_attributes=['username', 'first_name', 'last_name', 'email',],  #todo
+		),
+	),
+	dict(
+		NAME='django.contrib.auth.password_validation.MinimumLengthValidator',
+		OPTIONS=dict(
+			min_length=7,
+		)
+	),
+	dict(
+		NAME='django.contrib.auth.password_validation.CommonPasswordValidator',
+	),
+]
 
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_REQUIRED = False  # todo: change?
