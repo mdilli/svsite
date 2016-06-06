@@ -102,6 +102,7 @@
 {
 	height: 150px;
 	letter-spacing: 3px;
+	overflow: hidden;
 }
 
 #header-caption
@@ -162,8 +163,8 @@
 {
 	margin-bottom: 0;
 	border-radius: 0 0 5px 5px;
-	max-height: 50px;
-	background-color: purple;
+	/*max-height: 50px;*/
+	/*background-color: purple;*/
 }
 
 #cms-menu

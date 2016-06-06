@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 import filer.urls
 import cms.urls
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.shortcuts import redirect
 import badges.urls
 import allauth.urls
@@ -22,7 +23,9 @@ from member.views import member_setup_info
 
 #urlpatterns = #static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
 urlpatterns = [url(r'^\$intapi/', include(intapi.urls)),] + \
+	staticfiles_urlpatterns() + \
 	static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
+	[url(r'static/', lambda r: None),] + \
 	i18n_patterns(
 
 	url(r'^€/', include(svfinance.urls)),
@@ -42,6 +45,5 @@ urlpatterns = [url(r'^\$intapi/', include(intapi.urls)),] + \
 	url(r'^~/$', lambda request: redirect('/'), name='home'),  #todo: improve if possible (haven't found a way, name on include doesn't work)
 	url(r'^', include(cms.urls)),
 )
-
 
 

@@ -257,11 +257,6 @@ STATICFILES_FINDERS = (
 STATICFILES_DIRS = (join(BASE_DIR, 'themes', 'static'),)
 BOWER_COMPONENTS_ROOT = join(BASE_DIR, 'dev', 'bower')  # 'bower_components' is added automatically
 
-STATIC_ROOT = join(BASE_DIR, 'dev', 'static')  # overwritten later
-MEDIA_ROOT  = join(BASE_DIR, 'dev', 'media')
-CMS_MEDIA_ROOT = join(MEDIA_ROOT, 'cms')
-CMS_PAGE_MEDIA_PATH = join(MEDIA_ROOT, 'page')
-
 SV_THEMES_DIR = join(BASE_DIR, 'themes')
 SV_DEFAULT_THEME = 'standard'
 
