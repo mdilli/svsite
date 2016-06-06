@@ -1,7 +1,7 @@
 
 from django.conf import settings
 from django.contrib.auth.models import Group, UserManager, AbstractUser, GroupManager
-from django.core.urlresolvers import reverse, NoReverseMatch
+from django.core.urlresolvers import reverse
 from django.db.models.signals import post_save, post_delete
 from django_extensions.db.fields import AutoSlugField
 from django.utils.translation import ugettext_lazy as _
@@ -40,10 +40,7 @@ class Member(AbstractUser):
 		return self.first_name or self.username.title()
 
 	def get_absolute_url(self):
-		try:
-			return reverse('profile_info', kwargs=dict(pk=self.pk, label=self.slug))
-		except NoReverseMatch:
-			return reverse('member_setup_info')
+		return reverse('profile_info', kwargs=dict(pk=self.pk, label=self.slug))
 
 	def has_permission_superuser(self):
 		return True  # todo
