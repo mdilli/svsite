@@ -471,6 +471,7 @@ except ImportError:
 # Not a great idea in the end because it doesn't work if static files refer to each other by absolute path.
 VERSION_HASH = urlsafe_b64encode(pack('=I', 65536*VERSION[0] + 256*VERSION[1] + VERSION[2])).rstrip(b'=').rstrip(b'A')
 STATIC_ROOT = join(STATIC_ROOT, VERSION_HASH.decode('ascii'))
+STATIC_URL = join(STATIC_URL, VERSION_HASH.decode('ascii')) + '/'
 
 
 
