@@ -31,6 +31,8 @@ def update_static_local(STATIC_ROOT, STATIC_URL):
 def update_static_apache(STATIC_ROOT, STATIC_URL):
 	STATIC_ROOT = join(STATIC_ROOT, VERSION_HASH)
 	STATIC_URL = join(STATIC_URL, VERSION_HASH)
+	if not STATIC_URL.endswith('/'):
+		STATIC_URL += '/'
 	return STATIC_ROOT, STATIC_URL
 
 
