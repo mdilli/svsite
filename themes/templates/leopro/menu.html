@@ -5,7 +5,7 @@
 {% load language_flag_url from language_flags %}
 {% load get_current_language from i18n %}
 {% get_current_language as LANGUAGE_CODE %}
-    
+
 <div id="header-container" class="container"> <!-- if you remove this, the menu will be wider -->
 	<nav id="header-menu-top" class="navbar navbar-default hidden-xs hidden-sm" style="min-height:33px;">
 		<div class="container-fluid" style="stylebackground-image: url(http://leonardo.science.ru.nl/templates/al_monalisa/images/menubar_separator.png); height:33px;" >
@@ -26,20 +26,20 @@
 
 			<!-- Icons for external sites and feeds. -->
 			<ul class="nav navbar-nav navbar-right" style="margin-top:-3px">
-			<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-									<i class="glyphicon glyphicon-user"></i> {% if request.user.is_authenticated %}{% firstof request.user.get_short_name 'account' %}{% else %}login{% endif %} <b class="caret"></b>
-								</a>
-								<ul class="dropdown-menu {% if not request.user.is_authenticated %}large-dropdown{% endif %}">
-									{% if request.user.is_authenticated %}
-										{% include THEME_PREFIX|add:'/menu_items_account.html' %}
-									{% else %}
-{#										<div style="width: 200px; padding: 0.5em;">#}
-											{% include THEME_PREFIX|add:'/menu_items_login.html' %}
-{#										</div>#}
-									{% endif %}
-								</ul>
-							</li>
+	{#			<li class="dropdown">#}
+	{#				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#}
+	{#					<i class="glyphicon glyphicon-user"></i> {% if request.user.is_authenticated %}{% firstof request.user.get_short_name 'account' %}{% else %}login{% endif %} <b class="caret"></b>#}
+	{#				</a>#}
+	{#				<ul class="dropdown-menu {% if not request.user.is_authenticated %}large-dropdown{% endif %}">#}
+	{#					{% if request.user.is_authenticated %}#}
+	{#						{% include THEME_PREFIX|add:'/menu_items_account.html' %}#}
+	{#					{% else %}#}
+	{#										<div style="width: 200px; padding: 0.5em;">#}
+	{#							{% include THEME_PREFIX|add:'/menu_items_login.html' %}#}
+	{#										</div>#}
+	{#					{% endif %}#}
+	{#				</ul>#}
+	{#			</li>#}
 
 				<li id="header-language-switcher">
 					<!-- I'm going to ignore this warning: -->
@@ -97,22 +97,22 @@
 					</div><!-- /.navbar-collapse -->
 
 					<!-- Account options for small displays: a second collapse item -->
-					<div id="menu_account_parent" class="hidden-lg hidden-md hidden-sm visible-xs">
-						<div class="collapse navbar-collapse" id="menu_account">
-							<ul class="nav navbar-nav">
-								{% if request.user.is_authenticated %}
-									{% include THEME_PREFIX|add:'/menu_items_account.html' %}
-								{% else %}
-									{% include THEME_PREFIX|add:'/menu_items_login.html' %}
-								{% endif %}
-							</ul>
-						</div>
-					</div>
+{#					<div id="menu_account_parent" class="hidden-lg hidden-md hidden-sm visible-xs">#}
+{#						<div class="collapse navbar-collapse" id="menu_account">#}
+{#							<ul class="nav navbar-nav">#}
+{#								{% if request.user.is_authenticated %}#}
+{#									{% include THEME_PREFIX|add:'/menu_items_account.html' %}#}
+{#								{% else %}#}
+{#									{% include THEME_PREFIX|add:'/menu_items_login.html' %}#}
+{#								{% endif %}#}
+{#							</ul>#}
+{#						</div>#}
+{#					</div>#}
 
 					<!-- Account options for large displays: a normal dropdown menu -->
 					<div class="visisble-lg visisble-md visisble-sm hidden-xs">
 						<ul class="nav navbar-nav navbar-right navbar-nocollapse">
-							
+
 						</ul>
 					</div>
 
