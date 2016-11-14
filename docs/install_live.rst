@@ -65,7 +65,7 @@ wsgi-express
 
 This alternative method is a variation on the official one. It also uses ``Apache`` and ``mod_wsgi``, but ``mod_wsgi`` is part of Python instead of Apache. An advantage of this setup is that you can have different websites with different Python versions, which is not otherwise possible.
 
-This relies on ``mod_wsgi``, which should already be installed in your virtual environment (otherwise, :doc:`remember <install_dev>` the ``pew`` stuff? Do that and ``pip install mod_wsgi``).
+This relies on ``mod_wsgi``, which should already be installed in your virtual environment (otherwise, :doc:`remember <install_dev>` the ``pew`` stuff? Do that and ``pip install mod_wsgi``). Furthermore, ``'mod_wsgi.server',`` needs to be in ``INSTALLED_APPS``, svsite already does this for you.
 
 You can test that it works with (user and group are optional, it's safe to use the correct permissions when live later though)::
 
