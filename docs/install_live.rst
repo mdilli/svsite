@@ -110,6 +110,7 @@ The idea is to run a wsgi server, and let Apache proxypass the requests to it. H
 
 		# This is the core part: all the non-static traffic is just sent to wsgi.
 		# `retry=0` causes Apache to retry to contact wsgi every time, even if it got no response last time
+		ProxyPreserveHost On
 		ProxyPass / http://localhost:8081/ retry=0
 		ProxyPassReverse / http://localhost:8081/
 
