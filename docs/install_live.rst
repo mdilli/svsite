@@ -130,7 +130,7 @@ Then we need to make sure that the wsgi server is always running. On Ubuntu, ``U
     [Service]
     Type=idle
     WorkingDirectory=/path_to_live_svsite/source
-    ExecStart=/path_to_virtualenv/bin/python manage.py runmodwsgi --log-to-terminal --user www-data --group devs --host=localhost --port 8081 --pythonpath=/path_to_virtualenv/lib/python3.5/site-packages
+    ExecStart=/path_to_virtualenv/bin/python manage.py runmodwsgi --log-to-terminal --user www-data --group devs --host=localhost --port 8081 --python-path=/path_to_virtualenv/lib/python3.5/site-packages --python-path=/path_to_live/svsite/source
 
     [Install]
     WantedBy=multi-user.target
