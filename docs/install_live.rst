@@ -65,11 +65,11 @@ wsgi-express
 
 This alternative method is a variation on the official one. It also uses ``Apache`` and ``mod_wsgi``, but ``mod_wsgi`` is part of Python instead of Apache. An advantage of this setup is that you can have different websites with different Python versions, which is not otherwise possible.
 
-This relies on ``mod_wsgi``, which should already be installed in your virtual environment (otherwise, :doc:`remember <install_dev>` the ``pew`` stuff? Do that and ``pip install mod_wsgi``). Furthermore, ``'mod_wsgi.server',`` needs to be in ``INSTALLED_APPS``, svsite already does this for you.
+This relies on ``mod_wsgi``, which should already be installed in your virtual environment (otherwise, :doc:`remember <install_dev>` the ``pew`` stuff? Do that and ``pip install mod_wsgi``). Furthermore, ``'mod_wsgi.server',`` needs to be in ``INSTALLED_APPS``, which svsite already does for you.
 
 You can test that it works with (user and group are optional, it's safe to use the correct permissions when live later though)::
 
-	python source/manage.py runmodwsgi --log-to-terminal --user www-data --group devs --host=localhost --port 8081 --pythonpath=/path-to-virtualenv/lib/python3.4/site-packages source/wsgi.py
+	python source/manage.py runmodwsgi --log-to-terminal --user www-data --group devs --host=localhost --port 8081 --pythonpath=/path-to-virtualenv/lib/python3.5/site-packages
 
 which should let you visit `localhost:8081`_ and see the site. If it does not work, have a look at `mod_wsgi pypi page`_.
 
@@ -121,30 +121,24 @@ The idea is to run a wsgi server, and let Apache proxypass the requests to it. H
 
 Use ``a2ensite svsite`` and ``sudo service apache2 reload``.
 
-Then we need to make sure that the wsgi server is always running. There are many ways. On Ubuntu and possibly other related systems, one can use Upstart. Here is an example configuration file, which should go in ``/etc/init/svsite``::
+Then we need to make sure that the wsgi server is always running. On Ubuntu, ``Upstart`` used to be the way to do that (:doc:`like this<install_live>`), but these days ``systemd`` is the way to go. Here is an example configuration file, which should go in ``/lib/systemd/system/svsite.service``::
 
-	description "Always run the wsgi daemon for svsite website"
+    [Unit]
+    Description=Run the wsgi daemon for SvSite website
+    After=multi-user.target
 
-	# automatically start on boot
-	start on filesystem or runlevel [2345]
+    [Service]
+    Type=idle
+    WorkingDirectory=/path_to_live_svsite/source
+    ExecStart=/path_to_virtualenv/bin/python manage.py runmodwsgi --log-to-terminal --user www-data --group devs --host=localhost --port 8081 --pythonpath=/path_to_virtualenv/lib/python3.5/site-packages
 
-	# automatically stop on shutdown
-	stop on shutdown or runlevel [!2345]
+    [Install]
+    WantedBy=multi-user.target
 
-	# restart if it stops for any reason other than you manually stopping it
-	respawn
+After changing values where necessary, you need to run::
 
-	# this is the code that starts the process (update the parths and user/group)
-	script
-		cd /live/svsite
-		/path_to_virtualenv/bin/python3.4 source/manage.py runmodwsgi --log-to-terminal --user www-data --group devs --host=localhost --port 8081 --pythonpath=/path_to_virtualenv/svsite/lib/python3.4/site-packages source/wsgi.py
-	end script
-
-	# make sure the wsgi process is gone, otherwise you can't restart
-	post-stop script
-	    kill $(cat /var/run/svleo.pid)
-	    rm -f /var/run/svleo.pid
-	end script
+    sudo systemctl daemon-reload
+    sudo systemctl enable svsite.service
 
 After saving this, you can use these self-explanatory commands::
 
