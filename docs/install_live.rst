@@ -94,8 +94,9 @@ The idea is to run a wsgi server, and let Apache proxypass the requests to it. H
 			ExpiresDefault "access plus 1 day"
 			Header append Cache-Control "public"
 			Options -Indexes
-			Order deny,allow
-			Allow from all
+			# Order deny,allow    # in older Apaches
+			# Allow from all      # in older Apache
+			Require all granted   # in newer Apache
 		</Directory>
 
 		# Media is similar to static, but without cache.
@@ -104,8 +105,9 @@ The idea is to run a wsgi server, and let Apache proxypass the requests to it. H
 		ProxyPass /media !
 		<Directory /data/media/svsite/>
 			Options -Indexes
-			Order deny,allow
-			Allow from all
+			# Order deny,allow    # in older Apaches
+			# Allow from all      # in older Apache
+			Require all granted   # in newer Apache
 		</Directory>
 
 		# This is the core part: all the non-static traffic is just sent to wsgi.
