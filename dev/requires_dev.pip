@@ -1,7 +1,7 @@
 
 sphinx
 sphinx_rtd_theme
-pygraphviz
+#pygraphviz
 
 pytest
 pytest-pythonpath

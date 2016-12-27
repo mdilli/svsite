@@ -51,6 +51,7 @@ django-display-exceptions
 
 django_extensions   # for autoslugfield
 django-model-utils  # for activity TimeFramedModel
+django-admin-sortable
 
 django-bootstrap-form
 
