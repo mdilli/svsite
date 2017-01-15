@@ -16,7 +16,8 @@ Installing dependencies
 
 For this to work, you will need ``python3-dev`` including ``pip`` and a database (``sqlite3`` is default and easy, but slow). Things will be easier and better with ``virtualenv`` or ``pew`` and ``git``, so probably get those too. You'll also need ``libjpeg-dev`` and the dev version of Python because of ``pillow``. You can install them with::
 
-	sudo apt-get install python3.4-dev sqlite3 git libjpeg-dev python-pip
+	sudo apt-get install libxml2-dev libxslt1-dev zlib1g-dev    # for lxml (which will be installed with pip)
+	sudo apt-get install python3-dev sqlite3 git libjpeg-dev python-pip
 	sudo apt-get install postgresql libpq-dev       # for postgres, only if you want that database
 	sudo apt-get install mysql-server mysql-client  # for mysql, only if you want that database
 
@@ -38,14 +39,15 @@ If you skip this step, everything will be installed system-wide, so you need to 
 Install the necessary Python dependencies through::
 
 	pip install -r dev/requires.pip
-	pip install psycopg2     # for postgres, only if you want that database
-	pip install mysqlclient  # for mysql, only if you want that database
+	pip install psycopg2     # only if you want to use a postgres database
+	pip install mysqlclient  # only if you want to use a mysql database
 
 Development
 ...............................
 
 If you want to run tests, build the documentation or do anything other than simply running the website, you should install (otherwise skip it)::
 
+	sudo apt-get install libgraphviz-dev
 	pip install -r dev/requires_dev.pip  # optional
 
 Database

@@ -7,7 +7,7 @@ from cms.app_base import CMSApp
 class SearchApphook(CMSApp):
 	name = _('Search')
 	app_name = 'searcher'
-	urls = ['searcher.urls']
+	# urls = ['searcher.urls']   #TODO: DEBUGGG
 	menus = []
 
 

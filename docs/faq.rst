@@ -13,6 +13,13 @@ Okay, this one hasn't been asked "frequently" in the strict meaning of the word,
 ...encountered problems
 -------------------------------
 
+* If you get an error like::
+
+    AttributeError: 'RegexURLResolver' object has no attribute '_urlconf_module'
+
+  something is using your urlconf before it finished loading. For example, one of the admin or view files may be directly calling `reverse`.
+
+
 * After updating, you might get::
 
     KeyError at /en/stuff/
