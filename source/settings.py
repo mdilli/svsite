@@ -59,7 +59,7 @@ INSTALLED_APPS = (
 
 	'cmsplugin_filer_file',    # from cms-filer, special migration needed
 	# 'cmsplugin_filer_folder',  # todo: useful but doesn't work (cannot select folders)
-	'cmsplugin_filer_link',    # from cms-filer, special migration needed
+        'cmsplugin_filer_link',    # from cms-filer, special migration needed
 	'cmsplugin_filer_image',   # from cms-filer, special migration needed
 	# 'cmsplugin_filer_teaser',  # from cms-filer, special migration needed
 	# 'cmsplugin_filer_video',   # from cms-filer, special migration needed
